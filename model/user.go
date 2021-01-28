@@ -2,32 +2,29 @@ package model
 
 import (
 	"ProManageSystem/DB"
-
-	"github.com/jinzhu/gorm"
 )
 
-//用户数据模型
+//用户数据模型（包括物业和业主用户）
 type User struct {
-	gorm.Model
-	Username string `gorm:"type:varchar(20);not null;unique"`
-	Password string `gorm:"type:varchar(20);not null"`
-	Address  string `gorm:"type:varchar(255);not null"`
+	Username  string `gorm:"type:varchar(20);primary_key"`
+	Upassword string `gorm:"type:varchar(20);not null"`
+	Utype     int8
 }
 
 func (user *User) Create() error {
-	err := DB.Mysqldb.Create(user).Error
+	err := DB.Mysqldb.Create(&user).Error
 	return err
 }
 func (user *User) Save() error {
-	err := DB.Mysqldb.Save(user).Error
+	err := DB.Mysqldb.Save(&user).Error
 	return err
 }
 func (user *User) Delete() error {
-	err := DB.Mysqldb.Delete(user).Error
+	err := DB.Mysqldb.Delete(&user).Error
 	return err
 }
 func GetUser(username string) (*User, error) {
-	var user User
-	result := DB.Mysqldb.Where(User{Username: username}).First(&user)
+	user := User{}
+	result := DB.Mysqldb.Where("username=?", username).First(&user)
 	return &user, result.Error
 }

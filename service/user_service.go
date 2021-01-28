@@ -3,36 +3,40 @@ package service
 import (
 	"ProManageSystem/model"
 	"fmt"
+
+	"github.com/pkg/errors"
 )
 
 type UserService struct {
 	Username string `form:"username"`
 	Password string `form:"password"`
-	Address  string `form:"address"`
+	Utype    int8   `form:"utype"`
 }
 
-func (service *UserService) Get() *model.User {
+func (service *UserService) Userlogin() error {
 	user, err := model.GetUser(service.Username)
 	if err != nil {
-		fmt.Println(err)
+		return err
 	}
-	return user
-}
-func (service *UserService) Create(user *model.User) {
-	err := user.Create()
-	if err != nil {
-		fmt.Println(err)
+	if service.Utype == 0 {
+		_, err := model.GetOwner(service.Username)
+		if err != nil {
+			return err
+		}
+	} else {
+		_, err := model.GetManager(service.Username)
+		if err != nil {
+			return err
+		}
 	}
-}
-func (service *UserService) Save(user *model.User) {
-	err := user.Save()
-	if err != nil {
-		fmt.Println(err)
+
+	if user == nil {
+		return errors.New("没有找到用户")
 	}
-}
-func (service *UserService) Delete(user *model.User) {
-	err := user.Delete()
-	if err != nil {
-		fmt.Println(err)
+	if user.Upassword != service.Password {
+		fmt.Println("密码错误")
+		return errors.New("密码错误")
 	}
+
+	return err
 }

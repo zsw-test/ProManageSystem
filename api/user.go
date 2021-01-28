@@ -1,37 +1,35 @@
 package api
 
 import (
-	"ProManageSystem/model"
 	"ProManageSystem/service"
 	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
 
-func CreateUser(c *gin.Context) {
+func Login(c *gin.Context) {
 	service := service.UserService{}
-
 	if err := c.ShouldBind(&service); err == nil {
 		fmt.Println(service)
-		user := &model.User{
-			Username: service.Username,
-			Password: service.Password,
-			Address:  service.Address,
+		err = service.Userlogin()
+		//逻辑
+		if err != nil {
+			c.JSON(200, err.Error())
+		} else {
+			c.HTML(200, "index.html", gin.H{
+				"username": service.Username,
+			})
+			c.JSON(200, "登陆成功 欢迎您"+service.Username)
 		}
-		service.Create(user)
-		c.JSON(200, user)
 	} else {
-		c.JSON(200, err)
+		c.JSON(200, err.Error())
 	}
-
-}
-func GetUser(c *gin.Context) {
-
-}
-func UpdateUser(c *gin.Context) {
-
 }
 
-func DeleteUser(c *gin.Context) {
+func LoginHtml(c *gin.Context) {
+	c.HTML(200, "login.html", "")
+}
 
+func RegisterHtml(c *gin.Context) {
+	c.HTML(200, "register.html", "")
 }
