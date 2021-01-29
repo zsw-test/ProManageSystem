@@ -1,8 +1,10 @@
 package api
 
 import (
+	"ProManageSystem/cache"
 	"ProManageSystem/service"
 	"fmt"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,10 +18,16 @@ func Login(c *gin.Context) {
 		if err != nil {
 			c.JSON(200, err.Error())
 		} else {
-			c.HTML(200, "index.html", gin.H{
-				"username": service.Username,
-			})
-			c.JSON(200, "登陆成功 欢迎您"+service.Username)
+			session, err := cache.SessionStore.Get(c.Request, "sessionid")
+			if err != nil {
+				fmt.Println("sessionid 登陆时不存在,即将存入session")
+			}
+			session.Values["username"] = service.Username
+			err = session.Save(c.Request, c.Writer)
+			if err != nil {
+				fmt.Println(err.Error())
+			}
+			c.Redirect(http.StatusSeeOther, "/index")
 		}
 	} else {
 		c.JSON(200, err.Error())
@@ -32,4 +40,8 @@ func LoginHtml(c *gin.Context) {
 
 func RegisterHtml(c *gin.Context) {
 	c.HTML(200, "register.html", "")
+}
+
+func IndexHtml(c *gin.Context) {
+	c.HTML(200, "index.html", "")
 }

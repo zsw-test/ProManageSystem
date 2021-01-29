@@ -3,6 +3,7 @@ package main
 import (
 	"ProManageSystem/api"
 	"ProManageSystem/conf"
+	"ProManageSystem/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,8 +11,15 @@ import (
 func main() {
 	conf.Init()
 	router := gin.Default()
+	//创建session存储内存 来存储用户信息
+
 	router.Static("/static", "./static")
 	router.LoadHTMLGlob("templates/*")
+	ownerauto := router.Group("/index")
+	ownerauto.Use(middleware.Ownerauth)
+	{
+		ownerauto.GET("", api.IndexHtml)
+	}
 
 	router.GET("/register", api.RegisterHtml)
 	router.GET("/login", api.LoginHtml)
