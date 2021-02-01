@@ -7,28 +7,16 @@ import (
 )
 
 type Owner struct {
-	Oname      string
-	Osex       string `gorm:"type:varchar(4)`
-	Oroom      string `gorm:"type:varchar(30);not null"`
-	Otelephone int
-	User
+	gorm.Model
+	Username  string `gorm:"type:varchar(20);unique_index:username"` //添加唯一索引，防止用户名相同
+	Password  string `gorm:"type:varchar(20);"`
+	Address   string `gorm:"type:varchar(20);"`
+	Telephone int
 }
 
 func (user *Owner) Create() error {
 	err := DB.Mysqldb.Create(user).Error
 	return err
-}
-func (o *Owner) AfterCreate(tx *gorm.DB) (err error) {
-	user := User{
-		Username:  o.Username,
-		Upassword: o.Upassword,
-		Utype:     o.Utype,
-	}
-	err = user.Create()
-	if err != nil {
-		return err
-	}
-	return
 }
 
 func (user *Owner) Save() error {
@@ -36,39 +24,24 @@ func (user *Owner) Save() error {
 	return err
 }
 
-func (o *Owner) AfterSave(tx *gorm.DB) (err error) {
-	user := User{
-		Username:  o.Username,
-		Upassword: o.Upassword,
-		Utype:     o.Utype,
-	}
-	err = user.Save()
-	if err != nil {
-		return err
-	}
-	return
-}
-
 func (o *Owner) Delete() error {
 	err := DB.Mysqldb.Delete(o).Error
 	return err
 }
 
-func (o *Owner) AfterDelete(tx *gorm.DB) (err error) {
-	user := User{
-		Username:  o.Username,
-		Upassword: o.Upassword,
-		Utype:     o.Utype,
-	}
-	err = user.Delete()
-	if err != nil {
-		return err
-	}
-	return
-}
-
-func GetOwner(username string) (*Owner, error) {
+func GetOwnerbyname(username string) (*Owner, error) {
 	var owner = &Owner{}
 	err := DB.Mysqldb.Where("username = ?", username).Find(&owner).Error
 	return owner, err
+}
+func GetOwnerbyid(id int) (*Owner, error) {
+	var owner = &Owner{}
+	err := DB.Mysqldb.Where("id = ?", id).Find(&owner).Error
+	return owner, err
+}
+
+func GetOwnerPage(pageindex, pagesize int) ([]Owner, error) {
+	OwnerList := []Owner{}
+	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&OwnerList).Error
+	return OwnerList, err
 }
