@@ -13,12 +13,12 @@ func (service *OwnerGetService) OwnerGet() seralizer.Response {
 	owner, err := model.GetOwnerbyid(service.Id)
 	if err != nil {
 		return seralizer.Response{
-			Code:   "404",
+			Code:   seralizer.NotExistUser,
 			Result: "不存在用户",
 		}
 	} else {
 		return seralizer.Response{
-			Code:   "200",
+			Code:   seralizer.Sucess,
 			Result: "查询成功",
 			Data:   owner,
 		}

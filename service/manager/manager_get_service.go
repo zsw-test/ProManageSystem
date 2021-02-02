@@ -13,12 +13,12 @@ func (service *ManagerGetService) ManagerGet() seralizer.Response {
 	manager, err := model.GetManagerbyid(service.Id)
 	if err != nil {
 		return seralizer.Response{
-			Code:   "404",
+			Code:   404,
 			Result: "不存在用户",
 		}
 	} else {
 		return seralizer.Response{
-			Code:   "200",
+			Code:   1,
 			Result: "查询成功",
 			Data:   manager,
 		}

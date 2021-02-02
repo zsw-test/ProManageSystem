@@ -17,8 +17,8 @@ func (service *OwnerSaveService) OwnerSave() seralizer.Response {
 	owner, err := model.GetOwnerbyid(service.Id)
 	if err != nil {
 		return seralizer.Response{
-			Code:   "404",
-			Result: "保存失败",
+			Code:   seralizer.NotExistUser,
+			Result: seralizer.GetResult(seralizer.NotExistUser),
 		}
 	}
 	owner.Username = service.Username
@@ -28,12 +28,12 @@ func (service *OwnerSaveService) OwnerSave() seralizer.Response {
 	err = owner.Save()
 	if err != nil {
 		return seralizer.Response{
-			Code:   "404",
-			Result: "保存失败",
+			Code:   seralizer.ErrorSave,
+			Result: seralizer.GetResult(seralizer.ErrorSave),
 		}
 	}
 	return seralizer.Response{
-		Code:   "200",
-		Result: "保存成功",
+		Code:   seralizer.Sucess,
+		Result: seralizer.GetResult(seralizer.Sucess),
 	}
 }

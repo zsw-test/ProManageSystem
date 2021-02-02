@@ -22,12 +22,12 @@ func (service *ManagerRegisterService) ManagerRegister() seralizer.Response {
 	err := manager.Create()
 	if err != nil {
 		return seralizer.Response{
-			Code:   "404",
+			Code:   seralizer.ExistUser,
 			Result: "用户已经存在",
 		}
 	}
 	return seralizer.Response{
-		Code:   "200",
+		Code:   seralizer.Sucess,
 		Result: "创建成功",
 	}
 }

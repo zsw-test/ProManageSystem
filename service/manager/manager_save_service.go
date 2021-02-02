@@ -17,7 +17,7 @@ func (service *ManagerSaveService) ManagerSave() seralizer.Response {
 	manager, err := model.GetManagerbyid(service.Id)
 	if err != nil {
 		return seralizer.Response{
-			Code:   "404",
+			Code:   seralizer.NotExistUser,
 			Result: "用户不存在",
 		}
 	}
@@ -28,12 +28,12 @@ func (service *ManagerSaveService) ManagerSave() seralizer.Response {
 	err = manager.Save()
 	if err != nil {
 		return seralizer.Response{
-			Code:   "404",
+			Code:   seralizer.ErrorSave,
 			Result: "保存失败",
 		}
 	}
 	return seralizer.Response{
-		Code:   "200",
+		Code:   seralizer.Sucess,
 		Result: "保存成功",
 	}
 }

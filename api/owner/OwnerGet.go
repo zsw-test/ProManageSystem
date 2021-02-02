@@ -1,26 +1,25 @@
-package manager
+package owner
 
 import (
-	"ProManageSystem/service/manager"
+	"ProManageSystem/service/owner"
 	"fmt"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
-func ManagerGet(c *gin.Context) {
+func OwnerGet(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-	service := manager.ManagerGetService{
+	service := owner.OwnerGetService{
 		Id: id,
 	}
-	res := service.ManagerGet()
+	res := service.OwnerGet()
 	c.JSON(200, res)
 }
-
-func ManagerGetPage(c *gin.Context) {
+func OwnerGetPage(c *gin.Context) {
 	pageindex, err := strconv.Atoi(c.Query("pageindex"))
 	if err != nil {
 		fmt.Println(err.Error())
@@ -29,7 +28,7 @@ func ManagerGetPage(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-	service := manager.ManagerGetPageService{}
-	res := service.ManagerGetPage(pageindex, pagesize)
+	service := owner.OwnerGetPageService{}
+	res := service.OwnerGetPage(pageindex, pagesize)
 	c.JSON(200, res)
 }

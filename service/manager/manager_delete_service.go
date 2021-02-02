@@ -13,19 +13,19 @@ func (service *ManagerDeleteService) ManagerDelete() seralizer.Response {
 	manager, err := model.GetManagerbyid(service.Id)
 	if err != nil {
 		return seralizer.Response{
-			Code:   "404",
+			Code:   seralizer.NotExistUser,
 			Result: "用户不存在",
 		}
 	}
 	err = manager.Delete()
 	if err != nil {
 		return seralizer.Response{
-			Code:   "404",
+			Code:   seralizer.ErrorDelete,
 			Result: "删除失败",
 		}
 	}
 	return seralizer.Response{
-		Code:   "200",
+		Code:   seralizer.Sucess,
 		Result: "删除成功",
 	}
 }

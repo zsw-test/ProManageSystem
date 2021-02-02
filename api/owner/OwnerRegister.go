@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+//业主注册
 func OwnerRegister(c *gin.Context) {
 	service := owner.OwnerRegisterService{}
 	if err := c.ShouldBind(&service); err == nil {

@@ -13,19 +13,19 @@ func (service *OwnerDeleteService) OwnerDelete() seralizer.Response {
 	owner, err := model.GetOwnerbyid(service.Id)
 	if err != nil {
 		return seralizer.Response{
-			Code:   "404",
+			Code:   seralizer.NotExistUser,
 			Result: "用户不存在",
 		}
 	}
 	err = owner.Delete()
 	if err != nil {
 		return seralizer.Response{
-			Code:   "404",
+			Code:   seralizer.ErrorDelete,
 			Result: "删除失败",
 		}
 	}
 	return seralizer.Response{
-		Code:   "200",
+		Code:   seralizer.Sucess,
 		Result: "删除成功",
 	}
 }

@@ -45,3 +45,14 @@ func GetOwnerPage(pageindex, pagesize int) ([]Owner, error) {
 	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&OwnerList).Error
 	return OwnerList, err
 }
+
+//检查业主权限
+func CheckOwnerAuth(username, password string) (bool, error) {
+	var auth Owner
+	err := DB.Mysqldb.Select("id").Where(Owner{Username: username, Password: password}).First(&auth).Error
+	if auth.ID > 0 {
+		return true, err
+	}
+
+	return false, err
+}

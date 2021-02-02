@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+//业主登陆
 func OwnerLogin(c *gin.Context) {
 	service := owner.OwnerLoginService{}
 	if err := c.ShouldBind(&service); err == nil {
