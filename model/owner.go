@@ -6,6 +6,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+//业主结构体
 type Owner struct {
 	gorm.Model
 	Username  string `gorm:"type:varchar(20);unique_index:username"` //添加唯一索引，防止用户名相同

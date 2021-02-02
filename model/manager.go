@@ -6,6 +6,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+//物业管理员结构体
 type Manager struct {
 	gorm.Model
 	Username  string `gorm:"type:varchar(20);unique_index:username"` //添加唯一索引，防止用户名相同
