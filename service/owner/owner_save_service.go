@@ -1,8 +1,8 @@
 package owner
 
 import (
-	"ProManageSystem/model"
-	"ProManageSystem/seralizer"
+	"ProManageSystem/model/owner"
+	"ProManageSystem/serializer"
 )
 
 type OwnerSaveService struct {
@@ -13,12 +13,12 @@ type OwnerSaveService struct {
 	Address   string `form:"address"`
 }
 
-func (service *OwnerSaveService) OwnerSave() seralizer.Response {
-	owner, err := model.GetOwnerbyid(service.Id)
+func (service *OwnerSaveService) OwnerSave() serializer.Response {
+	owner, err := owner.GetOwnerbyid(service.Id)
 	if err != nil {
-		return seralizer.Response{
-			Code:   seralizer.NotExistUser,
-			Result: seralizer.GetResult(seralizer.NotExistUser),
+		return serializer.Response{
+			Code:   serializer.NotExistUser,
+			Result: serializer.GetResult(serializer.NotExistUser),
 		}
 	}
 	owner.Username = service.Username
@@ -27,13 +27,13 @@ func (service *OwnerSaveService) OwnerSave() seralizer.Response {
 	owner.Password = service.Password
 	err = owner.Save()
 	if err != nil {
-		return seralizer.Response{
-			Code:   seralizer.ErrorSave,
-			Result: seralizer.GetResult(seralizer.ErrorSave),
+		return serializer.Response{
+			Code:   serializer.ErrorSave,
+			Result: serializer.GetResult(serializer.ErrorSave),
 		}
 	}
-	return seralizer.Response{
-		Code:   seralizer.Sucess,
-		Result: seralizer.GetResult(seralizer.Sucess),
+	return serializer.Response{
+		Code:   serializer.Sucess,
+		Result: serializer.GetResult(serializer.Sucess),
 	}
 }

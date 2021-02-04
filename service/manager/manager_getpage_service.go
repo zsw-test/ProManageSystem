@@ -1,26 +1,26 @@
 package manager
 
 import (
-	"ProManageSystem/model"
-	"ProManageSystem/seralizer"
+	"ProManageSystem/model/manager"
+	"ProManageSystem/serializer"
 )
 
 type ManagerGetPageService struct {
 }
 
-func (service *ManagerGetPageService) ManagerGetPage(pageindex, pagesize int) seralizer.Response {
-	managerlist, err := model.GetManagerPage(pageindex, pagesize)
-	code := seralizer.Sucess
+func (service *ManagerGetPageService) ManagerGetPage(pageindex, pagesize int) serializer.Response {
+	managerlist, err := manager.GetManagerPage(pageindex, pagesize)
+	code := serializer.Sucess
 	if err != nil {
-		code = seralizer.ErrorGet
-		return seralizer.Response{
+		code = serializer.ErrorGet
+		return serializer.Response{
 			Code:   code,
-			Result: seralizer.GetResult(code),
+			Result: serializer.GetResult(code),
 		}
 	}
-	res := seralizer.Response{
+	res := serializer.Response{
 		Code:   code,
-		Result: seralizer.GetResult(code),
+		Result: serializer.GetResult(code),
 		Data:   managerlist,
 	}
 	return res

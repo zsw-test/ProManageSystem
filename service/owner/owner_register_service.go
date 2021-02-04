@@ -1,8 +1,8 @@
 package owner
 
 import (
-	"ProManageSystem/model"
-	"ProManageSystem/seralizer"
+	"ProManageSystem/model/owner"
+	"ProManageSystem/serializer"
 )
 
 type OwnerRegisterService struct {
@@ -12,8 +12,8 @@ type OwnerRegisterService struct {
 	Address   string `form:"address"`
 }
 
-func (service *OwnerRegisterService) OwnerRegister() seralizer.Response {
-	owner := model.Owner{
+func (service *OwnerRegisterService) OwnerRegister() serializer.Response {
+	owner := owner.Owner{
 		Username:  service.Username,
 		Password:  service.Password,
 		Telephone: service.Telephone,
@@ -21,13 +21,13 @@ func (service *OwnerRegisterService) OwnerRegister() seralizer.Response {
 	}
 	err := owner.Create()
 	if err != nil {
-		return seralizer.Response{
-			Code:   seralizer.ExistUser,
+		return serializer.Response{
+			Code:   serializer.ExistUser,
 			Result: "用户已经存在",
 		}
 	}
-	return seralizer.Response{
-		Code:   seralizer.Sucess,
+	return serializer.Response{
+		Code:   serializer.Sucess,
 		Result: "创建成功",
 	}
 }

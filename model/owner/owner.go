@@ -1,4 +1,4 @@
-package model
+package owner
 
 import (
 	"ProManageSystem/DB"
@@ -32,12 +32,12 @@ func (o *Owner) Delete() error {
 
 func GetOwnerbyname(username string) (*Owner, error) {
 	var owner = &Owner{}
-	err := DB.Mysqldb.Where("username = ?", username).Find(&owner).Error
+	err := DB.Mysqldb.Where("username = ?", username).First(&owner).Error
 	return owner, err
 }
 func GetOwnerbyid(id int) (*Owner, error) {
 	var owner = &Owner{}
-	err := DB.Mysqldb.Where("id = ?", id).Find(&owner).Error
+	err := DB.Mysqldb.Where("id = ?", id).First(&owner).Error
 	return owner, err
 }
 

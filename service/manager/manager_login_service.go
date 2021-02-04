@@ -1,8 +1,8 @@
 package manager
 
 import (
-	"ProManageSystem/model"
-	"ProManageSystem/seralizer"
+	"ProManageSystem/model/manager"
+	"ProManageSystem/serializer"
 	"ProManageSystem/util"
 )
 
@@ -11,42 +11,42 @@ type ManagerLoginService struct {
 	Password string `form:"password"`
 }
 
-func (service *ManagerLoginService) ManagerLogin() seralizer.Response {
+func (service *ManagerLoginService) ManagerLogin() serializer.Response {
 	data := map[string]interface{}{}
-	res := seralizer.Response{
-		Code:   seralizer.Sucess,
-		Result: seralizer.GetResult(seralizer.Sucess),
+	res := serializer.Response{
+		Code:   serializer.Sucess,
+		Result: serializer.GetResult(serializer.Sucess),
 	}
-	manager, err := model.GetOwnerbyname(service.Username)
+	manager, err := manager.GetManagerbyname(service.Username)
 	if err != nil {
-		res.Code = seralizer.NotExistUser
-		res.Result = seralizer.GetResult(res.Code)
+		res.Code = serializer.NotExistUser
+		res.Result = serializer.GetResult(res.Code)
 		return res
 	}
 	if service.Password != manager.Password {
-		res.Code = seralizer.ErrorPassword
-		res.Result = seralizer.GetResult(res.Code)
+		res.Code = serializer.ErrorPassword
+		res.Result = serializer.GetResult(res.Code)
 		return res
 	}
 
 	//登陆成功 生成jwt权限token
 	token, err := generateManagerToken(manager.Username, manager.Password)
 	if err != nil {
-		res.Code = seralizer.ErrorCreatToken
-		res.Result = seralizer.GetResult(res.Code)
+		res.Code = serializer.ErrorCreatToken
+		res.Result = serializer.GetResult(res.Code)
 		return res
 	}
 	data["id"] = manager.ID
 	data["token"] = token
-	res.Code = seralizer.Sucess
-	res.Result = seralizer.GetResult(res.Code)
+	res.Code = serializer.Sucess
+	res.Result = serializer.GetResult(res.Code)
 	res.Data = data
 	return res
 }
 
 func generateManagerToken(username, password string) (string, error) {
 	var token string
-	isExist, err := model.CheckManagerAuth(username, password)
+	isExist, err := manager.CheckManagerAuth(username, password)
 	if err != nil {
 		return token, err
 	}

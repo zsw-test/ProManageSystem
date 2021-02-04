@@ -1,4 +1,4 @@
-package model
+package manager
 
 import (
 	"ProManageSystem/DB"
@@ -32,12 +32,12 @@ func (manager *Manager) Delete() error {
 
 func GetManagerbyname(username string) (*Manager, error) {
 	var manager = &Manager{}
-	err := DB.Mysqldb.Where("username = ?", username).Find(&manager).Error
+	err := DB.Mysqldb.Where("username = ?", username).First(&manager).Error
 	return manager, err
 }
 func GetManagerbyid(id int) (*Manager, error) {
 	var manager = &Manager{}
-	err := DB.Mysqldb.Where("id = ?", id).Find(&manager).Error
+	err := DB.Mysqldb.Where("id = ?", id).First(&manager).Error
 	return manager, err
 }
 

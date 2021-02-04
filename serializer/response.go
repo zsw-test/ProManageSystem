@@ -1,4 +1,4 @@
-package seralizer
+package serializer
 
 type Response struct {
 	Code   int         `json:"code"`
@@ -24,6 +24,14 @@ const (
 
 	ErrorCreatToken = 12
 
+	ErrorNotExistRecord = 13
+
+	ErrorCreateParkinfo = 14
+
+	ErrorGetPark = 15
+
+	ErrorUpdateParkFee = 16
+
 	ErrorCheckToken = 401
 
 	ErrorTokenTimeout = 402
@@ -45,7 +53,7 @@ func GetResult(code int) string {
 	case ErrorGet:
 		result = "获取失败"
 	case ErrorRegister:
-		result = "注册失败"
+		result = "ErrorUpdateParkFee注册失败"
 	case ErrorLogin:
 		result = "登录失败"
 	case ExistUser:
@@ -60,7 +68,23 @@ func GetResult(code int) string {
 		result = "token已经超时"
 	case ErrorPassword:
 		result = "密码错误"
+	case ErrorNotExistRecord:
+		result = "不存在此记录"
+	case ErrorCreateParkinfo:
+		result = "创建停车信息失败"
+	case ErrorGetPark:
+		result = "获取车位失败"
+	case ErrorUpdateParkFee:
+		result = "更新停车费用失败"
 	}
 
 	return result
+}
+func GetResponse(code int, data ...interface{}) Response {
+	res := Response{
+		Code:   code,
+		Result: GetResult(code),
+		Data:   data,
+	}
+	return res
 }

@@ -1,31 +1,31 @@
 package owner
 
 import (
-	"ProManageSystem/model"
-	"ProManageSystem/seralizer"
+	"ProManageSystem/model/owner"
+	"ProManageSystem/serializer"
 )
 
 type OwnerDeleteService struct {
 	Id int `form:"id"`
 }
 
-func (service *OwnerDeleteService) OwnerDelete() seralizer.Response {
-	owner, err := model.GetOwnerbyid(service.Id)
+func (service *OwnerDeleteService) OwnerDelete() serializer.Response {
+	owner, err := owner.GetOwnerbyid(service.Id)
 	if err != nil {
-		return seralizer.Response{
-			Code:   seralizer.NotExistUser,
+		return serializer.Response{
+			Code:   serializer.NotExistUser,
 			Result: "用户不存在",
 		}
 	}
 	err = owner.Delete()
 	if err != nil {
-		return seralizer.Response{
-			Code:   seralizer.ErrorDelete,
+		return serializer.Response{
+			Code:   serializer.ErrorDelete,
 			Result: "删除失败",
 		}
 	}
-	return seralizer.Response{
-		Code:   seralizer.Sucess,
+	return serializer.Response{
+		Code:   serializer.Sucess,
 		Result: "删除成功",
 	}
 }

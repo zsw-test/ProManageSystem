@@ -1,7 +1,7 @@
 package jwt
 
 import (
-	"ProManageSystem/seralizer"
+	"ProManageSystem/serializer"
 	"ProManageSystem/util"
 	"net/http"
 	"time"
@@ -14,23 +14,23 @@ func JWTowner() gin.HandlerFunc {
 		var code int
 		var data interface{}
 
-		code = seralizer.Sucess
+		code = serializer.Sucess
 		token := c.Query("token")
 		if token == "" {
-			code = seralizer.InvaildParams
+			code = serializer.InvaildParams
 		} else {
 			claims, err := util.ParseOwnerToken(token)
 			if err != nil {
-				code = seralizer.ErrorCheckToken
+				code = serializer.ErrorCheckToken
 			} else if time.Now().Unix() > claims.ExpiresAt {
-				code = seralizer.ErrorTokenTimeout
+				code = serializer.ErrorTokenTimeout
 			}
 		}
 
-		if code != seralizer.Sucess {
-			c.JSON(http.StatusUnauthorized, seralizer.Response{
+		if code != serializer.Sucess {
+			c.JSON(http.StatusUnauthorized, serializer.Response{
 				Code:   code,
-				Result: seralizer.GetResult(code),
+				Result: serializer.GetResult(code),
 				Data:   data,
 			})
 
@@ -47,23 +47,23 @@ func JWTmanager() gin.HandlerFunc {
 		var code int
 		var data interface{}
 
-		code = seralizer.Sucess
+		code = serializer.Sucess
 		token := c.Query("token")
 		if token == "" {
-			code = seralizer.InvaildParams
+			code = serializer.InvaildParams
 		} else {
 			claims, err := util.ParseManagerToken(token)
 			if err != nil {
-				code = seralizer.ErrorCheckToken
+				code = serializer.ErrorCheckToken
 			} else if time.Now().Unix() > claims.ExpiresAt {
-				code = seralizer.ErrorTokenTimeout
+				code = serializer.ErrorTokenTimeout
 			}
 		}
 
-		if code != seralizer.Sucess {
-			c.JSON(http.StatusUnauthorized, seralizer.Response{
+		if code != serializer.Sucess {
+			c.JSON(http.StatusUnauthorized, serializer.Response{
 				Code:   code,
-				Result: seralizer.GetResult(code),
+				Result: serializer.GetResult(code),
 				Data:   data,
 			})
 

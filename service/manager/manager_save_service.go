@@ -1,8 +1,8 @@
 package manager
 
 import (
-	"ProManageSystem/model"
-	"ProManageSystem/seralizer"
+	"ProManageSystem/model/manager"
+	"ProManageSystem/serializer"
 )
 
 type ManagerSaveService struct {
@@ -13,11 +13,11 @@ type ManagerSaveService struct {
 	Telephone int    `form:"telephone"`
 }
 
-func (service *ManagerSaveService) ManagerSave() seralizer.Response {
-	manager, err := model.GetManagerbyid(service.Id)
+func (service *ManagerSaveService) ManagerSave() serializer.Response {
+	manager, err := manager.GetManagerbyid(service.Id)
 	if err != nil {
-		return seralizer.Response{
-			Code:   seralizer.NotExistUser,
+		return serializer.Response{
+			Code:   serializer.NotExistUser,
 			Result: "用户不存在",
 		}
 	}
@@ -27,13 +27,13 @@ func (service *ManagerSaveService) ManagerSave() seralizer.Response {
 	manager.Telephone = service.Telephone
 	err = manager.Save()
 	if err != nil {
-		return seralizer.Response{
-			Code:   seralizer.ErrorSave,
+		return serializer.Response{
+			Code:   serializer.ErrorSave,
 			Result: "保存失败",
 		}
 	}
-	return seralizer.Response{
-		Code:   seralizer.Sucess,
+	return serializer.Response{
+		Code:   serializer.Sucess,
 		Result: "保存成功",
 	}
 }

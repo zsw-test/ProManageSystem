@@ -1,26 +1,26 @@
 package owner
 
 import (
-	"ProManageSystem/model"
-	"ProManageSystem/seralizer"
+	"ProManageSystem/model/owner"
+	"ProManageSystem/serializer"
 )
 
 type OwnerGetPageService struct {
 }
 
-func (service *OwnerGetPageService) OwnerGetPage(pageindex, pagesize int) seralizer.Response {
-	ownerlist, err := model.GetOwnerPage(pageindex, pagesize)
-	code := seralizer.Sucess
+func (service *OwnerGetPageService) OwnerGetPage(pageindex, pagesize int) serializer.Response {
+	ownerlist, err := owner.GetOwnerPage(pageindex, pagesize)
+	code := serializer.Sucess
 	if err != nil {
-		code = seralizer.ErrorGet
-		return seralizer.Response{
+		code = serializer.ErrorGet
+		return serializer.Response{
 			Code:   code,
-			Result: seralizer.GetResult(code),
+			Result: serializer.GetResult(code),
 		}
 	}
-	res := seralizer.Response{
+	res := serializer.Response{
 		Code:   code,
-		Result: seralizer.GetResult(code),
+		Result: serializer.GetResult(code),
 		Data:   ownerlist,
 	}
 	return res

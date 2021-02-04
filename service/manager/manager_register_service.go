@@ -1,8 +1,8 @@
 package manager
 
 import (
-	"ProManageSystem/model"
-	"ProManageSystem/seralizer"
+	"ProManageSystem/model/manager"
+	"ProManageSystem/serializer"
 )
 
 type ManagerRegisterService struct {
@@ -12,8 +12,8 @@ type ManagerRegisterService struct {
 	Telephone int    `form:"telephone"`
 }
 
-func (service *ManagerRegisterService) ManagerRegister() seralizer.Response {
-	manager := model.Manager{
+func (service *ManagerRegisterService) ManagerRegister() serializer.Response {
+	manager := manager.Manager{
 		Username:  service.Username,
 		Password:  service.Password,
 		Depart:    service.Depart,
@@ -21,13 +21,13 @@ func (service *ManagerRegisterService) ManagerRegister() seralizer.Response {
 	}
 	err := manager.Create()
 	if err != nil {
-		return seralizer.Response{
-			Code:   seralizer.ExistUser,
+		return serializer.Response{
+			Code:   serializer.ExistUser,
 			Result: "用户已经存在",
 		}
 	}
-	return seralizer.Response{
-		Code:   seralizer.Sucess,
+	return serializer.Response{
+		Code:   serializer.Sucess,
 		Result: "创建成功",
 	}
 }

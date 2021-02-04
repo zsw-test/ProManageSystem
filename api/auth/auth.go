@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"ProManageSystem/model"
-	"ProManageSystem/seralizer"
+	"ProManageSystem/model/owner"
+	"ProManageSystem/serializer"
 	"ProManageSystem/util"
 	"fmt"
 	"net/http"
@@ -20,8 +20,8 @@ func GetAuth(c *gin.Context) {
 	password := c.PostForm("password")
 
 	data := make(map[string]interface{})
-	code := seralizer.Sucess
-	isExist, err := model.CheckOwnerAuth(username, password)
+	code := serializer.Sucess
+	isExist, err := owner.CheckOwnerAuth(username, password)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
@@ -29,17 +29,17 @@ func GetAuth(c *gin.Context) {
 	if isExist {
 		token, err := util.GenerateOwnerToken(username, password)
 		if err != nil {
-			code = seralizer.ErrorCreatToken
+			code = serializer.ErrorCreatToken
 		} else {
 			data["token"] = token
 
-			code = seralizer.Sucess
+			code = serializer.Sucess
 		}
 	} else {
-		code = seralizer.ErrorAuth
+		code = serializer.ErrorAuth
 	}
 
-	c.JSON(http.StatusOK, seralizer.Response{
+	c.JSON(http.StatusOK, serializer.Response{
 		Code:   code,
 		Result: "授权生成token",
 		Data:   data,

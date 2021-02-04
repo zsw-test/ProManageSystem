@@ -1,31 +1,31 @@
 package manager
 
 import (
-	"ProManageSystem/model"
-	"ProManageSystem/seralizer"
+	"ProManageSystem/model/manager"
+	"ProManageSystem/serializer"
 )
 
 type ManagerDeleteService struct {
 	Id int `form:"id"`
 }
 
-func (service *ManagerDeleteService) ManagerDelete() seralizer.Response {
-	manager, err := model.GetManagerbyid(service.Id)
+func (service *ManagerDeleteService) ManagerDelete() serializer.Response {
+	manager, err := manager.GetManagerbyid(service.Id)
 	if err != nil {
-		return seralizer.Response{
-			Code:   seralizer.NotExistUser,
+		return serializer.Response{
+			Code:   serializer.NotExistUser,
 			Result: "用户不存在",
 		}
 	}
 	err = manager.Delete()
 	if err != nil {
-		return seralizer.Response{
-			Code:   seralizer.ErrorDelete,
+		return serializer.Response{
+			Code:   serializer.ErrorDelete,
 			Result: "删除失败",
 		}
 	}
-	return seralizer.Response{
-		Code:   seralizer.Sucess,
+	return serializer.Response{
+		Code:   serializer.Sucess,
 		Result: "删除成功",
 	}
 }
