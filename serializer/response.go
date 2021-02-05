@@ -32,6 +32,10 @@ const (
 
 	ErrorUpdateParkFee = 16
 
+	ErrorCreateCarinfo = 17
+
+	ErrorCarType = 18
+
 	ErrorCheckToken = 401
 
 	ErrorTokenTimeout = 402
@@ -76,6 +80,10 @@ func GetResult(code int) string {
 		result = "获取车位失败"
 	case ErrorUpdateParkFee:
 		result = "更新停车费用失败"
+	case ErrorCreateCarinfo:
+		result = "创建车辆信息失败"
+	case ErrorCarType:
+		result = "不存在购买类型"
 	}
 
 	return result

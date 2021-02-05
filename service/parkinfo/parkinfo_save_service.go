@@ -6,14 +6,12 @@ import (
 )
 
 type ParkInfoSaveService struct {
-	ParkId    int    `form:"parkid"`
 	CarNumber string `form:"carnumber"`
 	Fee       int    `form:"fee"`
 }
 
 func (service *ParkInfoSaveService) ParkInfoSave() serializer.Response {
 	parkinfo := parkmodel.ParkInfo{
-		ParkId:    service.ParkId,
 		CarNumber: service.CarNumber,
 		Fee:       service.Fee,
 	}

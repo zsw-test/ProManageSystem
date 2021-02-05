@@ -3,6 +3,8 @@ package parkinfo
 import (
 	"ProManageSystem/model/parkmodel"
 	"ProManageSystem/serializer"
+	"ProManageSystem/util"
+	"time"
 )
 
 type ParkInfoGetPageService struct {
@@ -13,8 +15,10 @@ func (service *ParkInfoGetPageService) ParkInfoGetPage(pageindex, pagesize int) 
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
+	//模糊计算费用
 	for _, parkinfo := range parkinfolist {
-		err := parkinfo.UpdateFee()
+		parkinfo.Fee = util.Calcutefee(parkinfo.CreatedAt, time.Now())
+		parkinfo.Save()
 		if err != nil {
 			return serializer.GetResponse(serializer.ErrorUpdateParkFee)
 		}

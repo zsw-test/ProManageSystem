@@ -26,7 +26,8 @@ func (manager *Manager) Save() error {
 }
 
 func (manager *Manager) Delete() error {
-	err := DB.Mysqldb.Delete(manager).Error
+	//硬删除永久删除
+	err := DB.Mysqldb.Unscoped().Delete(manager).Error
 	return err
 }
 

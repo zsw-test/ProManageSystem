@@ -9,10 +9,11 @@ import (
 
 //数据迁移
 func Migration() {
-	DB.Mysqldb.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").
+	DB.Mysqldb.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4").
 		AutoMigrate(&owner.Owner{}).
 		AutoMigrate(&manager.Manager{}).
 		AutoMigrate(&parkmodel.Park{}).
-		AutoMigrate(&parkmodel.ParkInfo{})
+		AutoMigrate(&parkmodel.ParkInfo{}).
+		AutoMigrate(&parkmodel.CarInfo{})
 
 }

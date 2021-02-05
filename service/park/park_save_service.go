@@ -6,6 +6,7 @@ import (
 )
 
 type ParkSaveService struct {
+	Id       int
 	Ownerid  int    `form:"ownerid"`
 	Status   int8   `form:"status"`
 	Location string `form:"location"`

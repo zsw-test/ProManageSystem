@@ -26,7 +26,7 @@ func (user *Owner) Save() error {
 }
 
 func (o *Owner) Delete() error {
-	err := DB.Mysqldb.Delete(o).Error
+	err := DB.Mysqldb.Unscoped().Delete(o).Error
 	return err
 }
 

@@ -19,5 +19,6 @@ func MysqlInit(connstr string) {
 		os.Exit(0)
 	}
 	Mysqldb = db
+	db.LogMode(true)
 
 }
