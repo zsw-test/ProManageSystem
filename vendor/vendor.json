@@ -45,6 +45,30 @@
 			"revisionTime": "2021-01-12T00:32:04Z"
 		},
 		{
+			"checksumSHA1": "K0CNQohnoIiWgTS+ZhlphWwXSqc=",
+			"path": "github.com/go-playground/locales",
+			"revision": "ac5643571b2e4508ec50f9a132b5a683412b5bbe",
+			"revisionTime": "2020-09-27T18:55:35Z"
+		},
+		{
+			"checksumSHA1": "6xgFcEYVu7ZWVUeK7Q3gPLJ8h4s=",
+			"path": "github.com/go-playground/locales/currency",
+			"revision": "ac5643571b2e4508ec50f9a132b5a683412b5bbe",
+			"revisionTime": "2020-09-27T18:55:35Z"
+		},
+		{
+			"checksumSHA1": "cZEUrAMGZzuDuBSIiT19yC6y1mw=",
+			"path": "github.com/go-playground/universal-translator",
+			"revision": "f87b1403479a348651dbf5f07f5cc6e5fcf07008",
+			"revisionTime": "2019-11-11T20:22:24Z"
+		},
+		{
+			"checksumSHA1": "AF9LEEzud1GhvcdPLrNGi9YmMDs=",
+			"path": "github.com/go-playground/validator",
+			"revision": "f6584a41c8acc5dfc0b62f7962811f5231c11530",
+			"revisionTime": "2020-10-17T19:09:18Z"
+		},
+		{
 			"checksumSHA1": "rD6O1FRhmhGR0+tGc1hh3fsiM04=",
 			"path": "github.com/go-sql-driver/mysql",
 			"revision": "a341cd15c45e4cdae93421b02834fdadf61e5e18",
@@ -81,6 +105,12 @@
 			"revisionTime": "2020-11-11T04:36:58Z"
 		},
 		{
+			"checksumSHA1": "KOXBJa44LnAtAuxISen/RuZIou8=",
+			"path": "github.com/leodido/go-urn",
+			"revision": "6c96508144d00b380edbc8bda077e27b832d0c7b",
+			"revisionTime": "2020-12-13T19:16:25Z"
+		},
+		{
 			"checksumSHA1": "gKYUfMuLpEwRHZFjKzGIL0VdgKg=",
 			"path": "github.com/mattn/go-isatty",
 			"revision": ""
@@ -90,6 +120,12 @@
 			"path": "github.com/ugorji/go/codec",
 			"revision": "bae90649ef8224713af5d74abd1972d4e2b0f21f",
 			"revisionTime": "2021-01-10T04:54:06Z"
+		},
+		{
+			"checksumSHA1": "bn0M0GXOy3cG2A/i+h1oi3AE4i4=",
+			"path": "golang.org/x/crypto/sha3",
+			"revision": "eec23a3978adcfd26c29f4153eaa3e3d9b2cc53a",
+			"revisionTime": "2020-12-21T16:57:36Z"
 		},
 		{
 			"checksumSHA1": "bnAX6QJYlLgtPQG1+Ko8JfWJA+A=",
