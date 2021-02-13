@@ -14,4 +14,5 @@ func ManagerRegister(c *gin.Context) {
 	} else {
 		c.JSON(200, err.Error())
 	}
+	
 }
