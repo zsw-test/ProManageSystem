@@ -47,6 +47,11 @@ func GetManagerPage(pageindex, pagesize int) ([]Manager, error) {
 	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ManagerList).Error
 	return ManagerList, err
 }
+func GetManagerTotal() (int, error) {
+	count := 0
+	err := DB.Mysqldb.Model(&Manager{}).Count(&count).Error
+	return count, err
+}
 
 //检查管理员权限
 func CheckManagerAuth(username, password string) (bool, error) {

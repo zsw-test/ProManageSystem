@@ -1,5 +1,9 @@
 package serializer
 
+import (
+	"fmt"
+)
+
 type Response struct {
 	Code   int         `json:"code"`
 	Result string      `json:"result"`
@@ -35,6 +39,24 @@ const (
 	ErrorCreateCarinfo = 17
 
 	ErrorCarType = 18
+
+	ErrorComplaintCreate = 19
+
+	ErrorComplaintGet = 20
+
+	ErrorComplaintDelete = 21
+
+	ErrorComplaintSave = 22
+
+	ErrorRepairSave   = 23
+	ErrorRepairGet    = 24
+	ErrorRepairCreate = 25
+	ErrorRepairDelete = 26
+
+	ErrorExpressageSave   = 27
+	ErrorExpressageGet    = 28
+	ErrorExpressageCreate = 29
+	ErrorExpressageDelete = 30
 
 	ErrorCheckToken = 401
 
@@ -84,6 +106,30 @@ func GetResult(code int) string {
 		result = "创建车辆信息失败"
 	case ErrorCarType:
 		result = "不存在购买类型"
+	case ErrorComplaintCreate:
+		result = "创建投诉失败"
+	case ErrorComplaintGet:
+		result = "获取投诉失败"
+	case ErrorComplaintDelete:
+		result = "删除投诉失败"
+	case ErrorComplaintSave:
+		result = "保存投诉失败"
+	case ErrorRepairSave:
+		result = "保存维修失败"
+	case ErrorRepairGet:
+		result = "获取维修失败"
+	case ErrorRepairDelete:
+		result = "删除维修失败"
+	case ErrorRepairCreate:
+		result = "创建维修失败"
+	case ErrorExpressageGet:
+		result = "获取快件失败"
+	case ErrorExpressageSave:
+		result = "保存快件失败"
+	case ErrorExpressageDelete:
+		result = "删除快件失败"
+	case ErrorExpressageCreate:
+		result = "创建快件失败"
 	}
 
 	return result
@@ -92,7 +138,9 @@ func GetResponse(code int, data ...interface{}) Response {
 	res := Response{
 		Code:   code,
 		Result: GetResult(code),
-		Data:   data,
+		Data:   data[0],
 	}
+	//如果只有一个  那么data就不应该是数组了
+	fmt.Println(data[0])
 	return res
 }

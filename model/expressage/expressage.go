@@ -41,8 +41,15 @@ func GetExpressagebyid(id int) (*Expressage, error) {
 	return expressage, err
 }
 
+//根据用户id查找 可能有多个  所以返回一个list
+func GetExpressagebyOid(Oid int) ([]Expressage, error) {
+	ExpressageList := []Expressage{}
+	err := DB.Mysqldb.Where("id = ?", Oid).Find(&ExpressageList).Error
+	return ExpressageList, err
+}
+
 //根据用户名查找 可能有多个  所以返回一个list
-func GetExpressagebyname(Ownername int) ([]Expressage, error) {
+func GetExpressagebyOname(Ownername string) ([]Expressage, error) {
 	ExpressageList := []Expressage{}
 	err := DB.Mysqldb.Where("ownername = ?", Ownername).Find(&ExpressageList).Error
 	return ExpressageList, err
@@ -53,4 +60,9 @@ func GetExpressagePage(pageindex, pagesize int) ([]Expressage, error) {
 	ExpressageList := []Expressage{}
 	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ExpressageList).Error
 	return ExpressageList, err
+}
+func GetExpressageTotal() (int, error) {
+	count := 0
+	err := DB.Mysqldb.Model(&Expressage{}).Count(&count).Error
+	return count, err
 }

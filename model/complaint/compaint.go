@@ -13,7 +13,9 @@ type Complaint struct {
 	Managername string
 	Depart      string
 	Reason      string
-	Resolve     bool
+	//投诉的当前状态
+	Status  string
+	Resolve bool
 }
 
 //增加
@@ -46,5 +48,18 @@ func GetComplpaintbyid(id int) (*Complaint, error) {
 func GetComplpaintPage(pageindex, pagesize int) ([]Complaint, error) {
 	ComplaintList := []Complaint{}
 	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ComplaintList).Error
+	return ComplaintList, err
+}
+
+func GetComplaintTotal() (int, error) {
+	count := 0
+	err := DB.Mysqldb.Model(&Complaint{}).Count(&count).Error
+	return count, err
+}
+
+//根据用户名查找 可能有多个  所以返回一个list
+func GetComplaintbyOname(ownername string) ([]Complaint, error) {
+	ComplaintList := []Complaint{}
+	err := DB.Mysqldb.Where("ownername = ?", ownername).Find(&ComplaintList).Error
 	return ComplaintList, err
 }

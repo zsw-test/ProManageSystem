@@ -47,6 +47,12 @@ func GetOwnerPage(pageindex, pagesize int) ([]Owner, error) {
 	return OwnerList, err
 }
 
+func GetOwnerTotal() (int, error) {
+	count := 0
+	err := DB.Mysqldb.Model(&Owner{}).Count(&count).Error
+	return count, err
+}
+
 //检查业主权限
 func CheckOwnerAuth(username, password string) (bool, error) {
 	var auth Owner

@@ -48,6 +48,13 @@ func GetCarInfoPage(pageindex, pagesize int) ([]CarInfo, error) {
 	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&carinfolist).Error
 	return carinfolist, err
 }
+
+func GetCarinfoTotal() (int, error) {
+	count := 0
+	err := DB.Mysqldb.Model(&CarInfo{}).Count(&count).Error
+	return count, err
+}
+
 func GetCarInfobyCarnumber(carnumber string) (*CarInfo, error) {
 	var carinfo = &CarInfo{}
 	err := DB.Mysqldb.Where("carnumber = ?", carnumber).First(&carinfo).Error

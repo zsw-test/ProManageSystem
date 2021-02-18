@@ -52,3 +52,8 @@ func GetParkPage(pageindex, pagesize int) ([]Park, error) {
 	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&parkList).Error
 	return parkList, err
 }
+func GetParkTotal() (int, error) {
+	count := 0
+	err := DB.Mysqldb.Model(&Park{}).Count(&count).Error
+	return count, err
+}
