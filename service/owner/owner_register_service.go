@@ -8,8 +8,8 @@ import (
 type OwnerRegisterService struct {
 	Username  string `form:"username"`
 	Password  string `form:"password"`
-	Telephone int    `form:"telephone"`
-	Address   string `form:"address"`
+	Telephone string `form:"telephone"`
+	Houseid   int    `form:"houseid"`
 }
 
 func (service *OwnerRegisterService) OwnerRegister() serializer.Response {
@@ -17,7 +17,7 @@ func (service *OwnerRegisterService) OwnerRegister() serializer.Response {
 		Username:  service.Username,
 		Password:  service.Password,
 		Telephone: service.Telephone,
-		Address:   service.Address,
+		Houseid:   service.Houseid,
 	}
 	err := owner.Create()
 	if err != nil {

@@ -58,6 +58,16 @@ const (
 	ErrorExpressageCreate = 29
 	ErrorExpressageDelete = 30
 
+	ErrorChargeGet    = 34
+	ErrorChargeSave   = 31
+	ErrorChargeDelete = 32
+	ErrorChargeCreate = 33
+
+	ErrorChargeRecordGet    = 35
+	ErrorChargeRecordSave   = 36
+	ErrorChargeRecordDelete = 37
+	ErrorChargeRecordCreate = 38
+
 	ErrorCheckToken = 401
 
 	ErrorTokenTimeout = 402
@@ -130,6 +140,14 @@ func GetResult(code int) string {
 		result = "删除快件失败"
 	case ErrorExpressageCreate:
 		result = "创建快件失败"
+	case ErrorChargeGet:
+		result = "获取费用失败"
+	case ErrorChargeSave:
+		result = "保存费用失败"
+	case ErrorChargeDelete:
+		result = "删除费用失败"
+	case ErrorChargeCreate:
+		result = "创建费用失败"
 	}
 
 	return result
@@ -138,9 +156,15 @@ func GetResponse(code int, data ...interface{}) Response {
 	res := Response{
 		Code:   code,
 		Result: GetResult(code),
-		Data:   data[0],
 	}
-	//如果只有一个  那么data就不应该是数组了
-	fmt.Println(data[0])
+	if len(data) > 0 {
+		res = Response{
+			Code:   code,
+			Result: GetResult(code),
+			Data:   data[0],
+		}
+		fmt.Println(data[0])
+	}
+
 	return res
 }

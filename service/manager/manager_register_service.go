@@ -9,7 +9,7 @@ type ManagerRegisterService struct {
 	Username  string `form:"username"`
 	Password  string `form:"password"`
 	Depart    string `from:"depart"`
-	Telephone int    `form:"telephone"`
+	Telephone string `form:"telephone"`
 }
 
 func (service *ManagerRegisterService) ManagerRegister() serializer.Response {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"ProManageSystem/api/charge"
 	"ProManageSystem/api/complaint"
 	"ProManageSystem/api/expressage"
 	"ProManageSystem/api/manager"
@@ -8,7 +9,7 @@ import (
 	"ProManageSystem/api/park"
 	"ProManageSystem/api/repair"
 	"ProManageSystem/conf"
-	"ProManageSystem/middleware/jwt"
+	"ProManageSystem/model"
 
 	"github.com/gin-gonic/gin"
 )
@@ -62,26 +63,53 @@ func main() {
 	//用户
 	router.POST("/api/ownerlogin", owner.OwnerLogin)
 	router.POST("/api/ownerregister", owner.OwnerRegister)
-	ownerauth := router.Group("/api/owner")
+	ownerapi := router.Group("/api/owner")
+	//测试环境不添加token验证权限都可以进入
 	//添加owner的jwt中间件检查
-	ownerauth.Use(jwt.JWTowner())
-	{
-		ownerauth.GET("/:id/page", owner.OwnerGetPage)
-		ownerauth.GET("/:id", owner.OwnerGet)
-		ownerauth.PUT("/:id", owner.OwnerSave)
-		ownerauth.DELETE("/:id", owner.OwnerDelete)
-	}
+	// ownerapi.Use(jwt.JWTowner())
+	// {
+	ownerapi.GET("/:id/page", owner.OwnerGetPage)
+	ownerapi.GET("/:id", owner.OwnerGet)
+	ownerapi.PUT("/:id", owner.OwnerSave)
+	ownerapi.DELETE("/:id", owner.OwnerDelete)
+	//费用缴纳和查询
+	ownerapi.GET("/:id/charge/:houseid/water", charge.ChargeGetWater)
+	ownerapi.POST("/:id/charge/:houseid/water", charge.ChargeWaterPay)
+	ownerapi.GET("/:id/charge/:houseid/electric", charge.ChargeGetElectric)
+	ownerapi.POST("/:id/charge/:houseid/electric", charge.ChargeElectricPay)
+	ownerapi.GET("/:id/charge/:houseid/gas", charge.ChargeGetGas)
+	ownerapi.POST("/:id/charge/:houseid/gas", charge.ChargeGasPay)
+	ownerapi.GET("/:id/charge/:houseid/property", charge.ChargeGetProperty)
+	ownerapi.POST("/:id/charge/:houseid/property", charge.ChargePropertyPay)
+	//总费用查询
+	ownerapi.GET("/:id/charge/:houseid", charge.ChargeGet)
+	//缴费记录查询
+	ownerapi.GET("/:id/chargerecord/:houseid", charge.ChargeRecordGet)
+
+	//}
+
 	//管理员
 	router.POST("/api/managerlogin", manager.ManagerLogin)
 	router.POST("/api/managerregister", manager.ManagerRegister)
-	managerauth := router.Group("/api/manager")
-	managerauth.Use(jwt.JWTmanager())
-	{
-		managerauth.GET("/:id/page", manager.ManagerGetPage)
-		managerauth.GET("/:id", manager.ManagerGet)
-		managerauth.PUT("/:id", manager.ManagerSave)
-		managerauth.DELETE("/:id", manager.ManagerDelete)
-	}
+	managerapi := router.Group("/api/manager")
+	// managerapi.Use(jwt.JWTmanager())
+	// {
+	managerapi.GET("/:id/page", manager.ManagerGetPage)
+	managerapi.GET("/:id", manager.ManagerGet)
+	managerapi.PUT("/:id", manager.ManagerSave)
+	managerapi.DELETE("/:id", manager.ManagerDelete)
 
+	//总体费用查看和记录查询 （管理员）
+	managerapi.PUT("/:id/charge/:houseid", charge.ChargeSave)
+	managerapi.GET("/:id/chargetotal", charge.ChargeGetTotal)
+	managerapi.GET("/:id/chargepage", charge.ChargeGetPage)
+
+	managerapi.GET("/:id/chargerecordpage", charge.ChargeRecordGetPage)
+	managerapi.GET("/:id/chargerecordtotal", charge.ChargeRecordGetTotal)
+
+	// }
+	//数据准备
+	//model.PrepareHouse()
+	model.PrepareUsers()
 	router.Run(":31717")
 }

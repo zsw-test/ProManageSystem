@@ -10,7 +10,7 @@ type ManagerSaveService struct {
 	Username  string `form:"username"`
 	Password  string `form:"password"`
 	Depart    string `from:"depart"`
-	Telephone int    `form:"telephone"`
+	Telephone string `form:"telephone"`
 }
 
 func (service *ManagerSaveService) ManagerSave() serializer.Response {

@@ -9,8 +9,8 @@ type OwnerSaveService struct {
 	Id        int    `form:"id"`
 	Username  string `form:"username"`
 	Password  string `form:"password"`
-	Telephone int    `form:"telephone"`
-	Address   string `form:"address"`
+	Telephone string `form:"telephone"`
+	Houseid   int    `form:"houseid"`
 }
 
 func (service *OwnerSaveService) OwnerSave() serializer.Response {
@@ -22,7 +22,7 @@ func (service *OwnerSaveService) OwnerSave() serializer.Response {
 		}
 	}
 	owner.Username = service.Username
-	owner.Address = service.Address
+	owner.Houseid = service.Houseid
 	owner.Telephone = service.Telephone
 	owner.Password = service.Password
 	err = owner.Save()

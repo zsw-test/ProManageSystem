@@ -16,6 +16,7 @@ type House struct {
 	Area         float64
 	Prorityright int
 	HouseType    string
+	Ownerid      int
 }
 
 func (house *House) Create() error {

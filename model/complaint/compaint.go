@@ -38,14 +38,14 @@ func (c *Complaint) Delete() error {
 }
 
 //查找
-func GetComplpaintbyid(id int) (*Complaint, error) {
+func GetComplaintbyid(id int) (*Complaint, error) {
 	var complaint = &Complaint{}
 	err := DB.Mysqldb.Where("id = ?", id).First(&complaint).Error
 	return complaint, err
 }
 
 //获取页面
-func GetComplpaintPage(pageindex, pagesize int) ([]Complaint, error) {
+func GetComplaintPage(pageindex, pagesize int) ([]Complaint, error) {
 	ComplaintList := []Complaint{}
 	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ComplaintList).Error
 	return ComplaintList, err

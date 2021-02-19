@@ -16,7 +16,7 @@ type ComplaintSaveService struct {
 }
 
 func (service *ComplaintSaveService) ComplaintSave() serializer.Response {
-	com, err := complaint.GetComplpaintbyid(service.Id)
+	com, err := complaint.GetComplaintbyid(service.Id)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorComplaintGet)
 	}

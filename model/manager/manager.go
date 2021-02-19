@@ -12,7 +12,7 @@ type Manager struct {
 	Username  string `gorm:"type:varchar(20);unique_index:username"` //添加唯一索引，防止用户名相同
 	Password  string `gorm:"type:varchar(20);"`
 	Depart    string `gorm:"type:varchar(20);"`
-	Telephone int
+	Telephone string `gorm:"type:varchar(20);"`
 }
 
 func (m *Manager) Create() error {

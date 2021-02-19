@@ -10,7 +10,7 @@ type ComplaintDeleteService struct {
 }
 
 func (service *ComplaintDeleteService) ComplaintDelete() serializer.Response {
-	complaint, err := complaint.GetComplpaintbyid(service.Id)
+	complaint, err := complaint.GetComplaintbyid(service.Id)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorComplaintGet)
 	}
