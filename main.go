@@ -9,7 +9,7 @@ import (
 	"ProManageSystem/api/park"
 	"ProManageSystem/api/repair"
 	"ProManageSystem/conf"
-	"ProManageSystem/model"
+	"ProManageSystem/middleware/cors"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,7 +17,7 @@ import (
 func main() {
 	conf.Init()
 	router := gin.Default()
-
+	router.Use(cors.Cors())
 	//快件
 	router.GET("api/expressagetotal", expressage.ExpressageGetTotal)
 	router.GET("api/expressagepage", expressage.ComplaintGetPage)
@@ -110,6 +110,6 @@ func main() {
 	// }
 	//数据准备
 	//model.PrepareHouse()
-	model.PrepareUsers()
+	//model.PrepareUsers()
 	router.Run(":31717")
 }
