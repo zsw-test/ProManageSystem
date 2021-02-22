@@ -33,3 +33,8 @@ func ManagerGetPage(c *gin.Context) {
 	res := service.ManagerGetPage(pageindex, pagesize)
 	c.JSON(200, res)
 }
+func ManagerGetTotal(c *gin.Context) {
+	service := manager.ManagerGetService{}
+	res := service.ManagerGetTotal()
+	c.JSON(200, res)
+}

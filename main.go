@@ -69,6 +69,7 @@ func main() {
 	// ownerapi.Use(jwt.JWTowner())
 	// {
 	ownerapi.GET("/:id/page", owner.OwnerGetPage)
+	ownerapi.GET("/:id/total", owner.OwnerGetTotal)
 	ownerapi.GET("/:id", owner.OwnerGet)
 	ownerapi.PUT("/:id", owner.OwnerSave)
 	ownerapi.DELETE("/:id", owner.OwnerDelete)
@@ -95,6 +96,7 @@ func main() {
 	// managerapi.Use(jwt.JWTmanager())
 	// {
 	managerapi.GET("/:id/page", manager.ManagerGetPage)
+	managerapi.GET("/:id/total", manager.ManagerGetTotal)
 	managerapi.GET("/:id", manager.ManagerGet)
 	managerapi.PUT("/:id", manager.ManagerSave)
 	managerapi.DELETE("/:id", manager.ManagerDelete)

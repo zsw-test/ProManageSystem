@@ -3,6 +3,8 @@ package manager
 import (
 	"ProManageSystem/model/manager"
 	"ProManageSystem/serializer"
+
+	"github.com/gin-gonic/gin"
 )
 
 type ManagerGetService struct {
@@ -23,4 +25,11 @@ func (service *ManagerGetService) ManagerGet() serializer.Response {
 			Data:   manager,
 		}
 	}
+}
+func (service *ManagerGetService) ManagerGetTotal() serializer.Response {
+	count, err := manager.GetManagerTotal()
+	if err != nil {
+		return serializer.GetResponse(serializer.ErrorGet)
+	}
+	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
 }

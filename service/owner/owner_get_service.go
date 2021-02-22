@@ -3,6 +3,8 @@ package owner
 import (
 	"ProManageSystem/model/owner"
 	"ProManageSystem/serializer"
+
+	"github.com/gin-gonic/gin"
 )
 
 type OwnerGetService struct {
@@ -23,4 +25,11 @@ func (service *OwnerGetService) OwnerGet() serializer.Response {
 			Data:   owner,
 		}
 	}
+}
+func (service *OwnerGetService) OwnerGetTotal() serializer.Response {
+	count, err := owner.GetOwnerTotal()
+	if err != nil {
+		return serializer.GetResponse(serializer.ErrorGet)
+	}
+	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
 }

@@ -32,3 +32,8 @@ func OwnerGetPage(c *gin.Context) {
 	res := service.OwnerGetPage(pageindex, pagesize)
 	c.JSON(200, res)
 }
+func OwnerGetTotal(c *gin.Context) {
+	service := owner.OwnerGetService{}
+	res := service.OwnerGetTotal()
+	c.JSON(200, res)
+}
