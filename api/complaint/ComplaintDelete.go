@@ -9,7 +9,7 @@ import (
 )
 
 func ComplaintDelete(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
+	id, err := strconv.Atoi(c.Param("complaintid"))
 	if err != nil {
 		fmt.Println(err.Error())
 	}

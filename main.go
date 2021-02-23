@@ -18,41 +18,22 @@ func main() {
 	conf.Init()
 	router := gin.Default()
 	router.Use(cors.Cors())
-	//快件
-	router.GET("api/expressagetotal", expressage.ExpressageGetTotal)
-	router.GET("api/expressagepage", expressage.ComplaintGetPage)
-
-	router.GET("api/expressage/:id", expressage.ExpressageGet)
-	router.POST("api/expressage", expressage.ExpressageCreate)
-	router.DELETE("api/expressage/:id", expressage.ExpressageDelete)
-	router.PUT("api/expressage/:id", expressage.ExpressageSave)
-
-	//维修
-	router.GET("api/repairtotal", repair.RepairGetTotal)
-	router.GET("api/repairpage", repair.ComplaintGetPage)
-
-	router.GET("api/repair/:id", repair.RepairGet)
-	router.POST("api/repair", repair.RepairCreate)
-	router.DELETE("api/repair/:id", repair.RepairDelete)
-	router.PUT("api/repair/:id", repair.RepairSave)
-
-	//投诉
-	router.GET("api/complainttotal", complaint.ComplaintGetTotal)
-	router.GET("api/complaintpage", complaint.ComplaintGetPage)
-
-	router.GET("api/complaint/:id", complaint.ComplaintGet)
-	router.POST("api/complaint", complaint.ComplaintCreate)
-	router.DELETE("api/complaint/:id", complaint.ComplaintDelete)
-	router.PUT("api/complaint/:id", complaint.ComplaintSave)
 
 	//停车
+	//买停车卡(用户)
+	router.POST("api/carinfo", park.CarInfoBuy)
+	//查看车辆是否有月卡
+	router.GET("api/carinfo", park.CarinfoGet)
+
+	//查看所有停在物业的车  和月卡车
+	router.GET("api/carinfopage", park.CarinfoGetPage)
+	router.GET("api/carinfototal", park.CarinfoGetPage)
+
 	router.POST("api/parkinfo/:carnumber", park.ParkInfoIn)
 	router.GET("api/parkinfo/:carnumber", park.ParkInfoOut)
 	router.GET("api/parkinfopage", park.ParkInfoGetPage)
 	router.GET("api/parkinfototal", park.ParkInfoGetTotal)
 	router.DELETE("api/parkinfo/:carnumber", park.ParkInfoDelete)
-
-	router.POST("api/carinfo", park.CarInfoBuy)
 
 	router.POST("api/park", park.ParkCreate)
 	router.GET("api/parkpage", park.ParkGetPage)
@@ -86,6 +67,23 @@ func main() {
 	ownerapi.GET("/:id/charge/:houseid", charge.ChargeGet)
 	//缴费记录查询
 	ownerapi.GET("/:id/chargerecord/:houseid", charge.ChargeRecordGet)
+	//投诉
+	ownerapi.GET("/:id/complaint/:complaintid", complaint.ComplaintGet)
+	ownerapi.POST("/:id/complaint", complaint.ComplaintCreate)
+	ownerapi.DELETE("/:id/complaint/:complaintid", complaint.ComplaintDelete)
+	ownerapi.PUT("/:id/complaint/:complaintid", complaint.ComplaintSave)
+
+	//维修
+	ownerapi.GET("/:id/repair/:repairid", repair.RepairGet)
+	ownerapi.POST("/:id/repair", repair.RepairCreate)
+	ownerapi.DELETE("/:id/repair/:repairid", repair.RepairDelete)
+	ownerapi.PUT("/:id/repair/:repairid", repair.RepairSave)
+
+	//快件
+	ownerapi.GET("/:id/expressage/:expressageid", expressage.ExpressageGet)
+	ownerapi.POST("/:id/expressage", expressage.ExpressageCreate)
+	ownerapi.DELETE("/:id/expressage/:expressageid", expressage.ExpressageDelete)
+	ownerapi.PUT("/:id/expressage/:expressageid", expressage.ExpressageSave)
 
 	//}
 
@@ -108,6 +106,20 @@ func main() {
 
 	managerapi.GET("/:id/chargerecordpage", charge.ChargeRecordGetPage)
 	managerapi.GET("/:id/chargerecordtotal", charge.ChargeRecordGetTotal)
+
+	//查看投诉
+	managerapi.GET("/:id/complainttotal", complaint.ComplaintGetTotal)
+	managerapi.GET("/:id/complaintpage", complaint.ComplaintGetPage)
+
+	//查看维修
+	managerapi.GET("/:id/repairtotal", repair.RepairGetTotal)
+	managerapi.GET("/:id/repairpage", repair.ComplaintGetPage)
+
+	//查看All快件
+	managerapi.GET("/:id/expressagetotal", expressage.ExpressageGetTotal)
+	managerapi.GET("/:id/expressagepage", expressage.ComplaintGetPage)
+	//录入快件
+	managerapi.POST("/:id/expressage", expressage.ExpressageCreate)
 
 	// }
 	//数据准备

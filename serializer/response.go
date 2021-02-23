@@ -68,6 +68,11 @@ const (
 	ErrorChargeRecordDelete = 37
 	ErrorChargeRecordCreate = 38
 
+	ErrorCarinfoGet    = 39
+	ErrorCarinfoSave   = 40
+	ErrorCarinfoDelete = 41
+	ErrorCarinfoCreate = 42
+
 	ErrorCheckToken = 401
 
 	ErrorTokenTimeout = 402
@@ -147,6 +152,14 @@ func GetResult(code int) string {
 	case ErrorChargeDelete:
 		result = "删除费用失败"
 	case ErrorChargeCreate:
+		result = "创建费用失败"
+	case ErrorCarinfoGet:
+		result = "获取费用失败"
+	case ErrorCarinfoSave:
+		result = "保存费用失败"
+	case ErrorCarinfoDelete:
+		result = "删除费用失败"
+	case ErrorCarinfoCreate:
 		result = "创建费用失败"
 	}
 

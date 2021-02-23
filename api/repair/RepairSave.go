@@ -9,7 +9,7 @@ import (
 )
 
 func RepairSave(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
+	id, err := strconv.Atoi(c.Param("repairid"))
 	if err != nil {
 		fmt.Println(err.Error())
 	}
