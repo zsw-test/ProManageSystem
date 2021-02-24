@@ -50,9 +50,9 @@ func GetCarInfoPage(pageindex, pagesize int) ([]CarInfo, error) {
 }
 
 func GetCarinfoTotal() (int, error) {
-	count := 0
-	err := DB.Mysqldb.Model(&CarInfo{}).Count(&count).Error
-	return count, err
+	var num int
+	err := DB.Mysqldb.Model(&CarInfo{}).Count(&num).Error
+	return num, err
 }
 
 func GetCarInfobyCarnumber(carnumber string) (*CarInfo, error) {

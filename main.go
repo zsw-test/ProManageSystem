@@ -19,107 +19,116 @@ func main() {
 	router := gin.Default()
 	router.Use(cors.Cors())
 
-	//停车
-	//买停车卡(用户)
-	router.POST("api/carinfo", park.CarInfoBuy)
-	//查看车辆是否有月卡
-	router.GET("api/carinfo", park.CarinfoGet)
-
-	//查看所有停在物业的车  和月卡车
-	router.GET("api/carinfopage", park.CarinfoGetPage)
-	router.GET("api/carinfototal", park.CarinfoGetPage)
-
-	router.POST("api/parkinfo/:carnumber", park.ParkInfoIn)
-	router.GET("api/parkinfo/:carnumber", park.ParkInfoOut)
-	router.GET("api/parkinfopage", park.ParkInfoGetPage)
-	router.GET("api/parkinfototal", park.ParkInfoGetTotal)
-	router.DELETE("api/parkinfo/:carnumber", park.ParkInfoDelete)
-
-	router.POST("api/park", park.ParkCreate)
-	router.GET("api/parkpage", park.ParkGetPage)
-	router.GET("api/park/:id", park.ParkGet)
-	router.DELETE("api/park/:id", park.ParkDelete)
-	router.PUT("api/park/:id", park.ParkSave)
-
 	//用户
 	router.POST("/api/ownerlogin", owner.OwnerLogin)
 	router.POST("/api/ownerregister", owner.OwnerRegister)
-	ownerapi := router.Group("/api/owner")
+	ownerauth := router.Group("/api/ownerauth")
 	//测试环境不添加token验证权限都可以进入
 	//添加owner的jwt中间件检查
-	// ownerapi.Use(jwt.JWTowner())
+	// ownerauth.Use(jwt.JWTowner())
 	// {
-	ownerapi.GET("/:id/page", owner.OwnerGetPage)
-	ownerapi.GET("/:id/total", owner.OwnerGetTotal)
-	ownerapi.GET("/:id", owner.OwnerGet)
-	ownerapi.PUT("/:id", owner.OwnerSave)
-	ownerapi.DELETE("/:id", owner.OwnerDelete)
+	ownerapi := ownerauth.Group("/owner")
+	ownerapi.GET("/:ownerid", owner.OwnerGet)
+	ownerapi.PUT("/:ownerid", owner.OwnerSave)
+	ownerapi.DELETE("/:ownerid", owner.OwnerDelete)
 	//费用缴纳和查询
-	ownerapi.GET("/:id/charge/:houseid/water", charge.ChargeGetWater)
-	ownerapi.POST("/:id/charge/:houseid/water", charge.ChargeWaterPay)
-	ownerapi.GET("/:id/charge/:houseid/electric", charge.ChargeGetElectric)
-	ownerapi.POST("/:id/charge/:houseid/electric", charge.ChargeElectricPay)
-	ownerapi.GET("/:id/charge/:houseid/gas", charge.ChargeGetGas)
-	ownerapi.POST("/:id/charge/:houseid/gas", charge.ChargeGasPay)
-	ownerapi.GET("/:id/charge/:houseid/property", charge.ChargeGetProperty)
-	ownerapi.POST("/:id/charge/:houseid/property", charge.ChargePropertyPay)
+	ownerauth.GET("/charge/:houseid/water", charge.ChargeGetWater)
+	ownerauth.POST("/charge/:houseid/water", charge.ChargeWaterPay)
+	ownerauth.GET("/charge/:houseid/electric", charge.ChargeGetElectric)
+	ownerauth.POST("/charge/:houseid/electric", charge.ChargeElectricPay)
+	ownerauth.GET("/charge/:houseid/gas", charge.ChargeGetGas)
+	ownerauth.POST("/charge/:houseid/gas", charge.ChargeGasPay)
+	ownerauth.GET("/charge/:houseid/property", charge.ChargeGetProperty)
+	ownerauth.POST("/charge/:houseid/property", charge.ChargePropertyPay)
 	//总费用查询
-	ownerapi.GET("/:id/charge/:houseid", charge.ChargeGet)
+	ownerauth.GET("/charge/:houseid", charge.ChargeGet)
 	//缴费记录查询
-	ownerapi.GET("/:id/chargerecord/:houseid", charge.ChargeRecordGet)
+	ownerauth.GET("/chargerecord/:houseid", charge.ChargeRecordGet)
 	//投诉
-	ownerapi.GET("/:id/complaint/:complaintid", complaint.ComplaintGet)
-	ownerapi.POST("/:id/complaint", complaint.ComplaintCreate)
-	ownerapi.DELETE("/:id/complaint/:complaintid", complaint.ComplaintDelete)
-	ownerapi.PUT("/:id/complaint/:complaintid", complaint.ComplaintSave)
+	ownerauth.GET("/complaint/:complaintid", complaint.ComplaintGet)
+	ownerauth.POST("/complaint", complaint.ComplaintCreate)
+	ownerauth.DELETE("/complaint/:complaintid", complaint.ComplaintDelete)
+	ownerauth.PUT("/complaint/:complaintid", complaint.ComplaintSave)
 
 	//维修
-	ownerapi.GET("/:id/repair/:repairid", repair.RepairGet)
-	ownerapi.POST("/:id/repair", repair.RepairCreate)
-	ownerapi.DELETE("/:id/repair/:repairid", repair.RepairDelete)
-	ownerapi.PUT("/:id/repair/:repairid", repair.RepairSave)
+	ownerauth.GET("/repair/:repairid", repair.RepairGet)
+	ownerauth.POST("/repair", repair.RepairCreate)
+	ownerauth.DELETE("/repair/:repairid", repair.RepairDelete)
+	ownerauth.PUT("/repair/:repairid", repair.RepairSave)
 
 	//快件
-	ownerapi.GET("/:id/expressage/:expressageid", expressage.ExpressageGet)
-	ownerapi.POST("/:id/expressage", expressage.ExpressageCreate)
-	ownerapi.DELETE("/:id/expressage/:expressageid", expressage.ExpressageDelete)
-	ownerapi.PUT("/:id/expressage/:expressageid", expressage.ExpressageSave)
+	ownerauth.GET("/expressage/:expressageid", expressage.ExpressageGet)
+	ownerauth.POST("/expressage", expressage.ExpressageCreate)
+	ownerauth.DELETE("/expressage/:expressageid", expressage.ExpressageDelete)
+	ownerauth.PUT("/expressage/:expressageid", expressage.ExpressageSave)
+
+	//停车
+	//买停车卡(用户)
+	ownerauth.POST("/carinfo", park.CarInfoBuy)
+	//查看车辆是否有月卡
+	ownerauth.GET("/carinfo/:carnumber", park.CarinfoGet)
+	//用户模拟停车和出库的功能（本来应该是收费站来操作）
+	ownerauth.POST("/parkinfo/:carnumber", park.ParkInfoIn)
+	ownerauth.GET("/parkinfo/:carnumber", park.ParkInfoOut)
+	//支付成功就删除停车信息
+	ownerauth.DELETE("/parkinfo/:carnumber", park.ParkInfoDelete)
 
 	//}
 
 	//管理员
 	router.POST("/api/managerlogin", manager.ManagerLogin)
 	router.POST("/api/managerregister", manager.ManagerRegister)
-	managerapi := router.Group("/api/manager")
-	// managerapi.Use(jwt.JWTmanager())
+	managerauth := router.Group("/api/managerauth")
+	// managerauth.Use(jwt.JWTmanager())
 	// {
-	managerapi.GET("/:id/page", manager.ManagerGetPage)
-	managerapi.GET("/:id/total", manager.ManagerGetTotal)
-	managerapi.GET("/:id", manager.ManagerGet)
-	managerapi.PUT("/:id", manager.ManagerSave)
-	managerapi.DELETE("/:id", manager.ManagerDelete)
+	//管理所有的人员  业主和管理员
+	managerapi := managerauth.Group("/manager")
+	managerapi.GET("/:managerid", manager.ManagerGet)
+	managerapi.PUT("/:managerid", manager.ManagerSave)
+	managerapi.DELETE("/:managerid", manager.ManagerDelete)
+
+	managerauth.GET("/managerpage", manager.ManagerGetPage)
+	managerauth.GET("/managertotal", manager.ManagerGetTotal)
+	managerauth.GET("/ownerpage", owner.OwnerGetPage)
+	managerauth.GET("/ownertotal", owner.OwnerGetTotal)
+
+	managerauth.GET("/owner/:ownerid", owner.OwnerGet)
+	managerauth.PUT("/owner/:ownerid", owner.OwnerSave)
+	managerauth.DELETE("/owner/:ownerid", owner.OwnerDelete)
 
 	//总体费用查看和记录查询 （管理员）
-	managerapi.PUT("/:id/charge/:houseid", charge.ChargeSave)
-	managerapi.GET("/:id/chargetotal", charge.ChargeGetTotal)
-	managerapi.GET("/:id/chargepage", charge.ChargeGetPage)
+	managerauth.PUT("/charge/:houseid", charge.ChargeSave)
+	managerauth.GET("/chargetotal", charge.ChargeGetTotal)
+	managerauth.GET("/chargepage", charge.ChargeGetPage)
 
-	managerapi.GET("/:id/chargerecordpage", charge.ChargeRecordGetPage)
-	managerapi.GET("/:id/chargerecordtotal", charge.ChargeRecordGetTotal)
+	managerauth.GET("/chargerecordpage", charge.ChargeRecordGetPage)
+	managerauth.GET("/chargerecordtotal", charge.ChargeRecordGetTotal)
 
 	//查看投诉
-	managerapi.GET("/:id/complainttotal", complaint.ComplaintGetTotal)
-	managerapi.GET("/:id/complaintpage", complaint.ComplaintGetPage)
+	managerauth.GET("/complainttotal", complaint.ComplaintGetTotal)
+	managerauth.GET("/complaintpage", complaint.ComplaintGetPage)
 
 	//查看维修
-	managerapi.GET("/:id/repairtotal", repair.RepairGetTotal)
-	managerapi.GET("/:id/repairpage", repair.ComplaintGetPage)
+	managerauth.GET("/repairtotal", repair.RepairGetTotal)
+	managerauth.GET("/repairpage", repair.ComplaintGetPage)
 
 	//查看All快件
-	managerapi.GET("/:id/expressagetotal", expressage.ExpressageGetTotal)
-	managerapi.GET("/:id/expressagepage", expressage.ComplaintGetPage)
+	managerauth.GET("/expressagetotal", expressage.ExpressageGetTotal)
+	managerauth.GET("/expressagepage", expressage.ComplaintGetPage)
 	//录入快件
-	managerapi.POST("/:id/expressage", expressage.ExpressageCreate)
+	managerauth.POST("/expressage", expressage.ExpressageCreate)
+
+	//查看所有停在物业的车  和月卡车（管理员）
+	managerauth.GET("/carinfopage", park.CarinfoGetPage)
+	managerauth.GET("/carinfototal", park.CarinfoGetTotal)
+	managerauth.GET("/parkinfopage", park.ParkInfoGetPage)
+	managerauth.GET("/parkinfototal", park.ParkInfoGetTotal)
+
+	managerauth.POST("/park", park.ParkCreate)
+	managerauth.GET("/parkpage", park.ParkGetPage)
+	managerauth.GET("/park", park.ParkGet)
+	managerauth.DELETE("/park", park.ParkDelete)
+	managerauth.PUT("/park", park.ParkSave)
 
 	// }
 	//数据准备

@@ -12,19 +12,27 @@ type ExpressageGetService struct {
 }
 
 func (service *ExpressageGetService) ExpressageGetMe(ownername string) serializer.Response {
-	replist, err := expressage.GetExpressagebyOname(ownername)
+	explist, err := expressage.GetExpressagebyOname(ownername)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorExpressageGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, replist)
+	return serializer.GetResponse(serializer.Sucess, explist)
+}
+
+func (service *ExpressageGetService) ExpressageGetTelephone(telephone string) serializer.Response {
+	explist, err := expressage.GetExpressagebyTelephone(telephone)
+	if err != nil {
+		return serializer.GetResponse(serializer.ErrorExpressageGet)
+	}
+	return serializer.GetResponse(serializer.Sucess, explist)
 }
 
 func (service *ExpressageGetService) ExpressageGet() serializer.Response {
-	rep, err := expressage.GetExpressagebyid(service.Id)
+	exp, err := expressage.GetExpressagebyid(service.Id)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorExpressageGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, rep)
+	return serializer.GetResponse(serializer.Sucess, exp)
 }
 
 func (service *ExpressageGetService) ExpressageGetTotal() serializer.Response {
@@ -36,9 +44,9 @@ func (service *ExpressageGetService) ExpressageGetTotal() serializer.Response {
 }
 
 func (service *ExpressageGetService) ExpressageGetPage(pageindex, pagesize int) serializer.Response {
-	replist, err := expressage.GetExpressagePage(pageindex, pagesize)
+	explist, err := expressage.GetExpressagePage(pageindex, pagesize)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorExpressageGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, replist)
+	return serializer.GetResponse(serializer.Sucess, explist)
 }

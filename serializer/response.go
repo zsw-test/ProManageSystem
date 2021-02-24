@@ -154,13 +154,13 @@ func GetResult(code int) string {
 	case ErrorChargeCreate:
 		result = "创建费用失败"
 	case ErrorCarinfoGet:
-		result = "获取费用失败"
+		result = "获取车信息失败"
 	case ErrorCarinfoSave:
-		result = "保存费用失败"
+		result = "保存车信息失败"
 	case ErrorCarinfoDelete:
-		result = "删除费用失败"
+		result = "删除车信息失败"
 	case ErrorCarinfoCreate:
-		result = "创建费用失败"
+		result = "创建车信息失败"
 	}
 
 	return result

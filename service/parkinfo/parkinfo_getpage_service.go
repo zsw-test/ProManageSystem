@@ -18,6 +18,8 @@ func (service *ParkInfoGetPageService) ParkInfoGetPage(pageindex, pagesize int) 
 	//模糊计算费用
 	for _, parkinfo := range parkinfolist {
 		parkinfo.Fee = util.Calcutefee(parkinfo.CreatedAt, time.Now())
+		hour := time.Since(parkinfo.CreatedAt).Hours()
+		parkinfo.Hour = int(hour)
 		parkinfo.Save()
 		if err != nil {
 			return serializer.GetResponse(serializer.ErrorUpdateParkFee)

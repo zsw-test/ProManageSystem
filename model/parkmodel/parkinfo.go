@@ -12,7 +12,8 @@ type ParkInfo struct {
 	//车辆号码
 	CarNumber string `gorm:"column:carnumber;type:varchar(20);unique_index:carnumber"`
 	//费用  根据当前时间和创建时间来算出总费用
-	Fee int
+	Fee  int
+	Hour int
 }
 
 func (parkinfo *ParkInfo) Create() error {

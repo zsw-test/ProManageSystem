@@ -12,9 +12,18 @@ type CarInfoBuyService struct {
 }
 
 func (service *CarInfoBuyService) CarInfoBuy() serializer.Response {
+	//首先查询车辆信息是否存在物业系统中
 	carinfo, err := parkmodel.GetCarInfobyCarnumber(service.Carnumber)
 	if err != nil {
-		return serializer.GetResponse(serializer.ErrorGet)
+		//如果不存在直接创建一个购买车信息
+		carinfo = &parkmodel.CarInfo{
+			CarNumber: service.Carnumber,
+			CarType:   service.Cartype,
+		}
+		err = carinfo.Create()
+		if err != nil {
+			return serializer.GetResponse(serializer.ErrorCarinfoCreate)
+		}
 	}
 	//如果还没过期  就在过期时间加上去
 	var lasttime time.Time

@@ -11,6 +11,8 @@ type Expressage struct {
 	gorm.Model
 	Ownername       string
 	ExpressLocation string `gorm:"column:expressagelocation"`
+	Telephone       string `gorm:"type:varchar(20);"`
+	ExpType         string `gorm:"type:varchar(20);"`
 	Istake          bool
 }
 
@@ -39,6 +41,13 @@ func GetExpressagebyid(id int) (*Expressage, error) {
 	var expressage = &Expressage{}
 	err := DB.Mysqldb.Where("id = ?", id).First(&expressage).Error
 	return expressage, err
+}
+
+//根据用户电话号查找   可能有多个  所以返回一个list
+func GetExpressagebyTelephone(telephone string) ([]Expressage, error) {
+	ExpressageList := []Expressage{}
+	err := DB.Mysqldb.Where("telephone = ?", telephone).Find(&ExpressageList).Error
+	return ExpressageList, err
 }
 
 //根据用户id查找 可能有多个  所以返回一个list
