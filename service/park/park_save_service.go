@@ -13,12 +13,14 @@ type ParkSaveService struct {
 }
 
 func (service *ParkSaveService) ParkSave() serializer.Response {
-	park := parkmodel.Park{
-		Ownerid:  service.Ownerid,
-		Status:   service.Status,
-		Location: service.Location,
+	park, err := parkmodel.GetParkbyid(service.Id)
+	if err != nil {
+		return serializer.GetResponse(serializer.ErrorGetPark)
 	}
-	err := park.Save()
+	park.Ownerid = service.Ownerid
+	park.Status = service.Status
+	park.Location = service.Location
+	err = park.Save()
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorSave)
 	}

@@ -12,6 +12,8 @@ type Owner struct {
 	Username  string `gorm:"type:varchar(20);unique_index:username"` //添加唯一索引，防止用户名相同
 	Password  string `gorm:"type:varchar(20);"`
 	Houseid   int
+	ParkId    int
+	Carnumber string `gorm:"type:varchar(20);"`
 	Telephone string `gorm:"type:varchar(20);"`
 }
 

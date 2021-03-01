@@ -11,7 +11,7 @@ import (
 
 func ParkSave(c *gin.Context) {
 
-	id, err := strconv.Atoi(c.Param("id"))
+	id, err := strconv.Atoi(c.Param("parkid"))
 	if err != nil {
 		fmt.Println(err.Error())
 	}

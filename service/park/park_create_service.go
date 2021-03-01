@@ -22,7 +22,7 @@ func (service *ParkCreateService) ParkCreate() serializer.Response {
 	if err != nil {
 		return serializer.Response{
 			Code:   serializer.ExistUser,
-			Result: serializer.GetResult(serializer.ExistUser),
+			Result: serializer.GetResult(serializer.ErrorParkCreate),
 		}
 	}
 	return serializer.Response{

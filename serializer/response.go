@@ -73,6 +73,10 @@ const (
 	ErrorCarinfoDelete = 41
 	ErrorCarinfoCreate = 42
 
+	ErrorParkCreate = 43
+
+	ErrorParkBuy = 44
+
 	ErrorCheckToken = 401
 
 	ErrorTokenTimeout = 402
@@ -161,6 +165,10 @@ func GetResult(code int) string {
 		result = "删除车信息失败"
 	case ErrorCarinfoCreate:
 		result = "创建车信息失败"
+	case ErrorParkCreate:
+		result = "创建车位失败"
+	case ErrorParkBuy:
+		result = "购买车位失败，您已经有车位了"
 	}
 
 	return result

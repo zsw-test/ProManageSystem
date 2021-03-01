@@ -65,6 +65,9 @@ func main() {
 	//停车
 	//买停车卡(用户)
 	ownerauth.POST("/carinfo", park.CarInfoBuy)
+	//购买车位
+	ownerauth.POST("/parkbuy", park.ParkBuy)
+	ownerauth.GET("/park", park.ParkGetFreeList)
 	//查看车辆是否有月卡
 	ownerauth.GET("/carinfo/:carnumber", park.CarinfoGet)
 	//用户模拟停车和出库的功能（本来应该是收费站来操作）
@@ -126,9 +129,10 @@ func main() {
 
 	managerauth.POST("/park", park.ParkCreate)
 	managerauth.GET("/parkpage", park.ParkGetPage)
-	managerauth.GET("/park", park.ParkGet)
-	managerauth.DELETE("/park", park.ParkDelete)
-	managerauth.PUT("/park", park.ParkSave)
+	managerauth.GET("/parktotal", park.ParkGetTotal)
+	managerauth.GET("/park/:parkid", park.ParkGet)
+	managerauth.DELETE("/park/:parkid", park.ParkDelete)
+	managerauth.PUT("/park/:parkid", park.ParkSave)
 
 	// }
 	//数据准备

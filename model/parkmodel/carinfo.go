@@ -11,6 +11,7 @@ const (
 	TempoaryCar string = "临时车"
 	MounthCar   string = "月卡车"
 	YearCar     string = "年卡车"
+	PersonalCar string = "私家车"
 )
 
 type CarInfo struct {

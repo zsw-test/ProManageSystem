@@ -10,7 +10,7 @@ import (
 )
 
 func ParkGet(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
+	id, err := strconv.Atoi(c.Param("pakrid"))
 	if err != nil {
 		fmt.Println(err.Error())
 	}
@@ -33,5 +33,15 @@ func ParkGetPage(c *gin.Context) {
 	}
 	service := park.ParkGetPageService{}
 	res := service.ParkGetPage(pageindex, pagesize)
+	c.JSON(200, res)
+}
+func ParkGetTotal(c *gin.Context) {
+	service := park.ParkGetService{}
+	res := service.ParkGetTotal()
+	c.JSON(200, res)
+}
+func ParkGetFreeList(c *gin.Context) {
+	service := park.ParkGetService{}
+	res := service.ParkGetFreeList()
 	c.JSON(200, res)
 }

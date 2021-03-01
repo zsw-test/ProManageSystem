@@ -23,7 +23,7 @@ type Park struct {
 	//当前车位的状态
 	Status int8
 	//地点
-	Location string `grom:"varchar(20);unique_index:location"`
+	Location string `gorm:"type:varchar(20);unique_index:location"`
 }
 
 func (park *Park) Create() error {
@@ -37,7 +37,7 @@ func (park *Park) Save() error {
 }
 
 func (park *Park) Delete() error {
-	err := DB.Mysqldb.Delete(park).Error
+	err := DB.Mysqldb.Unscoped().Delete(park).Error
 	return err
 }
 
@@ -56,4 +56,29 @@ func GetParkTotal() (int, error) {
 	count := 0
 	err := DB.Mysqldb.Model(&Park{}).Count(&count).Error
 	return count, err
+}
+func GetParkEmpty() (int, error) {
+	count := 0
+	err := DB.Mysqldb.Where("Status = ?", 0).Model(&Park{}).Count(&count).Error
+	return count, err
+}
+func GetParkOccupy() (int, error) {
+	count := 0
+	err := DB.Mysqldb.Where("Status = ?", 1).Model(&Park{}).Count(&count).Error
+	return count, err
+}
+func GetParkPersonal() (int, error) {
+	count := 0
+	err := DB.Mysqldb.Where("Ownerid <> ?", 0).Model(&Park{}).Count(&count).Error
+	return count, err
+}
+func GetParkFree() (int, error) {
+	count := 0
+	err := DB.Mysqldb.Where("Ownerid = ?", 0).Model(&Park{}).Count(&count).Error
+	return count, err
+}
+func GetParkFreeList() ([]Park, error) {
+	parkList := []Park{}
+	err := DB.Mysqldb.Where("Ownerid = ?", 0).Find(&parkList).Error
+	return parkList, err
 }
