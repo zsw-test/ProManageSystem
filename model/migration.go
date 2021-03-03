@@ -25,6 +25,7 @@ func Migration() {
 		AutoMigrate(&repair.Repair{}).
 		AutoMigrate(&house.House{}).
 		AutoMigrate(&charge.Charge{}).
-		AutoMigrate(&charge.ChargeRecord{})
+		AutoMigrate(&charge.ChargeRecord{}).
+		AutoMigrate(&house.Resident{})
 
 }

@@ -4,6 +4,7 @@ import (
 	"ProManageSystem/api/charge"
 	"ProManageSystem/api/complaint"
 	"ProManageSystem/api/expressage"
+	"ProManageSystem/api/house"
 	"ProManageSystem/api/manager"
 	"ProManageSystem/api/owner"
 	"ProManageSystem/api/park"
@@ -95,6 +96,7 @@ func main() {
 	managerauth.GET("/ownerpage", owner.OwnerGetPage)
 	managerauth.GET("/ownertotal", owner.OwnerGetTotal)
 
+	managerauth.DELETE("/owneruntiepark/:ownerid", owner.OwnerUntiepark)
 	managerauth.GET("/owner/:ownerid", owner.OwnerGet)
 	managerauth.PUT("/owner/:ownerid", owner.OwnerSave)
 	managerauth.DELETE("/owner/:ownerid", owner.OwnerDelete)
@@ -134,9 +136,26 @@ func main() {
 	managerauth.DELETE("/park/:parkid", park.ParkDelete)
 	managerauth.PUT("/park/:parkid", park.ParkSave)
 
+	managerauth.POST("/house", house.HouseCreate)
+
+	managerauth.GET("/house/:houseid", house.HouseGet)
+	managerauth.GET("/housetotal", house.HouseGetTotal)
+	managerauth.GET("/housepage", house.HouseGetPage)
+	managerauth.DELETE("/house/:houseid", house.HouseDelete)
+	managerauth.PUT("/house/:houseid", house.HouseSave)
+
+	managerauth.POST("/resident", house.ResidentAdd)
+	managerauth.DELETE("/resident/:residentid", house.ResidentDel)
+	managerauth.GET("/resident/:residentid", house.ResidentGet)
+	managerauth.PUT("/resident/:residentid", house.ResidentSave)
+	managerauth.GET("/residentpage", house.ResidentGetPage)
+	managerauth.GET("/residenttotal", house.ResidentGetTotal)
+	managerauth.GET("/residenthousepage/:houseid", house.ResidentGetByhouseidPage)
+	managerauth.GET("/residenthousetotal/:houseid", house.ResidentGetByhouseidTotal)
+
 	// }
 	//数据准备
-	//model.PrepareHouse()
+	//model.PrepareHouseAndResident()
 	//model.PrepareUsers()
 	router.Run(":31717")
 }

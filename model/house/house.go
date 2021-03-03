@@ -12,7 +12,9 @@ type House struct {
 	//楼栋号码
 	Building int
 	//单元号码
-	Unit         int
+	Unit int
+	//门牌号吗
+	Door         int
 	Area         float64
 	Prorityright int
 	HouseType    string
@@ -30,7 +32,7 @@ func (house *House) Save() error {
 }
 
 func (house *House) Delete() error {
-	err := DB.Mysqldb.Delete(house).Error
+	err := DB.Mysqldb.Unscoped().Delete(house).Error
 	return err
 }
 

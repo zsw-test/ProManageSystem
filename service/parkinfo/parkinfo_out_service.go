@@ -21,7 +21,9 @@ func (service *ParkInfoOutService) ParkInfoOut() serializer.Response {
 		}
 	}
 	//更新计算费用  精确计算费用
+
 	parkinfo.Fee = util.Calcutefee(parkinfo.CreatedAt, time.Now())
+	parkinfo.Parktime = time.Since(parkinfo.CreatedAt).String()
 	err = parkinfo.Save()
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorSave)

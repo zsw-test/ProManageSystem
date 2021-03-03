@@ -1,7 +1,6 @@
 package model
 
 import (
-	"ProManageSystem/model/charge"
 	"ProManageSystem/model/house"
 	"ProManageSystem/model/manager"
 	"ProManageSystem/model/owner"
@@ -34,29 +33,30 @@ func PrepareUsers() {
 	}
 }
 
-func PrepareHouse() {
-	for i := 0; i < 10; i++ {
-		house := &house.House{
-			Building:     i + 1,
-			Unit:         i % 2,
-			Area:         90,
-			Prorityright: 100,
-			HouseType:    "三室一厅",
-		}
-		err := house.Create()
-		if err != nil {
-			fmt.Println(err.Error())
-		}
-		charge := charge.Charge{
-			Houseid:  int(house.ID),
-			Water:    0,
-			Electric: 0,
-			Gas:      0,
-			Property: 0,
-		}
-		err = charge.Create()
-		if err != nil {
-			fmt.Println(err.Error())
+func PrepareHouseAndResident() {
+	for i := 1; i <= 2; i++ {
+		for j := 1; j <= 2; j++ {
+			for f := 1; f <= 10; f++ {
+				for d := 1; d <= 4; d++ {
+					resident := &house.Resident{}
+					house := &house.House{
+						Building:     i,
+						Unit:         j,
+						Door:         f*100 + d,
+						Area:         90,
+						HouseType:    "三室一厅",
+						Prorityright: 70,
+					}
+					house.Create()
+					resident.Name = "zsw" + strconv.Itoa(int(house.ID))
+					resident.Age = 18
+					resident.Sex = "男"
+					resident.Work = "工程师"
+					resident.IdCard = 420105199903173612
+					resident.HouseId = int(house.ID)
+					resident.Create()
+				}
+			}
 		}
 	}
 }

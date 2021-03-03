@@ -77,6 +77,16 @@ const (
 
 	ErrorParkBuy = 44
 
+	ErrorHouseCreate = 45
+	ErrorHouseSave   = 46
+	ErrorHouseDelete = 47
+	ErrorHouseGet    = 48
+
+	ErrorAddResident  = 49
+	ErrorDelResident  = 50
+	ErrorGetResident  = 51
+	ErrorSaveResident = 52
+
 	ErrorCheckToken = 401
 
 	ErrorTokenTimeout = 402
@@ -169,6 +179,22 @@ func GetResult(code int) string {
 		result = "创建车位失败"
 	case ErrorParkBuy:
 		result = "购买车位失败，您已经有车位了"
+	case ErrorHouseGet:
+		result = "获取房屋失败"
+	case ErrorHouseSave:
+		result = "保存房屋失败"
+	case ErrorHouseDelete:
+		result = "删除房屋失败"
+	case ErrorHouseCreate:
+		result = "创建房屋失败"
+	case ErrorAddResident:
+		result = "添加住户失败"
+	case ErrorDelResident:
+		result = "删除住户失败"
+	case ErrorGetResident:
+		result = "获取住户失败"
+	case ErrorSaveResident:
+		result = "保存住户失败"
 	}
 
 	return result
