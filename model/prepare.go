@@ -52,11 +52,16 @@ func PrepareHouseAndResident() {
 					resident.Age = 18
 					resident.Sex = "男"
 					resident.Work = "工程师"
-					resident.IdCard = 420105199903173612
+					resident.IdCard = "420105199903173612"
 					resident.HouseId = int(house.ID)
 					resident.Create()
 				}
 			}
 		}
 	}
+}
+
+func PrepareAll() {
+	PrepareHouseAndResident()
+	PrepareUsers()
 }

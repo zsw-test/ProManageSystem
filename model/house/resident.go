@@ -13,7 +13,7 @@ type Resident struct {
 	Age     int
 	Sex     string
 	Work    string
-	IdCard  int64
+	IdCard  string
 	HouseId int
 }
 
