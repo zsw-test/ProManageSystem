@@ -3,7 +3,7 @@ package jwt
 import (
 	"ProManageSystem/serializer"
 	"ProManageSystem/util"
-	"net/http"
+	"fmt"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -15,7 +15,8 @@ func JWTowner() gin.HandlerFunc {
 		var data interface{}
 
 		code = serializer.Sucess
-		token := c.Query("token")
+		token := c.GetHeader("Token")
+		fmt.Println(c.Cookie("token"))
 		if token == "" {
 			code = serializer.InvaildParams
 		} else {
@@ -28,7 +29,7 @@ func JWTowner() gin.HandlerFunc {
 		}
 
 		if code != serializer.Sucess {
-			c.JSON(http.StatusUnauthorized, serializer.Response{
+			c.JSON(200, serializer.Response{
 				Code:   code,
 				Result: serializer.GetResult(code),
 				Data:   data,
@@ -48,7 +49,7 @@ func JWTmanager() gin.HandlerFunc {
 		var data interface{}
 
 		code = serializer.Sucess
-		token := c.Query("token")
+		token := c.GetHeader("Token")
 		if token == "" {
 			code = serializer.InvaildParams
 		} else {
@@ -61,7 +62,7 @@ func JWTmanager() gin.HandlerFunc {
 		}
 
 		if code != serializer.Sucess {
-			c.JSON(http.StatusUnauthorized, serializer.Response{
+			c.JSON(200, serializer.Response{
 				Code:   code,
 				Result: serializer.GetResult(code),
 				Data:   data,
