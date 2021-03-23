@@ -19,6 +19,16 @@ func RepairGet(c *gin.Context) {
 	res := service.RepairGet()
 	c.JSON(200, res)
 }
+func RepairGetOwner(c *gin.Context) {
+	service := repair.RepairGetService{}
+	service.Ownername = c.Query("Ownername")
+	c.JSON(200, service.RepairGetOwner())
+}
+func RepairGetManager(c *gin.Context) {
+	service := repair.RepairGetService{}
+	service.Managername = c.Query("Managername")
+	c.JSON(200, service.RepairGetManager())
+}
 
 func RepairGetTotal(c *gin.Context) {
 	service := repair.RepairGetService{}

@@ -56,6 +56,7 @@ func main() {
 	ownerauth.POST("/repair", repair.RepairCreate)
 	ownerauth.DELETE("/repair/:repairid", repair.RepairDelete)
 	ownerauth.PUT("/repair/:repairid", repair.RepairSave)
+	ownerauth.GET("/repairowner", repair.RepairGetOwner)
 
 	//快件
 	ownerauth.GET("/expressage/:expressageid", expressage.ExpressageGet)
@@ -116,6 +117,10 @@ func main() {
 	//查看维修
 	managerauth.GET("/repairtotal", repair.RepairGetTotal)
 	managerauth.GET("/repairpage", repair.ComplaintGetPage)
+	managerauth.GET("/repairmanager", repair.RepairGetManager)
+	//修改维修指派、解决
+	managerauth.PUT("/repairdispatch", repair.RepairDispatch)
+	managerauth.PUT("/repairresolve", repair.RepairResolve)
 
 	//查看All快件
 	managerauth.GET("/expressagetotal", expressage.ExpressageGetTotal)

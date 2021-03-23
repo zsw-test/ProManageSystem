@@ -6,20 +6,20 @@ import (
 )
 
 type RepairCreateService struct {
-	Ownername    string `form:"ownername"`
-	Owneraddress string `form:"owneraddress"`
-	Reason       string `form:"reason"`
-	Status       string `form:"status"`
-	Resolve      bool   `form:"resolve"`
+	Ownername string `form:"ownername"`
+	Address   string `form:"address"`
+	Reason    string `form:"reason"`
+	Status    string `form:"status"`
+	Resolve   bool   `form:"resolve"`
 }
 
 func (service *RepairCreateService) RepairCreate() serializer.Response {
 	rep := &repair.Repair{
-		Ownername:    service.Ownername,
-		Owneraddress: service.Owneraddress,
-		Reason:       service.Reason,
-		Status:       service.Status,
-		Resolve:      service.Resolve,
+		Ownername: service.Ownername,
+		Address:   service.Address,
+		Reason:    service.Reason,
+		Status:    service.Status,
+		Resolve:   service.Resolve,
 	}
 	err := rep.Create()
 	if err != nil {

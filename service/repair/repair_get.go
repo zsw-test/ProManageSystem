@@ -8,11 +8,21 @@ import (
 )
 
 type RepairGetService struct {
-	Id int `form:"id"`
+	Id          int `form:"id"`
+	Ownername   string
+	Managername string
 }
 
-func (service *RepairGetService) RepairGetMe(ownername string) serializer.Response {
-	replist, err := repair.GetRepairbyOname(ownername)
+func (service *RepairGetService) RepairGetOwner() serializer.Response {
+	replist, err := repair.GetRepairbyOname(service.Ownername)
+	if err != nil {
+		return serializer.GetResponse(serializer.ErrorRepairGet)
+	}
+	return serializer.GetResponse(serializer.Sucess, replist)
+}
+
+func (service *RepairGetService) RepairGetManager() serializer.Response {
+	replist, err := repair.GetRepairbyMname(service.Managername)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorRepairGet)
 	}

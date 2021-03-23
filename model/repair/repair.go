@@ -9,13 +9,13 @@ import (
 //报修
 type Repair struct {
 	gorm.Model
-	Ownername    string
-	Managername  string
-	Owneraddress string
-	Reason       string
-	Status       string
-	Pics         string `gorm:"type:blob(1024)"`
-	Resolve      bool
+	Ownername   string
+	Managername string
+	Address     string
+	Reason      string
+	Status      string
+	Pics        string `gorm:"type:blob(1024)"`
+	Resolve     bool
 }
 
 //增加
@@ -48,6 +48,13 @@ func GetRepairbyid(id int) (*Repair, error) {
 func GetRepairbyOname(ownername string) ([]Repair, error) {
 	RepairList := []Repair{}
 	err := DB.Mysqldb.Where("ownername = ?", ownername).Find(&RepairList).Error
+	return RepairList, err
+}
+
+//根据管理员用户名查找 可能有多个  所以返回一个list
+func GetRepairbyMname(managername string) ([]Repair, error) {
+	RepairList := []Repair{}
+	err := DB.Mysqldb.Where("managername = ?", managername).Find(&RepairList).Error
 	return RepairList, err
 }
 
