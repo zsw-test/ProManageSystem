@@ -1,4 +1,5 @@
-// package util
+package util
+
 // import (
 // 	"github.com/gin-gonic/gin"
 // 	"github.com/qiniu/go-sdk/auth/qbox"
