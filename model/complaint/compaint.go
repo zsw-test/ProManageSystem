@@ -9,10 +9,11 @@ import (
 //Complpaint  投诉结构体
 type Complaint struct {
 	gorm.Model
-	Ownername   string
-	Managername string
-	Depart      string
-	Reason      string
+	Ownername         string
+	Managername       string
+	ManagerHandleName string
+	Depart            string
+	Reason            string
 	//投诉的当前状态
 	Status  string
 	Resolve bool

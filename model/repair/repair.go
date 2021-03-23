@@ -10,9 +10,11 @@ import (
 type Repair struct {
 	gorm.Model
 	Ownername    string
+	Managername  string
 	Owneraddress string
 	Reason       string
 	Status       string
+	Pics         string `gorm:"type:blob(1024)"`
 	Resolve      bool
 }
 

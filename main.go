@@ -11,7 +11,6 @@ import (
 	"ProManageSystem/api/repair"
 	"ProManageSystem/conf"
 	"ProManageSystem/middleware/cors"
-	"ProManageSystem/model"
 
 	"github.com/gin-gonic/gin"
 )
@@ -156,6 +155,6 @@ func main() {
 
 	// }
 	//数据准备
-	model.PrepareAll()
+	//model.PrepareAll()
 	router.Run(":31717")
 }

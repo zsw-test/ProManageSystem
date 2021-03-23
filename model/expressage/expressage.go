@@ -10,6 +10,7 @@ import (
 type Expressage struct {
 	gorm.Model
 	Ownername       string
+	ManagerName     string
 	ExpressLocation string `gorm:"column:expressagelocation"`
 	Telephone       string `gorm:"type:varchar(20);"`
 	ExpType         string `gorm:"type:varchar(20);"`
