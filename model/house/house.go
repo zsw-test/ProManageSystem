@@ -19,6 +19,8 @@ type House struct {
 	Prorityright int
 	HouseType    string
 	Ownerid      int
+	//地址
+	Address string
 }
 
 func (house *House) Create() error {

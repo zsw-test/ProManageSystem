@@ -10,6 +10,7 @@ type ManagerRegisterService struct {
 	Password  string `form:"password"`
 	Depart    string `from:"depart"`
 	Telephone string `form:"telephone"`
+	Nickname  string
 }
 
 func (service *ManagerRegisterService) ManagerRegister() serializer.Response {
@@ -18,6 +19,7 @@ func (service *ManagerRegisterService) ManagerRegister() serializer.Response {
 		Password:  service.Password,
 		Depart:    service.Depart,
 		Telephone: service.Telephone,
+		Nickname:  service.Nickname,
 	}
 	err := manager.Create()
 	if err != nil {

@@ -11,6 +11,7 @@ type OwnerSaveService struct {
 	Password  string `form:"password"`
 	Telephone string `form:"telephone"`
 	Houseid   int    `form:"houseid"`
+	Nickname  string
 }
 
 func (service *OwnerSaveService) OwnerSave() serializer.Response {
@@ -25,6 +26,7 @@ func (service *OwnerSaveService) OwnerSave() serializer.Response {
 	owner.Houseid = service.Houseid
 	owner.Telephone = service.Telephone
 	owner.Password = service.Password
+	owner.Nickname = service.Nickname
 	err = owner.Save()
 	if err != nil {
 		return serializer.Response{

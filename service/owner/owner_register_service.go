@@ -10,6 +10,7 @@ type OwnerRegisterService struct {
 	Password  string `form:"password"`
 	Telephone string `form:"telephone"`
 	Houseid   int    `form:"houseid"`
+	Nickname  string
 }
 
 func (service *OwnerRegisterService) OwnerRegister() serializer.Response {
@@ -18,6 +19,7 @@ func (service *OwnerRegisterService) OwnerRegister() serializer.Response {
 		Password:  service.Password,
 		Telephone: service.Telephone,
 		Houseid:   service.Houseid,
+		Nickname:  service.Nickname,
 	}
 	err := owner.Create()
 	if err != nil {

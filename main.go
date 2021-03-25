@@ -12,12 +12,21 @@ import (
 	"ProManageSystem/conf"
 	"ProManageSystem/middleware/cors"
 	"ProManageSystem/middleware/jwt"
+	"ProManageSystem/model"
 	"ProManageSystem/util"
+	"flag"
 
 	"github.com/gin-gonic/gin"
 )
 
+var p = flag.Bool("p", false, "是否准备数据")
+
 func main() {
+	flag.Parse()
+	//根据命令行参数准备数据
+	if *p {
+		model.PrepareAll()
+	}
 	conf.Init()
 	router := gin.Default()
 	router.Use(cors.Cors())
@@ -125,6 +134,7 @@ func main() {
 		//修改维修指派、解决
 		managerauth.PUT("/repairdispatch", repair.RepairDispatch)
 		managerauth.PUT("/repairresolve", repair.RepairResolve)
+		managerauth.DELETE("/repair/:repairid", repair.RepairDelete)
 
 		//查看All快件
 		managerauth.GET("/expressagetotal", expressage.ExpressageGetTotal)
@@ -163,7 +173,6 @@ func main() {
 		managerauth.GET("/residenthousetotal/:houseid", house.ResidentGetByhouseidTotal)
 
 	}
-	//数据准备
-	//model.PrepareAll()
+
 	router.Run(":31717")
 }

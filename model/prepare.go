@@ -8,6 +8,13 @@ import (
 	"strconv"
 )
 
+func PrepareRepair() {
+
+}
+func PrepareComplaint() {
+
+}
+
 func PrepareUsers() {
 	for i := 0; i < 10; i++ {
 		owner := &owner.Owner{
@@ -15,6 +22,7 @@ func PrepareUsers() {
 			Password:  "123456",
 			Houseid:   i + 1,
 			Telephone: "12332112332",
+			Nickname:  "业主test" + strconv.Itoa(i),
 		}
 		err := owner.Create()
 		if err != nil {
@@ -25,6 +33,7 @@ func PrepareUsers() {
 			Password:  "123456",
 			Depart:    "维修部",
 			Telephone: "12332112332",
+			Nickname:  "管理员test" + strconv.Itoa(i),
 		}
 		err = manager.Create()
 		if err != nil {

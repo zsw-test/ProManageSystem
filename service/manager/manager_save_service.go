@@ -11,6 +11,7 @@ type ManagerSaveService struct {
 	Password  string `form:"password"`
 	Depart    string `from:"depart"`
 	Telephone string `form:"telephone"`
+	Nickname  string
 }
 
 func (service *ManagerSaveService) ManagerSave() serializer.Response {
@@ -25,6 +26,7 @@ func (service *ManagerSaveService) ManagerSave() serializer.Response {
 	manager.Password = service.Password
 	manager.Depart = service.Depart
 	manager.Telephone = service.Telephone
+	manager.Nickname = service.Nickname
 	err = manager.Save()
 	if err != nil {
 		return serializer.Response{

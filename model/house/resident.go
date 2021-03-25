@@ -15,6 +15,7 @@ type Resident struct {
 	Work    string
 	IdCard  string
 	HouseId int
+	Address string
 }
 
 func (resident *Resident) Create() error {

@@ -16,6 +16,7 @@ type HouseCreateService struct {
 	Prorityright int
 	HouseType    string
 	Ownerid      int
+	Address      string
 }
 
 func (service *HouseCreateService) HouseCreate() serializer.Response {
@@ -27,6 +28,7 @@ func (service *HouseCreateService) HouseCreate() serializer.Response {
 		Prorityright: service.Prorityright,
 		HouseType:    service.HouseType,
 		Ownerid:      service.Ownerid,
+		Address:      service.Address,
 	}
 	err := house.Create()
 	if err != nil {

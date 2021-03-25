@@ -13,6 +13,7 @@ type ReisdentSaveService struct {
 	Work    string
 	IdCard  string
 	HouseId int
+	Address string
 }
 
 func (service *ReisdentSaveService) ReisdentSave() serializer.Response {
@@ -26,6 +27,7 @@ func (service *ReisdentSaveService) ReisdentSave() serializer.Response {
 	resident.Work = service.Work
 	resident.IdCard = service.IdCard
 	resident.HouseId = service.HouseId
+	resident.Address = service.Address
 	err = resident.Save()
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorSaveResident)
