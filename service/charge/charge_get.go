@@ -15,35 +15,35 @@ func (service *ChargeGetService) ChargeGetWater(houseid int) serializer.Response
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorChargeGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"剩余水量": charge.Water})
+	return serializer.GetResponse(serializer.Success, gin.H{"剩余水量": charge.Water})
 }
 func (service *ChargeGetService) ChargeGetElectric(houseid int) serializer.Response {
 	charge, err := charge.GetChargebyhouseid(houseid)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorChargeGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"剩余电量": charge.Electric})
+	return serializer.GetResponse(serializer.Success, gin.H{"剩余电量": charge.Electric})
 }
 func (service *ChargeGetService) ChargeGetGas(houseid int) serializer.Response {
 	charge, err := charge.GetChargebyhouseid(houseid)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorChargeGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"剩余燃气": charge.Gas})
+	return serializer.GetResponse(serializer.Success, gin.H{"剩余燃气": charge.Gas})
 }
 func (service *ChargeGetService) ChargeGetProperty(houseid int) serializer.Response {
 	charge, err := charge.GetChargebyhouseid(houseid)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorChargeGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"需缴纳物业费": charge.Property})
+	return serializer.GetResponse(serializer.Success, gin.H{"需缴纳物业费": charge.Property})
 }
 func (service *ChargeGetService) ChargeGet(houseid int) serializer.Response {
 	charge, err := charge.GetChargebyhouseid(houseid)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorChargeGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, charge)
+	return serializer.GetResponse(serializer.Success, charge)
 }
 
 func (service *ChargeGetService) ChargeGetTotal() serializer.Response {
@@ -51,7 +51,7 @@ func (service *ChargeGetService) ChargeGetTotal() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
+	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
 func (service *ChargeGetService) ChargeGetPage(pageindex, pagesize int) serializer.Response {
@@ -59,5 +59,5 @@ func (service *ChargeGetService) ChargeGetPage(pageindex, pagesize int) serializ
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, comlist)
+	return serializer.GetResponse(serializer.Success, comlist)
 }

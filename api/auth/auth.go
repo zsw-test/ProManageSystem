@@ -20,7 +20,7 @@ func GetAuth(c *gin.Context) {
 	password := c.PostForm("password")
 
 	data := make(map[string]interface{})
-	code := serializer.Sucess
+	code := serializer.Success
 	isExist, err := owner.CheckOwnerAuth(username, password)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -33,7 +33,7 @@ func GetAuth(c *gin.Context) {
 		} else {
 			data["token"] = token
 
-			code = serializer.Sucess
+			code = serializer.Success
 		}
 	} else {
 		code = serializer.ErrorAuth

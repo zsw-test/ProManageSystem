@@ -13,5 +13,5 @@ func (service *ParkGetPageService) ParkGetPage(pageindex, pagesize int) serializ
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, parklist)
+	return serializer.GetResponse(serializer.Success, parklist)
 }

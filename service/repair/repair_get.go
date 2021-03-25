@@ -18,7 +18,7 @@ func (service *RepairGetService) RepairGetOwner() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorRepairGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, replist)
+	return serializer.GetResponse(serializer.Success, replist)
 }
 
 func (service *RepairGetService) RepairGetManager() serializer.Response {
@@ -26,7 +26,7 @@ func (service *RepairGetService) RepairGetManager() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorRepairGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, replist)
+	return serializer.GetResponse(serializer.Success, replist)
 }
 
 func (service *RepairGetService) RepairGet() serializer.Response {
@@ -34,7 +34,7 @@ func (service *RepairGetService) RepairGet() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorRepairGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, rep)
+	return serializer.GetResponse(serializer.Success, rep)
 }
 
 func (service *RepairGetService) RepairGetTotal() serializer.Response {
@@ -42,7 +42,7 @@ func (service *RepairGetService) RepairGetTotal() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorRepairGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
+	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
 func (service *RepairGetService) RepairGetPage(pageindex, pagesize int) serializer.Response {
@@ -50,5 +50,5 @@ func (service *RepairGetService) RepairGetPage(pageindex, pagesize int) serializ
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorRepairGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, replist)
+	return serializer.GetResponse(serializer.Success, replist)
 }

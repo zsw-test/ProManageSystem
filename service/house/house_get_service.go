@@ -16,7 +16,7 @@ func (service *HouseGetService) HouseGet() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorHouseGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, data)
+	return serializer.GetResponse(serializer.Success, data)
 }
 
 func (service *HouseGetService) HouseGetTotal() serializer.Response {
@@ -24,7 +24,7 @@ func (service *HouseGetService) HouseGetTotal() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
+	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
 func (service *HouseGetService) HouseGetPage(pageindex, pagesize int) serializer.Response {
@@ -32,6 +32,6 @@ func (service *HouseGetService) HouseGetPage(pageindex, pagesize int) serializer
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, houselist)
+	return serializer.GetResponse(serializer.Success, houselist)
 }
 

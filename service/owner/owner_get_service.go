@@ -20,7 +20,7 @@ func (service *OwnerGetService) OwnerGet() serializer.Response {
 		}
 	} else {
 		return serializer.Response{
-			Code:   serializer.Sucess,
+			Code:   serializer.Success,
 			Result: "查询成功",
 			Data:   owner,
 		}
@@ -31,5 +31,5 @@ func (service *OwnerGetService) OwnerGetTotal() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
+	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }

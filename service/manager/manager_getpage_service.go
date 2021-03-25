@@ -10,7 +10,7 @@ type ManagerGetPageService struct {
 
 func (service *ManagerGetPageService) ManagerGetPage(pageindex, pagesize int) serializer.Response {
 	managerlist, err := manager.GetManagerPage(pageindex, pagesize)
-	code := serializer.Sucess
+	code := serializer.Success
 	if err != nil {
 		code = serializer.ErrorGet
 		return serializer.Response{

@@ -19,7 +19,7 @@ func (service *ParkDeleteService) ParkDelete() serializer.Response {
 	}
 	park.Delete()
 	return serializer.Response{
-		Code:   serializer.Sucess,
-		Result: serializer.GetResult(serializer.Sucess),
+		Code:   serializer.Success,
+		Result: serializer.GetResult(serializer.Success),
 	}
 }

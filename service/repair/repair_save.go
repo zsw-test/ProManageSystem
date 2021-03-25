@@ -12,6 +12,7 @@ type RepairSaveService struct {
 	Reason      string `form:"reason"`
 	Status      string `form:"status"`
 	Resolve     bool   `form:"resolve"`
+	Pics        string
 	Managername string
 }
 
@@ -25,12 +26,13 @@ func (service *RepairSaveService) RepairSave() serializer.Response {
 	rep.Reason = service.Reason
 	rep.Status = service.Status
 	rep.Resolve = service.Resolve
+	rep.Pics = service.Pics
 
 	err = rep.Save()
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorRepairSave)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }
 
 func (service *RepairSaveService) RepairDispatch() serializer.Response {
@@ -44,7 +46,7 @@ func (service *RepairSaveService) RepairDispatch() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorRepairSave)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }
 func (service *RepairSaveService) RepairResolve() serializer.Response {
 	rep, err := repair.GetRepairbyid(service.Id)
@@ -57,5 +59,5 @@ func (service *RepairSaveService) RepairResolve() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorRepairSave)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

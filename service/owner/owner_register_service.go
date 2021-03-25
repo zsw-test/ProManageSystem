@@ -27,7 +27,7 @@ func (service *OwnerRegisterService) OwnerRegister() serializer.Response {
 		}
 	}
 	return serializer.Response{
-		Code:   serializer.Sucess,
+		Code:   serializer.Success,
 		Result: "创建成功",
 	}
 }

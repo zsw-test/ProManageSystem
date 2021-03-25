@@ -10,7 +10,7 @@ type OwnerGetPageService struct {
 
 func (service *OwnerGetPageService) OwnerGetPage(pageindex, pagesize int) serializer.Response {
 	ownerlist, err := owner.GetOwnerPage(pageindex, pagesize)
-	code := serializer.Sucess
+	code := serializer.Success
 	if err != nil {
 		code = serializer.ErrorGet
 		return serializer.Response{

@@ -14,7 +14,7 @@ func JWTowner() gin.HandlerFunc {
 		var code int
 		var data interface{}
 
-		code = serializer.Sucess
+		code = serializer.Success
 		token := c.GetHeader("Token")
 		fmt.Println(c.Cookie("token"))
 		if token == "" {
@@ -28,7 +28,7 @@ func JWTowner() gin.HandlerFunc {
 			}
 		}
 
-		if code != serializer.Sucess {
+		if code != serializer.Success {
 			c.JSON(200, serializer.Response{
 				Code:   code,
 				Result: serializer.GetResult(code),
@@ -48,7 +48,7 @@ func JWTmanager() gin.HandlerFunc {
 		var code int
 		var data interface{}
 
-		code = serializer.Sucess
+		code = serializer.Success
 		token := c.GetHeader("Token")
 		if token == "" {
 			code = serializer.InvaildParams
@@ -61,7 +61,7 @@ func JWTmanager() gin.HandlerFunc {
 			}
 		}
 
-		if code != serializer.Sucess {
+		if code != serializer.Success {
 			c.JSON(200, serializer.Response{
 				Code:   code,
 				Result: serializer.GetResult(code),

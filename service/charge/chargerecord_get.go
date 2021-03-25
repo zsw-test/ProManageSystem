@@ -15,7 +15,7 @@ func (service *ChargeRecordGetService) ChargeRecordGet(houseid int) serializer.R
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorChargeRecordGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, chargerecord)
+	return serializer.GetResponse(serializer.Success, chargerecord)
 }
 
 func (service *ChargeRecordGetService) ChargeRecordGetTotal() serializer.Response {
@@ -23,7 +23,7 @@ func (service *ChargeRecordGetService) ChargeRecordGetTotal() serializer.Respons
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
+	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
 func (service *ChargeRecordGetService) ChargeRecordGetPage(pageindex, pagesize int) serializer.Response {
@@ -31,5 +31,5 @@ func (service *ChargeRecordGetService) ChargeRecordGetPage(pageindex, pagesize i
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, comlist)
+	return serializer.GetResponse(serializer.Success, comlist)
 }

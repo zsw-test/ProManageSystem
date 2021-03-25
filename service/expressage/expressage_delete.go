@@ -18,5 +18,5 @@ func (service *ExpressageDeleteService) ExpressageDelete() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorExpressageDelete)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

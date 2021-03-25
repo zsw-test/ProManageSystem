@@ -15,5 +15,5 @@ func (serivice *ParkInfoTotalService) ParkInfoTotal() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
+	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }

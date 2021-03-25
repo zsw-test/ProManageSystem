@@ -30,5 +30,5 @@ func (service *ReisdentSaveService) ReisdentSave() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorSaveResident)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

@@ -20,8 +20,8 @@ func (service *ParkGetService) ParkGet() serializer.Response {
 		}
 	}
 	return serializer.Response{
-		Code:   serializer.Sucess,
-		Result: serializer.GetResult(serializer.Sucess),
+		Code:   serializer.Success,
+		Result: serializer.GetResult(serializer.Success),
 		Data:   park,
 	}
 }
@@ -31,7 +31,7 @@ func (service *ParkGetService) ParkGetTotal() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGetPark)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
+	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
 func (service *ParkGetService) ParkGetFreeList() serializer.Response {
@@ -39,5 +39,5 @@ func (service *ParkGetService) ParkGetFreeList() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGetPark)
 	}
-	return serializer.GetResponse(serializer.Sucess, parklist)
+	return serializer.GetResponse(serializer.Success, parklist)
 }

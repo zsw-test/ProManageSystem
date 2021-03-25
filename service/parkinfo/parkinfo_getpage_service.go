@@ -24,5 +24,5 @@ func (service *ParkInfoGetPageService) ParkInfoGetPage(pageindex, pagesize int) 
 			return serializer.GetResponse(serializer.ErrorUpdateParkFee)
 		}
 	}
-	return serializer.GetResponse(serializer.Sucess, parkinfolist)
+	return serializer.GetResponse(serializer.Success, parkinfolist)
 }

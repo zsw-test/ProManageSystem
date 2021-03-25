@@ -16,7 +16,7 @@ func (service *ExpressageGetService) ExpressageGetMe(ownername string) serialize
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorExpressageGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, explist)
+	return serializer.GetResponse(serializer.Success, explist)
 }
 
 func (service *ExpressageGetService) ExpressageGetTelephone(telephone string) serializer.Response {
@@ -24,7 +24,7 @@ func (service *ExpressageGetService) ExpressageGetTelephone(telephone string) se
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorExpressageGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, explist)
+	return serializer.GetResponse(serializer.Success, explist)
 }
 
 func (service *ExpressageGetService) ExpressageGet() serializer.Response {
@@ -32,7 +32,7 @@ func (service *ExpressageGetService) ExpressageGet() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorExpressageGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, exp)
+	return serializer.GetResponse(serializer.Success, exp)
 }
 
 func (service *ExpressageGetService) ExpressageGetTotal() serializer.Response {
@@ -40,7 +40,7 @@ func (service *ExpressageGetService) ExpressageGetTotal() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorExpressageGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
+	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
 func (service *ExpressageGetService) ExpressageGetPage(pageindex, pagesize int) serializer.Response {
@@ -48,5 +48,5 @@ func (service *ExpressageGetService) ExpressageGetPage(pageindex, pagesize int) 
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorExpressageGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, explist)
+	return serializer.GetResponse(serializer.Success, explist)
 }

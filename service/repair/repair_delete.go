@@ -18,5 +18,5 @@ func (service *RepairDeleteService) RepairDelete() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorRepairDelete)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

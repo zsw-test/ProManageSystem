@@ -19,5 +19,5 @@ func (service *ParkInfoSaveService) ParkInfoSave() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorSave)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

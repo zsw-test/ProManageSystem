@@ -36,8 +36,8 @@ func (service *HouseCreateService) HouseCreate() serializer.Response {
 		}
 	}
 	return serializer.Response{
-		Code:   serializer.Sucess,
-		Result: serializer.GetResult(serializer.Sucess),
+		Code:   serializer.Success,
+		Result: serializer.GetResult(serializer.Success),
 		Data:   map[string]interface{}{"id": house.ID},
 	}
 }

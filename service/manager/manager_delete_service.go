@@ -25,7 +25,7 @@ func (service *ManagerDeleteService) ManagerDelete() serializer.Response {
 		}
 	}
 	return serializer.Response{
-		Code:   serializer.Sucess,
+		Code:   serializer.Success,
 		Result: "删除成功",
 	}
 }

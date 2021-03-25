@@ -24,5 +24,5 @@ func (service *ExpressageSaveService) ExpressageSave() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorExpressageSave)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

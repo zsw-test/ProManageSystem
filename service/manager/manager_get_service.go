@@ -20,8 +20,8 @@ func (service *ManagerGetService) ManagerGet() serializer.Response {
 		}
 	} else {
 		return serializer.Response{
-			Code:   serializer.Sucess,
-			Result: serializer.GetResult(serializer.Sucess),
+			Code:   serializer.Success,
+			Result: serializer.GetResult(serializer.Success),
 			Data:   manager,
 		}
 	}
@@ -31,5 +31,5 @@ func (service *ManagerGetService) ManagerGetTotal() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
+	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }

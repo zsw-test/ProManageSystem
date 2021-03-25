@@ -33,7 +33,7 @@ func (service *ManagerSaveService) ManagerSave() serializer.Response {
 		}
 	}
 	return serializer.Response{
-		Code:   serializer.Sucess,
+		Code:   serializer.Success,
 		Result: "保存成功",
 	}
 }

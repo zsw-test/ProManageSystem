@@ -23,5 +23,5 @@ func (service *ChargeRecordCreateService) ChargeRecordCreate() serializer.Respon
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorChargeRecordCreate)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

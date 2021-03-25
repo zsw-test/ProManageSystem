@@ -46,5 +46,5 @@ func (service *ParkBuyService) ParkBuy() serializer.Response {
 		return serializer.GetResponse(serializer.ErrorCarinfoCreate)
 	}
 
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

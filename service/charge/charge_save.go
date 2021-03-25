@@ -57,7 +57,7 @@ func (service *ChargePayWaterService) ChargePayWater() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorChargeRecordCreate)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }
 
 func (service *ChargePayElectricService) ChargePayElectric() serializer.Response {
@@ -80,7 +80,7 @@ func (service *ChargePayElectricService) ChargePayElectric() serializer.Response
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorChargeRecordCreate)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }
 
 func (service *ChargePayGasService) ChargePayGas() serializer.Response {
@@ -103,7 +103,7 @@ func (service *ChargePayGasService) ChargePayGas() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorChargeRecordCreate)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }
 func (service *ChargePayPropertyService) ChargePayProperty() serializer.Response {
 	c, err := charge.GetChargebyhouseid(service.Houseid)
@@ -125,7 +125,7 @@ func (service *ChargePayPropertyService) ChargePayProperty() serializer.Response
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorChargeRecordCreate)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }
 
 func (service *ChargeSaveService) ChargeSave() serializer.Response {
@@ -141,5 +141,5 @@ func (service *ChargeSaveService) ChargeSave() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorChargeSave)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

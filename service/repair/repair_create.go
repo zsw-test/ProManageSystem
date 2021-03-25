@@ -11,6 +11,7 @@ type RepairCreateService struct {
 	Reason    string `form:"reason"`
 	Status    string `form:"status"`
 	Resolve   bool   `form:"resolve"`
+	Pics      string `form:"pics"`
 }
 
 func (service *RepairCreateService) RepairCreate() serializer.Response {
@@ -20,6 +21,7 @@ func (service *RepairCreateService) RepairCreate() serializer.Response {
 		Reason:    service.Reason,
 		Status:    service.Status,
 		Resolve:   service.Resolve,
+		Pics:      service.Pics,
 	}
 	err := rep.Create()
 	if err != nil {
@@ -29,8 +31,8 @@ func (service *RepairCreateService) RepairCreate() serializer.Response {
 		}
 	}
 	return serializer.Response{
-		Code:   serializer.Sucess,
-		Result: serializer.GetResult(serializer.Sucess),
+		Code:   serializer.Success,
+		Result: serializer.GetResult(serializer.Success),
 		Data:   map[string]interface{}{"id": rep.ID},
 	}
 }

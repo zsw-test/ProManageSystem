@@ -14,8 +14,8 @@ type ManagerLoginService struct {
 func (service *ManagerLoginService) ManagerLogin() serializer.Response {
 	data := map[string]interface{}{}
 	res := serializer.Response{
-		Code:   serializer.Sucess,
-		Result: serializer.GetResult(serializer.Sucess),
+		Code:   serializer.Success,
+		Result: serializer.GetResult(serializer.Success),
 	}
 	manager, err := manager.GetManagerbyname(service.Username)
 	if err != nil {
@@ -38,7 +38,7 @@ func (service *ManagerLoginService) ManagerLogin() serializer.Response {
 	}
 	data["id"] = manager.ID
 	data["token"] = token
-	res.Code = serializer.Sucess
+	res.Code = serializer.Success
 	res.Result = serializer.GetResult(res.Code)
 	res.Data = data
 	return res

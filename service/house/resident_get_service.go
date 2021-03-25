@@ -17,7 +17,7 @@ func (service *ResidnetGetService) ResidentGetByid() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGetResident)
 	}
-	return serializer.GetResponse(serializer.Sucess, data)
+	return serializer.GetResponse(serializer.Success, data)
 }
 
 func (service *ResidnetGetService) ResidentGetByhouseidPage(pageindex, pagesize int) serializer.Response {
@@ -25,14 +25,14 @@ func (service *ResidnetGetService) ResidentGetByhouseidPage(pageindex, pagesize 
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGetResident)
 	}
-	return serializer.GetResponse(serializer.Sucess, data)
+	return serializer.GetResponse(serializer.Success, data)
 }
 func (service *ResidnetGetService) ResidentGetByhouseidTotal() serializer.Response {
 	count, err := house.GetResidentsbyhouseidTotal(service.Houseid)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGetResident)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
+	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
 func (service *ResidnetGetService) ResidentGetPage(pageindex, pagesize int) serializer.Response {
@@ -40,12 +40,12 @@ func (service *ResidnetGetService) ResidentGetPage(pageindex, pagesize int) seri
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGetResident)
 	}
-	return serializer.GetResponse(serializer.Sucess, data)
+	return serializer.GetResponse(serializer.Success, data)
 }
 func (service *ResidnetGetService) ResidentGetTotal() serializer.Response {
 	count, err := house.GetResidentTotal()
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGetResident)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
+	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }

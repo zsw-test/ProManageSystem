@@ -27,5 +27,5 @@ func (service *ParkInfoDeleteService) ParkInfoDelete() serializer.Response {
 		carinfo.Delete()
 	}
 
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

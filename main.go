@@ -12,6 +12,7 @@ import (
 	"ProManageSystem/conf"
 	"ProManageSystem/middleware/cors"
 	"ProManageSystem/middleware/jwt"
+	"ProManageSystem/util"
 
 	"github.com/gin-gonic/gin"
 )
@@ -24,6 +25,8 @@ func main() {
 	//用户
 	router.POST("/api/ownerlogin", owner.OwnerLogin)
 	router.POST("/api/ownerregister", owner.OwnerRegister)
+	router.GET("/api/qiniutoken", util.GetQiniuToken)
+	router.POST("api/qiniuup", util.UpPhoto)
 	ownerauth := router.Group("/api/ownerauth")
 	//测试环境不添加token验证权限都可以进入
 	//添加owner的jwt中间件检查

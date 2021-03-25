@@ -42,7 +42,7 @@ func (service *ParkInfoOutService) ParkInfoOut() serializer.Response {
 			if err != nil {
 				return serializer.GetResponse(serializer.ErrorSave)
 			}
-			return serializer.GetResponse(serializer.Sucess, parkinfo)
+			return serializer.GetResponse(serializer.Success, parkinfo)
 		} else {
 			var lasttime time.Time
 			if carinfo.ExpireTime.After(parkinfo.CreatedAt) {
@@ -56,9 +56,9 @@ func (service *ParkInfoOutService) ParkInfoOut() serializer.Response {
 			if err != nil {
 				return serializer.GetResponse(serializer.ErrorSave)
 			}
-			return serializer.GetResponse(serializer.Sucess, parkinfo)
+			return serializer.GetResponse(serializer.Success, parkinfo)
 		}
 	}
 
-	return serializer.GetResponse(serializer.Sucess, parkinfo)
+	return serializer.GetResponse(serializer.Success, parkinfo)
 }

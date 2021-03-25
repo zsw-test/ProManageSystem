@@ -19,5 +19,5 @@ func (service *ResidentDeleteService) ResidentDelete() serializer.Response {
 		return serializer.GetResponse(serializer.ErrorDelResident)
 	}
 
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

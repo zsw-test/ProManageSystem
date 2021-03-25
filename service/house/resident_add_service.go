@@ -18,5 +18,5 @@ func (service *ResidentAddService) ResidentAdd() serializer.Response {
 			return serializer.GetResponse(serializer.ErrorAddResident)
 		}
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

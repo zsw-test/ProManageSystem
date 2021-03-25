@@ -18,5 +18,5 @@ func (service *ComplaintDeleteService) ComplaintDelete() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorComplaintDelete)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

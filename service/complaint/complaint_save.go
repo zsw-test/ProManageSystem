@@ -30,5 +30,5 @@ func (service *ComplaintSaveService) ComplaintSave() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorComplaintSave)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

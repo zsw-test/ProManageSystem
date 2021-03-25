@@ -116,6 +116,54 @@
 			"revision": ""
 		},
 		{
+			"checksumSHA1": "MF0sjb6wpL4UBAy0un0l5NR7bAo=",
+			"path": "github.com/qiniu/go-sdk/v7",
+			"revision": "cec56adf2a75056f71489442df7594cfa3c18dbe",
+			"revisionTime": "2021-03-15T07:44:12Z"
+		},
+		{
+			"checksumSHA1": "32EFAPASo+iXLsVSXYyshmCpWWM=",
+			"path": "github.com/qiniu/go-sdk/v7/auth",
+			"revision": "cec56adf2a75056f71489442df7594cfa3c18dbe",
+			"revisionTime": "2021-03-15T07:44:12Z"
+		},
+		{
+			"checksumSHA1": "Wvv7bSeWEbz2knYxDyX0fwkIywQ=",
+			"path": "github.com/qiniu/go-sdk/v7/auth/qbox",
+			"revision": "cec56adf2a75056f71489442df7594cfa3c18dbe",
+			"revisionTime": "2021-03-15T07:44:12Z"
+		},
+		{
+			"checksumSHA1": "xxcHtVxcTCu1DUvD8250231H5L0=",
+			"path": "github.com/qiniu/go-sdk/v7/client",
+			"revision": "cec56adf2a75056f71489442df7594cfa3c18dbe",
+			"revisionTime": "2021-03-15T07:44:12Z"
+		},
+		{
+			"checksumSHA1": "MEzV35dlvCH5VrdSU4J2jlZJ14g=",
+			"path": "github.com/qiniu/go-sdk/v7/conf",
+			"revision": "cec56adf2a75056f71489442df7594cfa3c18dbe",
+			"revisionTime": "2021-03-15T07:44:12Z"
+		},
+		{
+			"checksumSHA1": "s6TfewBOLJGd/VWewzWRUjHJITk=",
+			"path": "github.com/qiniu/go-sdk/v7/internal/log",
+			"revision": "cec56adf2a75056f71489442df7594cfa3c18dbe",
+			"revisionTime": "2021-03-15T07:44:12Z"
+		},
+		{
+			"checksumSHA1": "Nd+w4V53+zQCdrGnTzrBY6/atjM=",
+			"path": "github.com/qiniu/go-sdk/v7/reqid",
+			"revision": "cec56adf2a75056f71489442df7594cfa3c18dbe",
+			"revisionTime": "2021-03-15T07:44:12Z"
+		},
+		{
+			"checksumSHA1": "9aP1h4LAYBGnsfajIRi2Wnl/870=",
+			"path": "github.com/qiniu/go-sdk/v7/storage",
+			"revision": "cec56adf2a75056f71489442df7594cfa3c18dbe",
+			"revisionTime": "2021-03-15T07:44:12Z"
+		},
+		{
 			"checksumSHA1": "fEHVI+YxmHBoCcEkxtmbI8YzU44=",
 			"path": "github.com/ugorji/go/codec",
 			"revision": "bae90649ef8224713af5d74abd1972d4e2b0f21f",
@@ -126,6 +174,17 @@
 			"path": "golang.org/x/crypto/sha3",
 			"revision": "eec23a3978adcfd26c29f4153eaa3e3d9b2cc53a",
 			"revisionTime": "2020-12-21T16:57:36Z"
+		},
+		{
+			"checksumSHA1": "dlAKgpdTFe1TE5cWJSSwQglAX+c=",
+			"path": "golang.org/x/sync/singleflight",
+			"revision": "036812b2e83c0ddf193dd5a34e034151da389d09",
+			"revisionTime": "2021-02-19T23:54:43Z"
+		},
+		{
+			"checksumSHA1": "ri+e7RKdbjLsKhKSvgYfzpGz5+Y=",
+			"path": "golang.org/x/sys/cpu",
+			"revision": ""
 		},
 		{
 			"checksumSHA1": "bnAX6QJYlLgtPQG1+Ko8JfWJA+A=",

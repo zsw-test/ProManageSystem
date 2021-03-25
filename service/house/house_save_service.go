@@ -24,7 +24,7 @@ func (service *HouseSaveService) HouseSave() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorHouseSave)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }
 func (service *HouseSaveService) HouseBuy() serializer.Response {
 	house, err := house.GetHousebyid(service.Id)
@@ -36,5 +36,5 @@ func (service *HouseSaveService) HouseBuy() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorHouseSave)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

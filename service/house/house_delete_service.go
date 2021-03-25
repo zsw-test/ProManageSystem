@@ -18,5 +18,5 @@ func (service *HouseDeleteService) HouseDelete() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorHouseDelete)
 	}
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

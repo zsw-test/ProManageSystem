@@ -16,14 +16,14 @@ func (service *ComplaintGetService) ComplaintGetMe(ownername string) serializer.
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorComplaintGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, data)
+	return serializer.GetResponse(serializer.Success, data)
 }
 func (service *ComplaintGetService) ComplaintGet() serializer.Response {
 	data, err := complaint.GetComplaintbyid(service.Id)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorComplaintGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, data)
+	return serializer.GetResponse(serializer.Success, data)
 }
 
 func (service *ComplaintGetService) ComplaintGetTotal() serializer.Response {
@@ -31,7 +31,7 @@ func (service *ComplaintGetService) ComplaintGetTotal() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
+	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
 func (service *ComplaintGetService) ComplaintGetPage(pageindex, pagesize int) serializer.Response {
@@ -39,5 +39,5 @@ func (service *ComplaintGetService) ComplaintGetPage(pageindex, pagesize int) se
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, comlist)
+	return serializer.GetResponse(serializer.Success, comlist)
 }

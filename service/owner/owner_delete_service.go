@@ -25,7 +25,7 @@ func (service *OwnerDeleteService) OwnerDelete() serializer.Response {
 		}
 	}
 	return serializer.Response{
-		Code:   serializer.Sucess,
+		Code:   serializer.Success,
 		Result: "删除成功",
 	}
 }

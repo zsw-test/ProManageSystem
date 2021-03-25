@@ -15,7 +15,7 @@ func (service *CarinfoGetService) CarinfoGet(carnumber string) serializer.Respon
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorCarinfoGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, data)
+	return serializer.GetResponse(serializer.Success, data)
 }
 
 func (service *CarinfoGetService) CarinfoGetTotal() serializer.Response {
@@ -23,7 +23,7 @@ func (service *CarinfoGetService) CarinfoGetTotal() serializer.Response {
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorCarinfoGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, gin.H{"count": count})
+	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
 func (service *CarinfoGetService) CarinfoGetPage(pageindex, pagesize int) serializer.Response {
@@ -31,5 +31,5 @@ func (service *CarinfoGetService) CarinfoGetPage(pageindex, pagesize int) serial
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorCarinfoGet)
 	}
-	return serializer.GetResponse(serializer.Sucess, comlist)
+	return serializer.GetResponse(serializer.Success, comlist)
 }

@@ -36,13 +36,13 @@ func (service *CarInfoBuyService) CarInfoBuy() serializer.Response {
 		carinfo.CarType = service.Cartype
 		carinfo.ExpireTime = lasttime.AddDate(1, 0, 0)
 		carinfo.Save()
-		return serializer.GetResponse(serializer.Sucess, carinfo)
+		return serializer.GetResponse(serializer.Success, carinfo)
 	}
 	if service.Cartype == parkmodel.MounthCar {
 		carinfo.CarType = service.Cartype
 		carinfo.ExpireTime = lasttime.AddDate(0, 1, 0)
 		carinfo.Save()
-		return serializer.GetResponse(serializer.Sucess, carinfo)
+		return serializer.GetResponse(serializer.Success, carinfo)
 	}
 	return serializer.GetResponse(serializer.ErrorCarType)
 }

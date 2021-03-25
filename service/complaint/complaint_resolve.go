@@ -16,5 +16,5 @@ func (service *ComplaintResolveService) ComplaintResolve() serializer.Response {
 	}
 	complaint.Resolve = true
 	complaint.Save()
-	return serializer.GetResponse(serializer.Sucess)
+	return serializer.GetResponse(serializer.Success)
 }

@@ -11,7 +11,7 @@ type Response struct {
 }
 
 const (
-	Sucess        = 1
+	Success       = 1
 	InvaildParams = 2
 	NotExistUser  = 3
 
@@ -95,7 +95,7 @@ const (
 func GetResult(code int) string {
 	result := "无效code"
 	switch code {
-	case Sucess:
+	case Success:
 		result = "成功"
 	case InvaildParams:
 		result = "参数错误"

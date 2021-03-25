@@ -33,5 +33,5 @@ func (service *ParkInfoInService) ParkInfoIn() serializer.Response {
 		}
 	}
 
-	return serializer.GetResponse(serializer.Sucess, map[string]interface{}{"id": parkinfo.ID, "车辆类型": carinfo.CarType})
+	return serializer.GetResponse(serializer.Success, map[string]interface{}{"id": parkinfo.ID, "车辆类型": carinfo.CarType})
 }
