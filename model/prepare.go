@@ -4,18 +4,26 @@ import (
 	"ProManageSystem/model/house"
 	"ProManageSystem/model/manager"
 	"ProManageSystem/model/owner"
+	"ProManageSystem/model/parkmodel"
+	"ProManageSystem/model/repair"
 	"fmt"
 	"strconv"
 )
 
-func PrepareRepair() {
-
+func PreparePark() {
+	for i := 0; i < 100; i++ {
+		park := &parkmodel.Park{
+			Status:   parkmodel.Empty,
+			Location: "A-" + strconv.Itoa(i),
+		}
+		park.Create()
+	}
 }
 func PrepareComplaint() {
 
 }
 
-func PrepareUsers() {
+func PrepareUsersAndRepair() {
 	for i := 0; i < 10; i++ {
 		owner := &owner.Owner{
 			Username:  "zsw" + strconv.Itoa(i),
@@ -28,6 +36,14 @@ func PrepareUsers() {
 		if err != nil {
 			fmt.Println(err.Error())
 		}
+		repair := &repair.Repair{
+			Ownername: owner.Username,
+			Address:   "37栋2204",
+			Reason:    "水龙头坏了",
+			Pics:      `["https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fp2.zx.680.com%2F2016-07%2F20%2F20160720155702715888.png&refer=http%3A%2F%2Fp2.zx.680.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1619315604&t=fc55cb0a7fe354b0920156e917c070eb"]`,
+		}
+		repair.Create()
+
 		manager := &manager.Manager{
 			Username:  "admin" + strconv.Itoa(i),
 			Password:  "123456",
@@ -72,5 +88,6 @@ func PrepareHouseAndResident() {
 
 func PrepareAll() {
 	PrepareHouseAndResident()
-	PrepareUsers()
+	PrepareUsersAndRepair()
+	PreparePark()
 }

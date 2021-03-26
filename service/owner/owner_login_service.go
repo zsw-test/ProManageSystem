@@ -38,6 +38,8 @@ func (service *OwnerLoginService) OwnerLogin() serializer.Response {
 	}
 	data["id"] = owner.ID
 	data["token"] = token
+	data["houseid"] = owner.Houseid
+	data["parkid"] = owner.ParkId
 	res.Code = serializer.Success
 	res.Result = serializer.GetResult(res.Code)
 	res.Data = data

@@ -41,3 +41,19 @@ func (service *ParkGetService) ParkGetFreeList() serializer.Response {
 	}
 	return serializer.GetResponse(serializer.Success, parklist)
 }
+
+//获取空闲车位数量   所有车位数量减去在场车辆信息数量  停车信息相当于一个停车记录 只有出去才会删除
+func (service *ParkGetService) ParkGetAllCount() serializer.Response {
+	parkinfocount, err := parkmodel.GetParkInfoTotal()
+	if err != nil {
+		return serializer.GetResponse(serializer.ErrorGetPark)
+	}
+	parkcount, err := parkmodel.GetParkTotal()
+	if err != nil {
+		return serializer.GetResponse(serializer.ErrorGetPark)
+	}
+	mp := map[string]int{}
+	mp["parkinfocount"] = parkinfocount
+	mp["parkcount"] = parkcount
+	return serializer.GetResponse(serializer.Success, mp)
+}

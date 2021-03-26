@@ -42,12 +42,12 @@ func GetResidentbyid(id int) (*Resident, error) {
 //获取该房间的所有住户
 func GetResidentsbyhouseidPage(houseid, pagesize, pageindex int) ([]Resident, error) {
 	residentList := []Resident{}
-	err := DB.Mysqldb.Where("houseid = ?", houseid).Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&residentList).Error
+	err := DB.Mysqldb.Where("house_id = ?", houseid).Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&residentList).Error
 	return residentList, err
 }
 func GetResidentsbyhouseidTotal(houseid int) (int, error) {
 	count := 0
-	err := DB.Mysqldb.Model(&Resident{}).Where("houseid = ?", houseid).Count(&count).Error
+	err := DB.Mysqldb.Model(&Resident{}).Where("house_id = ?", houseid).Count(&count).Error
 	return count, err
 }
 

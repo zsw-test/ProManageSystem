@@ -22,12 +22,13 @@ import (
 var p = flag.Bool("p", false, "是否准备数据")
 
 func main() {
+	conf.Init()
 	flag.Parse()
 	//根据命令行参数准备数据
 	if *p {
 		model.PrepareAll()
 	}
-	conf.Init()
+
 	router := gin.Default()
 	router.Use(cors.Cors())
 
@@ -58,6 +59,11 @@ func main() {
 		ownerauth.GET("/charge/:houseid", charge.ChargeGet)
 		//缴费记录查询
 		ownerauth.GET("/chargerecord/:houseid", charge.ChargeRecordGet)
+
+		//我的房屋
+		ownerauth.GET("/residenthousepage/:houseid", house.ResidentGetByhouseidPage)
+		ownerauth.GET("/residenthousetotal/:houseid", house.ResidentGetByhouseidTotal)
+
 		//投诉
 		ownerauth.GET("/complaint/:complaintid", complaint.ComplaintGet)
 		ownerauth.POST("/complaint", complaint.ComplaintCreate)
@@ -147,6 +153,8 @@ func main() {
 		managerauth.GET("/carinfototal", park.CarinfoGetTotal)
 		managerauth.GET("/parkinfopage", park.ParkInfoGetPage)
 		managerauth.GET("/parkinfototal", park.ParkInfoGetTotal)
+
+		managerauth.GET("/parkallcount", park.ParkGetAllCount)
 
 		managerauth.POST("/park", park.ParkCreate)
 		managerauth.GET("/parkpage", park.ParkGetPage)

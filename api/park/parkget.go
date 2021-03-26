@@ -45,3 +45,8 @@ func ParkGetFreeList(c *gin.Context) {
 	res := service.ParkGetFreeList()
 	c.JSON(200, res)
 }
+func ParkGetAllCount(c *gin.Context) {
+	service := park.ParkGetService{}
+	res := service.ParkGetAllCount()
+	c.JSON(200, res)
+}
