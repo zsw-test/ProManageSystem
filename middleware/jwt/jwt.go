@@ -3,7 +3,6 @@ package jwt
 import (
 	"ProManageSystem/serializer"
 	"ProManageSystem/util"
-	"fmt"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -16,7 +15,6 @@ func JWTowner() gin.HandlerFunc {
 
 		code = serializer.Success
 		token := c.GetHeader("Token")
-		fmt.Println(c.Cookie("token"))
 		if token == "" {
 			code = serializer.InvaildParams
 		} else {
