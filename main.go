@@ -63,6 +63,8 @@ func main() {
 		//我的房屋
 		ownerauth.GET("/residenthousepage/:houseid", house.ResidentGetByhouseidPage)
 		ownerauth.GET("/residenthousetotal/:houseid", house.ResidentGetByhouseidTotal)
+		ownerauth.POST("/resident", house.ResidentAdd)
+		ownerauth.DELETE("/resident/:residentid", house.ResidentDel)
 
 		//投诉
 		ownerauth.GET("/complaint/:complaintid", complaint.ComplaintGet)
