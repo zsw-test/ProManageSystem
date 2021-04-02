@@ -210,7 +210,7 @@ func GetResponse(code int, data ...interface{}) Response {
 			Result: GetResult(code),
 			Data:   data[0],
 		}
-		fmt.Println(data[0])
+		fmt.Println("serializer data:", data[0])
 	}
 
 	return res

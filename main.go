@@ -9,11 +9,11 @@ import (
 	"ProManageSystem/api/owner"
 	"ProManageSystem/api/park"
 	"ProManageSystem/api/repair"
+	"ProManageSystem/api/thirdparty"
 	"ProManageSystem/conf"
 	"ProManageSystem/middleware/cors"
 	"ProManageSystem/middleware/jwt"
 	"ProManageSystem/model"
-	"ProManageSystem/util"
 	"flag"
 
 	"github.com/gin-gonic/gin"
@@ -32,11 +32,14 @@ func main() {
 	router := gin.Default()
 	router.Use(cors.Cors())
 
+	// 百度faceapi
+	router.POST("/api/facedetect", thirdparty.FaceDetect)
+
 	//用户
 	router.POST("/api/ownerlogin", owner.OwnerLogin)
 	router.POST("/api/ownerregister", owner.OwnerRegister)
-	router.GET("/api/qiniutoken", util.GetQiniuToken)
-	router.POST("api/qiniuup", util.UpPhoto)
+	router.GET("/api/qiniutoken", thirdparty.GetQiniuToken)
+	router.POST("api/qiniuup", thirdparty.UpPhoto)
 	ownerauth := router.Group("/api/ownerauth")
 	//测试环境不添加token验证权限都可以进入
 	//添加owner的jwt中间件检查

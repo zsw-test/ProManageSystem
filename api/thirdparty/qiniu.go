@@ -1,4 +1,4 @@
-package util
+package thirdparty
 
 import (
 	"ProManageSystem/serializer"
@@ -28,6 +28,8 @@ func GetQiniuToken(c *gin.Context) {
 	upToken := putPolicy.UploadToken(mac)
 	c.JSON(200, serializer.GetResponse(serializer.Success, upToken))
 }
+
+// 上传图片到七牛云接口 客户端直接拼接域名+图片名字即可获取图片链接
 func UpPhoto(c *gin.Context) {
 	fileheader, _ := c.FormFile("file")
 	file, _ := fileheader.Open()
