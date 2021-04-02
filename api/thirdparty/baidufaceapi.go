@@ -50,7 +50,8 @@ func AccessToken() string {
 
 func FaceDetect(c *gin.Context) {
 	song := make(map[string]interface{})
-	song["image"] = "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3879284015,3445644955&fm=26&gp=0.jpg"
+	image := c.PostForm("image")
+	song["image"] = image + "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3879284015,3445644955&fm=26&gp=0.jpg"
 	song["image_type"] = "URL"
 	bytesData, err := json.Marshal(song)
 	if err != nil {
@@ -80,6 +81,36 @@ func FaceDetect(c *gin.Context) {
 	c.JSON(200, serializer.GetResponse(serializer.Success, str))
 
 }
-func Face(c *gin.Context) {
-
+func FaceAdd(c *gin.Context) {
+	song := make(map[string]interface{})
+	song["image"] = "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3879284015,3445644955&fm=26&gp=0.jpg"
+	song["image_type"] = "URL"
+	song["group_id"] = "promanage"
+	song["user_id"] = "user1"
+	bytesData, err := json.Marshal(song)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	reader := bytes.NewReader(bytesData)
+	url := "https://aip.baidubce.com/rest/2.0/face/v3/faceset/user/add?access_token=" + AccessToken()
+	request, err := http.NewRequest("POST", url, reader)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	request.Header.Set("Content-Type", "application/json;charset=UTF-8")
+	client := http.Client{}
+	resp, err := client.Do(request)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	respBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	str := string(respBytes)
+	c.JSON(200, serializer.GetResponse(serializer.Success, str))
 }

@@ -34,7 +34,7 @@ func main() {
 
 	// 百度faceapi
 	router.POST("/api/facedetect", thirdparty.FaceDetect)
-
+	router.POST("/api/faceadd", thirdparty.FaceAdd)
 	//用户
 	router.POST("/api/ownerlogin", owner.OwnerLogin)
 	router.POST("/api/ownerregister", owner.OwnerRegister)
