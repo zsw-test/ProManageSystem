@@ -48,12 +48,17 @@ func AccessToken() string {
 	return t.AccessToken
 }
 
+type FaceAddService struct {
+	Image    string `json:"image"`
+	Username string `json:"username"`
+}
+
 func FaceDetect(c *gin.Context) {
-	song := make(map[string]interface{})
+	params := make(map[string]interface{})
 	image := c.PostForm("image")
-	song["image"] = image + "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3879284015,3445644955&fm=26&gp=0.jpg"
-	song["image_type"] = "URL"
-	bytesData, err := json.Marshal(song)
+	params["image"] = image + "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3879284015,3445644955&fm=26&gp=0.jpg"
+	params["image_type"] = "URL"
+	bytesData, err := json.Marshal(params)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
@@ -82,18 +87,69 @@ func FaceDetect(c *gin.Context) {
 
 }
 func FaceAdd(c *gin.Context) {
-	song := make(map[string]interface{})
-	song["image"] = "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3879284015,3445644955&fm=26&gp=0.jpg"
-	song["image_type"] = "URL"
-	song["group_id"] = "promanage"
-	song["user_id"] = "user1"
-	bytesData, err := json.Marshal(song)
+	params := make(map[string]interface{})
+	service := FaceAddService{}
+	err := c.ShouldBind(&service)
+	if err != nil {
+		c.JSON(200, serializer.GetResponse(serializer.InvaildParams))
+		return
+	}
+	params["image"] = service.Image
+	params["image_type"] = "URL"
+	params["group_id"] = "promanage"
+	params["user_id"] = service.Username
+	bytesData, err := json.Marshal(params)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
 	reader := bytes.NewReader(bytesData)
 	url := "https://aip.baidubce.com/rest/2.0/face/v3/faceset/user/add?access_token=" + AccessToken()
+	request, err := http.NewRequest("POST", url, reader)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	request.Header.Set("Content-Type", "application/json;charset=UTF-8")
+	client := http.Client{}
+	resp, err := client.Do(request)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	respBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	str := string(respBytes)
+	c.JSON(200, serializer.GetResponse(serializer.Success, str))
+}
+
+type FaceSearchService struct {
+	Image    string `json:"image"`
+	Username string `json:"username"`
+}
+
+func FaceSearch(c *gin.Context) {
+	params := make(map[string]interface{})
+	service := FaceSearchService{}
+	err := c.ShouldBind(&service)
+	if err != nil {
+		c.JSON(200, serializer.GetResponse(serializer.InvaildParams))
+		return
+	}
+	params["image"] = service.Image
+	params["image_type"] = "URL"
+	params["group_id_list"] = "promanage"
+	params["user_id"] = service.Username
+	bytesData, err := json.Marshal(params)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	reader := bytes.NewReader(bytesData)
+	url := "https://aip.baidubce.com/rest/2.0/face/v3/search?access_token=" + AccessToken()
 	request, err := http.NewRequest("POST", url, reader)
 	if err != nil {
 		fmt.Println(err.Error())
