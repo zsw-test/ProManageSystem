@@ -1,13 +1,16 @@
 package model
 
 import (
+	"ProManageSystem/model/charge"
 	"ProManageSystem/model/house"
 	"ProManageSystem/model/manager"
 	"ProManageSystem/model/owner"
 	"ProManageSystem/model/parkmodel"
 	"ProManageSystem/model/repair"
 	"fmt"
+	"math/rand"
 	"strconv"
+	"time"
 )
 
 func PreparePark() {
@@ -80,6 +83,16 @@ func PrepareHouseAndResident() {
 					resident.IdCard = "420105199903173612"
 					resident.HouseId = int(house.ID)
 					resident.Create()
+					rand.Seed(time.Now().Unix())
+					// 每个房屋必须有费用表
+					charge := &charge.Charge{
+						Houseid:  int(house.ID),
+						Water:    float64(rand.Intn(50)),
+						Electric: float64(rand.Intn(50)),
+						Gas:      float64(rand.Intn(50)),
+						Property: 0,
+					}
+					charge.Create()
 				}
 			}
 		}
