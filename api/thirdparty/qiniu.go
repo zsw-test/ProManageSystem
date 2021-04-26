@@ -16,7 +16,7 @@ import (
 const (
 	accessKey = "WeLgPYJU2FhvjgOqFp-MfPLgcybp9CSqGJ1hfeAP"
 	secretKey = "b_a8AMSaZnqEH5WVnVke1-9WvSWGfq-LVq5SESue"
-	bucket    = "promanage"
+	bucket    = "promanage1"
 )
 
 func GetQiniuToken(c *gin.Context) {
