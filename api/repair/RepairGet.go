@@ -36,7 +36,7 @@ func RepairGetTotal(c *gin.Context) {
 	c.JSON(200, res)
 }
 
-func ComplaintGetPage(c *gin.Context) {
+func RepairGetPage(c *gin.Context) {
 	pageindex, err := strconv.Atoi(c.Query("pageindex"))
 	if err != nil {
 		fmt.Println(err.Error())

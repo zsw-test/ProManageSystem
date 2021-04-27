@@ -39,3 +39,13 @@ func ComplaintGetPage(c *gin.Context) {
 	res := service.ComplaintGetPage(pageindex, pagesize)
 	c.JSON(200, res)
 }
+func ComplaintGetOwner(c *gin.Context) {
+	service := complaint.ComplaintGetService{}
+	service.Ownername = c.Query("Ownername")
+	c.JSON(200, service.ComplaintGetOwner())
+}
+func ComplaintGetManager(c *gin.Context) {
+	service := complaint.ComplaintGetService{}
+	service.Managername = c.Query("Managername")
+	c.JSON(200, service.ComplaintGetManager())
+}

@@ -26,7 +26,7 @@ func ExpressageGetTotal(c *gin.Context) {
 	c.JSON(200, res)
 }
 
-func ComplaintGetPage(c *gin.Context) {
+func ExpressageGetPage(c *gin.Context) {
 	pageindex, err := strconv.Atoi(c.Query("pageindex"))
 	if err != nil {
 		fmt.Println(err.Error())
@@ -38,4 +38,9 @@ func ComplaintGetPage(c *gin.Context) {
 	service := expressage.ExpressageGetService{}
 	res := service.ExpressageGetPage(pageindex, pagesize)
 	c.JSON(200, res)
+}
+func ExpressageGetOwner(c *gin.Context) {
+	service := expressage.ExpressageGetService{}
+	service.Ownername = c.Query("Ownername")
+	c.JSON(200, service.ExpressageGetMe())
 }

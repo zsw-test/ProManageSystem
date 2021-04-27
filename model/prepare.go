@@ -2,6 +2,7 @@ package model
 
 import (
 	"ProManageSystem/model/charge"
+	"ProManageSystem/model/complaint"
 	"ProManageSystem/model/house"
 	"ProManageSystem/model/manager"
 	"ProManageSystem/model/owner"
@@ -46,13 +47,19 @@ func PrepareUsersAndRepair() {
 			Pics:      `["https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fp2.zx.680.com%2F2016-07%2F20%2F20160720155702715888.png&refer=http%3A%2F%2Fp2.zx.680.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1619315604&t=fc55cb0a7fe354b0920156e917c070eb"]`,
 		}
 		repair.Create()
+		complaint := &complaint.Complaint{
+			Ownername: owner.Username,
+			Depart:    "维修部门",
+			Reason:    "修不好我家的门 希望能够好好解决  态度极差 呵呵~",
+		}
+		complaint.Create()
 
 		manager := &manager.Manager{
 			Username:  "admin" + strconv.Itoa(i),
 			Password:  "123456",
 			Depart:    "维修部",
-			Telephone: "12332112332",
-			Nickname:  "管理员test" + strconv.Itoa(i),
+			Telephone: "18627031313",
+			Nickname:  "管理员" + strconv.Itoa(i),
 		}
 		err = manager.Create()
 		if err != nil {

@@ -22,3 +22,21 @@ func ComplaintSave(c *gin.Context) {
 		c.JSON(200, err.Error())
 	}
 }
+func ComplaintDispatch(c *gin.Context) {
+	service := complaint.ComplaintSaveService{}
+	if err := c.ShouldBind(&service); err == nil {
+		res := service.ComplaintDispatch()
+		c.JSON(200, res)
+	} else {
+		c.JSON(200, err.Error())
+	}
+}
+func ComplaintResolve(c *gin.Context) {
+	service := complaint.ComplaintSaveService{}
+	if err := c.ShouldBind(&service); err == nil {
+		res := service.ComplaintResolve()
+		c.JSON(200, res)
+	} else {
+		c.JSON(200, err.Error())
+	}
+}

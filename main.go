@@ -39,6 +39,7 @@ func main() {
 	//用户
 	router.POST("/api/ownerlogin", owner.OwnerLogin)
 	router.POST("/api/ownerregister", owner.OwnerRegister)
+	// 七牛api
 	router.GET("/api/qiniutoken", thirdparty.GetQiniuToken)
 	router.POST("api/qiniuup", thirdparty.UpPhoto)
 	ownerauth := router.Group("/api/ownerauth")
@@ -75,6 +76,7 @@ func main() {
 		ownerauth.POST("/complaint", complaint.ComplaintCreate)
 		ownerauth.DELETE("/complaint/:complaintid", complaint.ComplaintDelete)
 		ownerauth.PUT("/complaint/:complaintid", complaint.ComplaintSave)
+		ownerauth.GET("/complaintowner", complaint.ComplaintGetOwner)
 
 		//维修
 		ownerauth.GET("/repair/:repairid", repair.RepairGet)
@@ -85,6 +87,7 @@ func main() {
 
 		//快件
 		ownerauth.GET("/expressage/:expressageid", expressage.ExpressageGet)
+		ownerauth.GET("/expressageowner", expressage.ExpressageGetOwner)
 		ownerauth.POST("/expressage", expressage.ExpressageCreate)
 		ownerauth.DELETE("/expressage/:expressageid", expressage.ExpressageDelete)
 		ownerauth.PUT("/expressage/:expressageid", expressage.ExpressageSave)
@@ -138,10 +141,15 @@ func main() {
 		//查看投诉
 		managerauth.GET("/complainttotal", complaint.ComplaintGetTotal)
 		managerauth.GET("/complaintpage", complaint.ComplaintGetPage)
+		managerauth.GET("/complaintmanager", complaint.ComplaintGetManager)
+		//修改投诉指派、解决
+		managerauth.PUT("/complaintdispatch", complaint.ComplaintDispatch)
+		managerauth.PUT("/complaintresolve", complaint.ComplaintResolve)
+		managerauth.DELETE("/complaint/:complaintid", complaint.ComplaintDelete)
 
 		//查看维修
 		managerauth.GET("/repairtotal", repair.RepairGetTotal)
-		managerauth.GET("/repairpage", repair.ComplaintGetPage)
+		managerauth.GET("/repairpage", repair.RepairGetPage)
 		managerauth.GET("/repairmanager", repair.RepairGetManager)
 		//修改维修指派、解决
 		managerauth.PUT("/repairdispatch", repair.RepairDispatch)
@@ -150,7 +158,7 @@ func main() {
 
 		//查看All快件
 		managerauth.GET("/expressagetotal", expressage.ExpressageGetTotal)
-		managerauth.GET("/expressagepage", expressage.ComplaintGetPage)
+		managerauth.GET("/expressagepage", expressage.ExpressageGetPage)
 		//录入快件
 		managerauth.POST("/expressage", expressage.ExpressageCreate)
 

@@ -8,11 +8,12 @@ import (
 )
 
 type ExpressageGetService struct {
-	Id int `form:"id"`
+	Id        int `form:"id"`
+	Ownername string
 }
 
-func (service *ExpressageGetService) ExpressageGetMe(ownername string) serializer.Response {
-	explist, err := expressage.GetExpressagebyOname(ownername)
+func (service *ExpressageGetService) ExpressageGetMe() serializer.Response {
+	explist, err := expressage.GetExpressagebyOname(service.Ownername)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorExpressageGet)
 	}
