@@ -2,6 +2,8 @@ package model
 
 import (
 	"ProManageSystem/DB"
+	"ProManageSystem/model/accessrecord"
+	"ProManageSystem/model/announce"
 	"ProManageSystem/model/charge"
 	"ProManageSystem/model/complaint"
 	"ProManageSystem/model/expressage"
@@ -26,6 +28,8 @@ func Migration() {
 		AutoMigrate(&house.House{}).
 		AutoMigrate(&charge.Charge{}).
 		AutoMigrate(&charge.ChargeRecord{}).
-		AutoMigrate(&house.Resident{})
+		AutoMigrate(&house.Resident{}).
+		AutoMigrate(&announce.Announce{}).
+		AutoMigrate(&accessrecord.Access{})
 
 }

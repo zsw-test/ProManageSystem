@@ -1,6 +1,8 @@
 package main
 
 import (
+	"ProManageSystem/api/access"
+	"ProManageSystem/api/announce"
 	"ProManageSystem/api/charge"
 	"ProManageSystem/api/complaint"
 	"ProManageSystem/api/expressage"
@@ -14,6 +16,7 @@ import (
 	"ProManageSystem/middleware/cors"
 	"ProManageSystem/middleware/jwt"
 	"ProManageSystem/model"
+
 	"flag"
 
 	"github.com/gin-gonic/gin"
@@ -36,6 +39,8 @@ func main() {
 	router.POST("/api/facedetect", thirdparty.FaceDetect)
 	router.POST("/api/faceadd", thirdparty.FaceAdd)
 	router.POST("/api/facesearch", thirdparty.FaceSearch)
+	// 创建一条记录
+	router.POST("/api/access", access.AccessCreate)
 	//用户
 	router.POST("/api/ownerlogin", owner.OwnerLogin)
 	router.POST("/api/ownerregister", owner.OwnerRegister)
@@ -106,6 +111,9 @@ func main() {
 		//支付成功就删除停车信息
 		ownerauth.DELETE("/parkinfo/:carnumber", park.ParkInfoDelete)
 
+		ownerauth.GET("/announce/:announceid", announce.AnnounceCreate)
+		ownerauth.GET("/announceall", announce.AnnounceGetAll)
+
 	}
 
 	//管理员
@@ -161,6 +169,7 @@ func main() {
 		managerauth.GET("/expressagepage", expressage.ExpressageGetPage)
 		//录入快件
 		managerauth.POST("/expressage", expressage.ExpressageCreate)
+		managerauth.DELETE("/expressage/:expressageid", expressage.ExpressageDelete)
 
 		//查看所有停在物业的车  和月卡车（管理员）
 		managerauth.GET("/carinfopage", park.CarinfoGetPage)
@@ -194,6 +203,13 @@ func main() {
 		managerauth.GET("/residenthousepage/:houseid", house.ResidentGetByhouseidPage)
 		managerauth.GET("/residenthousetotal/:houseid", house.ResidentGetByhouseidTotal)
 
+		managerauth.GET("/announce/:announceid", announce.AnnounceGet)
+		managerauth.GET("/announceall", announce.AnnounceGetAll)
+		managerauth.POST("/announce", announce.AnnounceCreate)
+		managerauth.PUT("/announce/:announceid", announce.AnnounceSave)
+		managerauth.DELETE("/announce/:announceid", announce.AnnounceDelete)
+
+		managerauth.GET("/accessall", access.AccessGetAll)
 	}
 
 	router.Run(":31717")

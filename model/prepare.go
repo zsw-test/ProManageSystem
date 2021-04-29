@@ -1,8 +1,10 @@
 package model
 
 import (
+	"ProManageSystem/model/announce"
 	"ProManageSystem/model/charge"
 	"ProManageSystem/model/complaint"
+	"ProManageSystem/model/expressage"
 	"ProManageSystem/model/house"
 	"ProManageSystem/model/manager"
 	"ProManageSystem/model/owner"
@@ -27,7 +29,7 @@ func PrepareComplaint() {
 
 }
 
-func PrepareUsersAndRepair() {
+func PrepareUserDatas() {
 	for i := 0; i < 10; i++ {
 		owner := &owner.Owner{
 			Username:  "zsw" + strconv.Itoa(i),
@@ -54,6 +56,14 @@ func PrepareUsersAndRepair() {
 		}
 		complaint.Create()
 
+		expressage := &expressage.Expressage{
+			Ownername:       owner.Username,
+			ExpressLocation: "北门门口",
+			ExpType:         "生活用品",
+			Telephone:       owner.Telephone,
+		}
+		expressage.Create()
+
 		manager := &manager.Manager{
 			Username:  "admin" + strconv.Itoa(i),
 			Password:  "123456",
@@ -61,10 +71,14 @@ func PrepareUsersAndRepair() {
 			Telephone: "18627031313",
 			Nickname:  "管理员" + strconv.Itoa(i),
 		}
-		err = manager.Create()
-		if err != nil {
-			fmt.Println(err.Error())
+		manager.Create()
+
+		announce := &announce.Announce{
+			Title:       "停水公告",
+			Text:        "停水通知：本小区因为线路维修于2021年5月29号下午14点-20点停水，请业主们相互转告 谢谢配合！",
+			Managername: manager.Username,
 		}
+		announce.Create()
 	}
 }
 
@@ -108,6 +122,6 @@ func PrepareHouseAndResident() {
 
 func PrepareAll() {
 	PrepareHouseAndResident()
-	PrepareUsersAndRepair()
+	PrepareUserDatas()
 	PreparePark()
 }
