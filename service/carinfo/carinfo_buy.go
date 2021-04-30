@@ -4,6 +4,8 @@ import (
 	"ProManageSystem/model/parkmodel"
 	"ProManageSystem/serializer"
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type CarInfoBuyService struct {
@@ -14,7 +16,7 @@ type CarInfoBuyService struct {
 func (service *CarInfoBuyService) CarInfoBuy() serializer.Response {
 	//首先查询车辆信息是否存在物业系统中
 	carinfo, err := parkmodel.GetCarInfobyCarnumber(service.Carnumber)
-	if err != nil {
+	if err != nil && err == gorm.ErrRecordNotFound {
 		//如果不存在直接创建一个购买车信息
 		carinfo = &parkmodel.CarInfo{
 			CarNumber: service.Carnumber,

@@ -1,6 +1,7 @@
 package model
 
 import (
+	"ProManageSystem/model/accessrecord"
 	"ProManageSystem/model/announce"
 	"ProManageSystem/model/charge"
 	"ProManageSystem/model/complaint"
@@ -10,7 +11,6 @@ import (
 	"ProManageSystem/model/owner"
 	"ProManageSystem/model/parkmodel"
 	"ProManageSystem/model/repair"
-	"fmt"
 	"math/rand"
 	"strconv"
 	"time"
@@ -30,37 +30,28 @@ func PrepareComplaint() {
 }
 
 func PrepareUserDatas() {
-	for i := 0; i < 10; i++ {
-		owner := &owner.Owner{
-			Username:  "zsw" + strconv.Itoa(i),
-			Password:  "123456",
-			Houseid:   i + 1,
-			Telephone: "12332112332",
-			Nickname:  "业主test" + strconv.Itoa(i),
-		}
-		err := owner.Create()
-		if err != nil {
-			fmt.Println(err.Error())
-		}
+	for i := 1; i <= 10; i++ {
+		Username := "zsw" + strconv.Itoa(i)
+
 		repair := &repair.Repair{
-			Ownername: owner.Username,
+			Ownername: Username,
 			Address:   "37栋2204",
 			Reason:    "水龙头坏了",
-			Pics:      `["https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fp2.zx.680.com%2F2016-07%2F20%2F20160720155702715888.png&refer=http%3A%2F%2Fp2.zx.680.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1619315604&t=fc55cb0a7fe354b0920156e917c070eb"]`,
+			Pics:      `["https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1185614971,854605554&fm=26&gp=0.jpg"]`,
 		}
 		repair.Create()
 		complaint := &complaint.Complaint{
-			Ownername: owner.Username,
+			Ownername: Username,
 			Depart:    "维修部门",
 			Reason:    "修不好我家的门 希望能够好好解决  态度极差 呵呵~",
 		}
 		complaint.Create()
 
 		expressage := &expressage.Expressage{
-			Ownername:       owner.Username,
+			Ownername:       Username,
 			ExpressLocation: "北门门口",
 			ExpType:         "生活用品",
-			Telephone:       owner.Telephone,
+			Telephone:       "18627031721",
 		}
 		expressage.Create()
 
@@ -79,6 +70,21 @@ func PrepareUserDatas() {
 			Managername: manager.Username,
 		}
 		announce.Create()
+
+		accessrecord := accessrecord.Access{
+			Name: Username,
+			Way:  "人脸识别",
+		}
+		accessrecord.Create()
+		parkinfo := parkmodel.ParkInfo{
+			CarNumber: "鄂A0000" + strconv.Itoa(i),
+		}
+		parkinfo.Create()
+		carinfo := parkmodel.CarInfo{
+			CarNumber: parkinfo.CarNumber,
+			CarType:   "临时车",
+		}
+		carinfo.Create()
 	}
 }
 
@@ -114,6 +120,17 @@ func PrepareHouseAndResident() {
 						Property: 0,
 					}
 					charge.Create()
+					owner := &owner.Owner{
+						Username:  "zsw" + strconv.Itoa(int(house.ID)),
+						Password:  "123456",
+						Houseid:   int(house.ID),
+						Telephone: "18627031721",
+						Nickname:  "业主test" + strconv.Itoa(int(house.ID)),
+					}
+					owner.Create()
+					house.Ownerid = int(owner.ID)
+					house.Save()
+
 				}
 			}
 		}

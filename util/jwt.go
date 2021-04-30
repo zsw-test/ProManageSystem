@@ -21,7 +21,7 @@ type Claims struct {
 //生成ownertoken
 func GenerateOwnerToken(username, password string) (string, error) {
 	nowTime := time.Now()
-	expireTime := nowTime.Add(20 * time.Minute)
+	expireTime := nowTime.Add(20 * time.Hour)
 
 	claims := Claims{
 		username,
@@ -41,7 +41,7 @@ func GenerateOwnerToken(username, password string) (string, error) {
 //生成ownertoken
 func GenerateManagerToken(username, password string) (string, error) {
 	nowTime := time.Now()
-	expireTime := nowTime.Add(20 * time.Minute)
+	expireTime := nowTime.Add(20 * time.Hour)
 
 	claims := Claims{
 		username,
