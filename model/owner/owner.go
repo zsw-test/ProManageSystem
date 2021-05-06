@@ -44,15 +44,15 @@ func GetOwnerbyid(id int) (*Owner, error) {
 	return owner, err
 }
 
-func GetOwnerPage(pageindex, pagesize int) ([]Owner, error) {
+func GetOwnerPage(pageindex, pagesize int, keyword string) ([]Owner, error) {
 	OwnerList := []Owner{}
-	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&OwnerList).Error
+	err := DB.Mysqldb.Where("username LIKE ?", "%"+keyword+"%").Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&OwnerList).Error
 	return OwnerList, err
 }
 
-func GetOwnerTotal() (int, error) {
+func GetOwnerTotal(keyword string) (int, error) {
 	count := 0
-	err := DB.Mysqldb.Model(&Owner{}).Count(&count).Error
+	err := DB.Mysqldb.Model(&Owner{}).Where("username LIKE ?", "%"+keyword+"%").Count(&count).Error
 	return count, err
 }
 

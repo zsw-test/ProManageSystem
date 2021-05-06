@@ -66,13 +66,14 @@ func GetExpressagebyOname(Ownername string) ([]Expressage, error) {
 }
 
 //获取页面
-func GetExpressagePage(pageindex, pagesize int) ([]Expressage, error) {
+func GetExpressagePage(pageindex, pagesize int, keyword string) ([]Expressage, error) {
 	ExpressageList := []Expressage{}
-	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ExpressageList).Error
+	err := DB.Mysqldb.Where("ownername LIKE ?", "%"+keyword+"%").Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ExpressageList).Error
 	return ExpressageList, err
 }
-func GetExpressageTotal() (int, error) {
+
+func GetExpressageTotal(keyword string) (int, error) {
 	count := 0
-	err := DB.Mysqldb.Model(&Expressage{}).Count(&count).Error
+	err := DB.Mysqldb.Model(&Expressage{}).Where("ownername LIKE ?", "%"+keyword+"%").Count(&count).Error
 	return count, err
 }

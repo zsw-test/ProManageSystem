@@ -19,19 +19,18 @@ func (service *HouseGetService) HouseGet() serializer.Response {
 	return serializer.GetResponse(serializer.Success, data)
 }
 
-func (service *HouseGetService) HouseGetTotal() serializer.Response {
-	count, err := house.GetHouseTotal()
+func (service *HouseGetService) HouseGetTotal(keyword string) serializer.Response {
+	count, err := house.GetHouseTotal(keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
 	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
-func (service *HouseGetService) HouseGetPage(pageindex, pagesize int) serializer.Response {
-	houselist, err := house.GetHousePage(pageindex, pagesize)
+func (service *HouseGetService) HouseGetPage(pageindex, pagesize int, keyword string) serializer.Response {
+	houselist, err := house.GetHousePage(pageindex, pagesize, keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
 	return serializer.GetResponse(serializer.Success, houselist)
 }
-

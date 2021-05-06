@@ -44,16 +44,16 @@ func GetCarInfobyid(id int) (*CarInfo, error) {
 	return carinfo, err
 }
 
-func GetCarInfoPage(pageindex, pagesize int) ([]CarInfo, error) {
-	carinfolist := []CarInfo{}
-	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&carinfolist).Error
-	return carinfolist, err
+func GetCarinfoPage(pageindex, pagesize int, keyword string) ([]CarInfo, error) {
+	CarinfoList := []CarInfo{}
+	err := DB.Mysqldb.Where("carnumber LIKE ?", "%"+keyword+"%").Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&CarinfoList).Error
+	return CarinfoList, err
 }
 
-func GetCarinfoTotal() (int, error) {
-	var num int
-	err := DB.Mysqldb.Model(&CarInfo{}).Count(&num).Error
-	return num, err
+func GetCarinfoTotal(keyword string) (int, error) {
+	count := 0
+	err := DB.Mysqldb.Model(&CarInfo{}).Where("carnumber LIKE ?", "%"+keyword+"%").Count(&count).Error
+	return count, err
 }
 
 func GetCarInfobyCarnumber(carnumber string) (*CarInfo, error) {

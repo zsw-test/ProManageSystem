@@ -19,12 +19,14 @@ func ParkInfoGetPage(c *gin.Context) {
 		c.JSON(200, serializer.GetResponse(serializer.InvaildParams))
 		return
 	}
+	keyword := c.Query("keyword")
 	service := parkinfo.ParkInfoGetPageService{}
-	res := service.ParkInfoGetPage(pageindex, pagesize)
+	res := service.ParkInfoGetPage(pageindex, pagesize, keyword)
 	c.JSON(200, res)
 }
 func ParkInfoGetTotal(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := parkinfo.ParkInfoTotalService{}
-	res := service.ParkInfoTotal()
+	res := service.ParkInfoTotal(keyword)
 	c.JSON(200, res)
 }

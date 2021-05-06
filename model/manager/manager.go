@@ -43,14 +43,14 @@ func GetManagerbyid(id int) (*Manager, error) {
 	return manager, err
 }
 
-func GetManagerPage(pageindex, pagesize int) ([]Manager, error) {
+func GetManagerPage(pageindex, pagesize int, keyword string) ([]Manager, error) {
 	ManagerList := []Manager{}
-	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ManagerList).Error
+	err := DB.Mysqldb.Where("username LIKE ?", "%"+keyword+"%").Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ManagerList).Error
 	return ManagerList, err
 }
-func GetManagerTotal() (int, error) {
+func GetManagerTotal(keyword string) (int, error) {
 	count := 0
-	err := DB.Mysqldb.Model(&Manager{}).Count(&count).Error
+	err := DB.Mysqldb.Model(&Manager{}).Where("username LIKE ?", "%"+keyword+"%").Count(&count).Error
 	return count, err
 }
 

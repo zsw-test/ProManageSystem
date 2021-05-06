@@ -36,16 +36,16 @@ func (service *ExpressageGetService) ExpressageGet() serializer.Response {
 	return serializer.GetResponse(serializer.Success, exp)
 }
 
-func (service *ExpressageGetService) ExpressageGetTotal() serializer.Response {
-	count, err := expressage.GetExpressageTotal()
+func (service *ExpressageGetService) ExpressageGetTotal(keyword string) serializer.Response {
+	count, err := expressage.GetExpressageTotal(keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorExpressageGet)
 	}
 	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
-func (service *ExpressageGetService) ExpressageGetPage(pageindex, pagesize int) serializer.Response {
-	explist, err := expressage.GetExpressagePage(pageindex, pagesize)
+func (service *ExpressageGetService) ExpressageGetPage(pageindex, pagesize int, keyword string) serializer.Response {
+	explist, err := expressage.GetExpressagePage(pageindex, pagesize, keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorExpressageGet)
 	}

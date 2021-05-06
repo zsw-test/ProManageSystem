@@ -18,16 +18,16 @@ func (service *ChargeRecordGetService) ChargeRecordGet(houseid int) serializer.R
 	return serializer.GetResponse(serializer.Success, chargerecord)
 }
 
-func (service *ChargeRecordGetService) ChargeRecordGetTotal() serializer.Response {
-	count, err := charge.GetChargeRecordTotal()
+func (service *ChargeRecordGetService) ChargeRecordGetTotal(keyword string) serializer.Response {
+	count, err := charge.GetChargeRecordTotal(keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
 	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
-func (service *ChargeRecordGetService) ChargeRecordGetPage(pageindex, pagesize int) serializer.Response {
-	comlist, err := charge.GetChargeRecordPage(pageindex, pagesize)
+func (service *ChargeRecordGetService) ChargeRecordGetPage(pageindex, pagesize int, keyword string) serializer.Response {
+	comlist, err := charge.GetChargeRecordPage(pageindex, pagesize, keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}

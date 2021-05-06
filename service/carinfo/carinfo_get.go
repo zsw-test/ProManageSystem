@@ -18,16 +18,16 @@ func (service *CarinfoGetService) CarinfoGet(carnumber string) serializer.Respon
 	return serializer.GetResponse(serializer.Success, data)
 }
 
-func (service *CarinfoGetService) CarinfoGetTotal() serializer.Response {
-	count, err := parkmodel.GetCarinfoTotal()
+func (service *CarinfoGetService) CarinfoGetTotal(keyword string) serializer.Response {
+	count, err := parkmodel.GetCarinfoTotal(keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorCarinfoGet)
 	}
 	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
-func (service *CarinfoGetService) CarinfoGetPage(pageindex, pagesize int) serializer.Response {
-	comlist, err := parkmodel.GetCarInfoPage(pageindex, pagesize)
+func (service *CarinfoGetService) CarinfoGetPage(pageindex, pagesize int, keyword string) serializer.Response {
+	comlist, err := parkmodel.GetCarinfoPage(pageindex, pagesize, keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorCarinfoGet)
 	}

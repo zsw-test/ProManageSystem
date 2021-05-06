@@ -16,7 +16,8 @@ func AccessCreate(c *gin.Context) {
 	}
 }
 func AccessGetAll(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := access.AccessGetService{}
-	res := service.AccessGetAll()
+	res := service.AccessGetAll(keyword)
 	c.JSON(200, res)
 }

@@ -51,13 +51,14 @@ func GetResidentsbyhouseidTotal(houseid int) (int, error) {
 	return count, err
 }
 
-func GetResidentPage(pageindex, pagesize int) ([]Resident, error) {
-	residentList := []Resident{}
-	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&residentList).Error
-	return residentList, err
+func GetResidentPage(pageindex, pagesize int, keyword string) ([]Resident, error) {
+	ResidentList := []Resident{}
+	err := DB.Mysqldb.Where("name LIKE ?", "%"+keyword+"%").Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ResidentList).Error
+	return ResidentList, err
 }
-func GetResidentTotal() (int, error) {
+
+func GetResidentTotal(keyword string) (int, error) {
 	count := 0
-	err := DB.Mysqldb.Model(&Resident{}).Count(&count).Error
+	err := DB.Mysqldb.Model(&Resident{}).Where("name LIKE ?", "%"+keyword+"%").Count(&count).Error
 	return count, err
 }

@@ -28,8 +28,8 @@ func (service *ComplaintGetService) ComplaintGet() serializer.Response {
 	return serializer.GetResponse(serializer.Success, data)
 }
 
-func (service *ComplaintGetService) ComplaintGetTotal() serializer.Response {
-	count, err := complaint.GetComplaintTotal()
+func (service *ComplaintGetService) ComplaintGetTotal(keyword string) serializer.Response {
+	count, err := complaint.GetComplaintTotal(keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}
@@ -52,8 +52,8 @@ func (service *ComplaintGetService) ComplaintGetManager() serializer.Response {
 	return serializer.GetResponse(serializer.Success, replist)
 }
 
-func (service *ComplaintGetService) ComplaintGetPage(pageindex, pagesize int) serializer.Response {
-	replist, err := complaint.GetComplaintPage(pageindex, pagesize)
+func (service *ComplaintGetService) ComplaintGetPage(pageindex, pagesize int, keyword string) serializer.Response {
+	replist, err := complaint.GetComplaintPage(pageindex, pagesize, keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorComplaintGet)
 	}

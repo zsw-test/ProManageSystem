@@ -45,15 +45,15 @@ func GetComplaintbyid(id int) (*Complaint, error) {
 }
 
 //获取页面
-func GetComplaintPage(pageindex, pagesize int) ([]Complaint, error) {
+func GetComplaintPage(pageindex, pagesize int, keyword string) ([]Complaint, error) {
 	ComplaintList := []Complaint{}
-	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ComplaintList).Error
+	err := DB.Mysqldb.Where("ownername LIKE ?", "%"+keyword+"%").Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ComplaintList).Error
 	return ComplaintList, err
 }
 
-func GetComplaintTotal() (int, error) {
+func GetComplaintTotal(keyword string) (int, error) {
 	count := 0
-	err := DB.Mysqldb.Model(&Complaint{}).Count(&count).Error
+	err := DB.Mysqldb.Model(&Complaint{}).Where("ownername LIKE ?", "%"+keyword+"%").Count(&count).Error
 	return count, err
 }
 

@@ -8,8 +8,8 @@ import (
 type AccessGetService struct {
 }
 
-func (service *AccessGetService) AccessGetAll() serializer.Response {
-	explist, err := accessrecord.GetAccessAll()
+func (service *AccessGetService) AccessGetAll(keyword string) serializer.Response {
+	explist, err := accessrecord.GetAccessAll(keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}

@@ -21,8 +21,9 @@ func ExpressageGet(c *gin.Context) {
 }
 
 func ExpressageGetTotal(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := expressage.ExpressageGetService{}
-	res := service.ExpressageGetTotal()
+	res := service.ExpressageGetTotal(keyword)
 	c.JSON(200, res)
 }
 
@@ -35,8 +36,9 @@ func ExpressageGetPage(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+	keyword := c.Query("keyword")
 	service := expressage.ExpressageGetService{}
-	res := service.ExpressageGetPage(pageindex, pagesize)
+	res := service.ExpressageGetPage(pageindex, pagesize, keyword)
 	c.JSON(200, res)
 }
 func ExpressageGetOwner(c *gin.Context) {

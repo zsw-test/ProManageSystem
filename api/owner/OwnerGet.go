@@ -28,12 +28,14 @@ func OwnerGetPage(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+	keyword := c.Query("keyword")
 	service := owner.OwnerGetPageService{}
-	res := service.OwnerGetPage(pageindex, pagesize)
+	res := service.OwnerGetPage(pageindex, pagesize, keyword)
 	c.JSON(200, res)
 }
 func OwnerGetTotal(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := owner.OwnerGetService{}
-	res := service.OwnerGetTotal()
+	res := service.OwnerGetTotal(keyword)
 	c.JSON(200, res)
 }

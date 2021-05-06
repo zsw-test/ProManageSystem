@@ -26,8 +26,8 @@ func (service *ParkGetService) ParkGet() serializer.Response {
 	}
 }
 
-func (service *ParkGetService) ParkGetTotal() serializer.Response {
-	count, err := parkmodel.GetParkTotal()
+func (service *ParkGetService) ParkGetTotal(keyword string) serializer.Response {
+	count, err := parkmodel.GetParkTotal(keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGetPark)
 	}
@@ -44,11 +44,11 @@ func (service *ParkGetService) ParkGetFreeList() serializer.Response {
 
 //获取空闲车位数量   所有车位数量减去在场车辆信息数量  停车信息相当于一个停车记录 只有出去才会删除
 func (service *ParkGetService) ParkGetAllCount() serializer.Response {
-	parkinfocount, err := parkmodel.GetParkInfoTotal()
+	parkinfocount, err := parkmodel.GetParkInfoTotal("")
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGetPark)
 	}
-	parkcount, err := parkmodel.GetParkTotal()
+	parkcount, err := parkmodel.GetParkTotal("")
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGetPark)
 	}

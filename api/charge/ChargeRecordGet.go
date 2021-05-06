@@ -19,8 +19,9 @@ func ChargeRecordGet(c *gin.Context) {
 }
 
 func ChargeRecordGetTotal(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := charge.ChargeRecordGetService{}
-	res := service.ChargeRecordGetTotal()
+	res := service.ChargeRecordGetTotal(keyword)
 	c.JSON(200, res)
 }
 
@@ -33,7 +34,8 @@ func ChargeRecordGetPage(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+	keyword := c.Query("keyword")
 	service := charge.ChargeRecordGetService{}
-	res := service.ChargeRecordGetPage(pageindex, pagesize)
+	res := service.ChargeRecordGetPage(pageindex, pagesize, keyword)
 	c.JSON(200, res)
 }

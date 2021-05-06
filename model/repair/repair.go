@@ -59,14 +59,14 @@ func GetRepairbyMname(managername string) ([]Repair, error) {
 }
 
 //获取页面
-func GetRepairPage(pageindex, pagesize int) ([]Repair, error) {
+func GetRepairPage(pageindex, pagesize int, keyword string) ([]Repair, error) {
 	RepairList := []Repair{}
-	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&RepairList).Error
+	err := DB.Mysqldb.Where("ownername LIKE ?", "%"+keyword+"%").Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&RepairList).Error
 	return RepairList, err
 }
 
-func GetRepairTotal() (int, error) {
+func GetRepairTotal(keyword string) (int, error) {
 	count := 0
-	err := DB.Mysqldb.Model(&Repair{}).Count(&count).Error
+	err := DB.Mysqldb.Model(&Repair{}).Where("ownername LIKE ?", "%"+keyword+"%").Count(&count).Error
 	return count, err
 }

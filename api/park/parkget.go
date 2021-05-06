@@ -31,13 +31,15 @@ func ParkGetPage(c *gin.Context) {
 		c.JSON(200, serializer.GetResponse(serializer.InvaildParams))
 		return
 	}
+	keyword := c.Query("keyword")
 	service := park.ParkGetPageService{}
-	res := service.ParkGetPage(pageindex, pagesize)
+	res := service.ParkGetPage(pageindex, pagesize, keyword)
 	c.JSON(200, res)
 }
 func ParkGetTotal(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := park.ParkGetService{}
-	res := service.ParkGetTotal()
+	res := service.ParkGetTotal(keyword)
 	c.JSON(200, res)
 }
 func ParkGetFreeList(c *gin.Context) {

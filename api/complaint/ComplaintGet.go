@@ -21,8 +21,9 @@ func ComplaintGet(c *gin.Context) {
 }
 
 func ComplaintGetTotal(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := complaint.ComplaintGetService{}
-	res := service.ComplaintGetTotal()
+	res := service.ComplaintGetTotal(keyword)
 	c.JSON(200, res)
 }
 
@@ -35,8 +36,9 @@ func ComplaintGetPage(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+	keyword := c.Query("keyword")
 	service := complaint.ComplaintGetService{}
-	res := service.ComplaintGetPage(pageindex, pagesize)
+	res := service.ComplaintGetPage(pageindex, pagesize, keyword)
 	c.JSON(200, res)
 }
 func ComplaintGetOwner(c *gin.Context) {

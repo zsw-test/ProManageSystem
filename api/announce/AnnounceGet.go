@@ -22,7 +22,8 @@ func AnnounceGet(c *gin.Context) {
 }
 
 func AnnounceGetAll(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := announce.AnnounceGetService{}
-	res := service.AnnounceGetAll()
+	res := service.AnnounceGetAll(keyword)
 	c.JSON(200, res)
 }

@@ -9,8 +9,8 @@ type AnnounceGetService struct {
 	Id int `form:"id"`
 }
 
-func (service *AnnounceGetService) AnnounceGetAll() serializer.Response {
-	explist, err := announce.GetAnnounceAll()
+func (service *AnnounceGetService) AnnounceGetAll(keyword string) serializer.Response {
+	explist, err := announce.GetAnnounceAll(keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}

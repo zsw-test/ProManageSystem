@@ -11,6 +11,7 @@ import (
 	"ProManageSystem/model/owner"
 	"ProManageSystem/model/parkmodel"
 	"ProManageSystem/model/repair"
+	"fmt"
 	"math/rand"
 	"strconv"
 	"time"
@@ -101,6 +102,7 @@ func PrepareHouseAndResident() {
 						Area:         90,
 						HouseType:    "三室一厅",
 						Prorityright: 70,
+						Address:      fmt.Sprintf("%d-%d-%d", i, j, f*100+d),
 					}
 					house.Create()
 					resident.Name = "zsw" + strconv.Itoa(int(house.ID))

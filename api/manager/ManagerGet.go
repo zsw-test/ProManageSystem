@@ -29,12 +29,14 @@ func ManagerGetPage(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+	keyword := c.Query("keyword")
 	service := manager.ManagerGetPageService{}
-	res := service.ManagerGetPage(pageindex, pagesize)
+	res := service.ManagerGetPage(pageindex, pagesize, keyword)
 	c.JSON(200, res)
 }
 func ManagerGetTotal(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := manager.ManagerGetService{}
-	res := service.ManagerGetTotal()
+	res := service.ManagerGetTotal(keyword)
 	c.JSON(200, res)
 }

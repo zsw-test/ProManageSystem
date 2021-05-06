@@ -44,8 +44,8 @@ func GetAnnouncebyid(id int) (*Announce, error) {
 }
 
 // 查找所有
-func GetAnnounceAll() ([]Announce, error) {
+func GetAnnounceAll(keyword string) ([]Announce, error) {
 	AnnounceList := []Announce{}
-	err := DB.Mysqldb.Order("updated_at desc").Find(&AnnounceList).Error
+	err := DB.Mysqldb.Where("title LIKE ?", "%"+keyword+"%").Order("updated_at desc").Find(&AnnounceList).Error
 	return AnnounceList, err
 }

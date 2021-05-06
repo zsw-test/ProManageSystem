@@ -8,8 +8,8 @@ import (
 type OwnerGetPageService struct {
 }
 
-func (service *OwnerGetPageService) OwnerGetPage(pageindex, pagesize int) serializer.Response {
-	ownerlist, err := owner.GetOwnerPage(pageindex, pagesize)
+func (service *OwnerGetPageService) OwnerGetPage(pageindex, pagesize int, keyword string) serializer.Response {
+	ownerlist, err := owner.GetOwnerPage(pageindex, pagesize, keyword)
 	code := serializer.Success
 	if err != nil {
 		code = serializer.ErrorGet

@@ -39,8 +39,8 @@ func GetAccessbyid(id int) (*Access, error) {
 }
 
 // 查找所有
-func GetAccessAll() ([]Access, error) {
+func GetAccessAll(keyword string) ([]Access, error) {
 	AccessList := []Access{}
-	err := DB.Mysqldb.Order("updated_at desc").Limit(100).Find(&AccessList).Error
+	err := DB.Mysqldb.Where("name LIKE ?", "%"+keyword+"%").Order("updated_at desc").Limit(100).Find(&AccessList).Error
 	return AccessList, err
 }

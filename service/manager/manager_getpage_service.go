@@ -8,8 +8,8 @@ import (
 type ManagerGetPageService struct {
 }
 
-func (service *ManagerGetPageService) ManagerGetPage(pageindex, pagesize int) serializer.Response {
-	managerlist, err := manager.GetManagerPage(pageindex, pagesize)
+func (service *ManagerGetPageService) ManagerGetPage(pageindex, pagesize int, keyword string) serializer.Response {
+	managerlist, err := manager.GetManagerPage(pageindex, pagesize, keyword)
 	code := serializer.Success
 	if err != nil {
 		code = serializer.ErrorGet

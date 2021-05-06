@@ -10,8 +10,8 @@ import (
 type ParkInfoGetPageService struct {
 }
 
-func (service *ParkInfoGetPageService) ParkInfoGetPage(pageindex, pagesize int) serializer.Response {
-	parkinfolist, err := parkmodel.GetParkInfoPage(pageindex, pagesize)
+func (service *ParkInfoGetPageService) ParkInfoGetPage(pageindex, pagesize int, keyword string) serializer.Response {
+	parkinfolist, err := parkmodel.GetParkInfoPage(pageindex, pagesize, keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}

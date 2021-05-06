@@ -43,14 +43,14 @@ func GetParkInfobyCarnumber(carnumber string) (*ParkInfo, error) {
 	return parkinfo, err
 }
 
-func GetParkInfoPage(pageindex, pagesize int) ([]*ParkInfo, error) {
-	parkinfoList := []*ParkInfo{}
-	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&parkinfoList).Error
-	return parkinfoList, err
+func GetParkInfoPage(pageindex, pagesize int, keyword string) ([]ParkInfo, error) {
+	ParkInfoList := []ParkInfo{}
+	err := DB.Mysqldb.Where("carnumber LIKE ?", "%"+keyword+"%").Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ParkInfoList).Error
+	return ParkInfoList, err
 }
 
-func GetParkInfoTotal() (int, error) {
-	var num int
-	err := DB.Mysqldb.Model(&ParkInfo{}).Count(&num).Error
-	return num, err
+func GetParkInfoTotal(keyword string) (int, error) {
+	count := 0
+	err := DB.Mysqldb.Model(&ParkInfo{}).Where("carnumber LIKE ?", "%"+keyword+"%").Count(&count).Error
+	return count, err
 }

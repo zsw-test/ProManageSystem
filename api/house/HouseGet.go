@@ -21,8 +21,9 @@ func HouseGet(c *gin.Context) {
 }
 
 func HouseGetTotal(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := house.HouseGetService{}
-	res := service.HouseGetTotal()
+	res := service.HouseGetTotal(keyword)
 	c.JSON(200, res)
 }
 
@@ -35,7 +36,8 @@ func HouseGetPage(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+	keyword := c.Query("keyword")
 	service := house.HouseGetService{}
-	res := service.HouseGetPage(pageindex, pagesize)
+	res := service.HouseGetPage(pageindex, pagesize, keyword)
 	c.JSON(200, res)
 }

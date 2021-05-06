@@ -26,8 +26,8 @@ func (service *ManagerGetService) ManagerGet() serializer.Response {
 		}
 	}
 }
-func (service *ManagerGetService) ManagerGetTotal() serializer.Response {
-	count, err := manager.GetManagerTotal()
+func (service *ManagerGetService) ManagerGetTotal(keyword string) serializer.Response {
+	count, err := manager.GetManagerTotal(keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}

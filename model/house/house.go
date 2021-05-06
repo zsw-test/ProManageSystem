@@ -44,13 +44,13 @@ func GetHousebyid(id int) (*House, error) {
 	return house, err
 }
 
-func GetHousePage(pageindex, pagesize int) ([]House, error) {
+func GetHousePage(pageindex, pagesize int, keyword string) ([]House, error) {
 	houseList := []House{}
-	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&houseList).Error
+	err := DB.Mysqldb.Where("address LIKE ?", "%"+keyword+"%").Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&houseList).Error
 	return houseList, err
 }
-func GetHouseTotal() (int, error) {
+func GetHouseTotal(keyword string) (int, error) {
 	count := 0
-	err := DB.Mysqldb.Model(&House{}).Count(&count).Error
+	err := DB.Mysqldb.Model(&House{}).Where("address LIKE ?", "%"+keyword+"%").Count(&count).Error
 	return count, err
 }

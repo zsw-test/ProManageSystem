@@ -26,8 +26,8 @@ func (service *OwnerGetService) OwnerGet() serializer.Response {
 		}
 	}
 }
-func (service *OwnerGetService) OwnerGetTotal() serializer.Response {
-	count, err := owner.GetOwnerTotal()
+func (service *OwnerGetService) OwnerGetTotal(keyword string) serializer.Response {
+	count, err := owner.GetOwnerTotal(keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorGet)
 	}

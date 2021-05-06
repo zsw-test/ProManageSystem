@@ -60,14 +60,14 @@ func GetChargesRecordsbyhouseid(houseid int) ([]ChargeRecord, error) {
 }
 
 //获取页面
-func GetChargeRecordPage(pageindex, pagesize int) ([]ChargeRecord, error) {
+func GetChargeRecordPage(pageindex, pagesize int, keyword string) ([]ChargeRecord, error) {
 	ChargeRecordList := []ChargeRecord{}
-	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ChargeRecordList).Error
+	err := DB.Mysqldb.Where("houseid LIKE ?", "%"+keyword+"%").Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ChargeRecordList).Error
 	return ChargeRecordList, err
 }
 
-func GetChargeRecordTotal() (int, error) {
+func GetChargeRecordTotal(keyword string) (int, error) {
 	count := 0
-	err := DB.Mysqldb.Model(&ChargeRecord{}).Count(&count).Error
+	err := DB.Mysqldb.Model(&ChargeRecord{}).Where("houseid LIKE ?", "%"+keyword+"%").Count(&count).Error
 	return count, err
 }

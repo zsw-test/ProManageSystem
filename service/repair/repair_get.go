@@ -37,16 +37,16 @@ func (service *RepairGetService) RepairGet() serializer.Response {
 	return serializer.GetResponse(serializer.Success, rep)
 }
 
-func (service *RepairGetService) RepairGetTotal() serializer.Response {
-	count, err := repair.GetRepairTotal()
+func (service *RepairGetService) RepairGetTotal(keyword string) serializer.Response {
+	count, err := repair.GetRepairTotal(keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorRepairGet)
 	}
 	return serializer.GetResponse(serializer.Success, gin.H{"count": count})
 }
 
-func (service *RepairGetService) RepairGetPage(pageindex, pagesize int) serializer.Response {
-	replist, err := repair.GetRepairPage(pageindex, pagesize)
+func (service *RepairGetService) RepairGetPage(pageindex, pagesize int, keyword string) serializer.Response {
+	replist, err := repair.GetRepairPage(pageindex, pagesize, keyword)
 	if err != nil {
 		return serializer.GetResponse(serializer.ErrorRepairGet)
 	}

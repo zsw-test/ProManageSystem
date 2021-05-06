@@ -56,8 +56,9 @@ func ChargeGetProperty(c *gin.Context) {
 }
 
 func ChargeGetTotal(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := charge.ChargeGetService{}
-	res := service.ChargeGetTotal()
+	res := service.ChargeGetTotal(keyword)
 	c.JSON(200, res)
 }
 
@@ -70,7 +71,8 @@ func ChargeGetPage(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+	keyword := c.Query("keyword")
 	service := charge.ChargeGetService{}
-	res := service.ChargeGetPage(pageindex, pagesize)
+	res := service.ChargeGetPage(pageindex, pagesize, keyword)
 	c.JSON(200, res)
 }

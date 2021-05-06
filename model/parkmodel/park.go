@@ -47,14 +47,15 @@ func GetParkbyid(id int) (*Park, error) {
 	return park, err
 }
 
-func GetParkPage(pageindex, pagesize int) ([]Park, error) {
-	parkList := []Park{}
-	err := DB.Mysqldb.Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&parkList).Error
-	return parkList, err
+func GetParkPage(pageindex, pagesize int, keyword string) ([]Park, error) {
+	ParkList := []Park{}
+	err := DB.Mysqldb.Where("location LIKE ?", "%"+keyword+"%").Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&ParkList).Error
+	return ParkList, err
 }
-func GetParkTotal() (int, error) {
+
+func GetParkTotal(keyword string) (int, error) {
 	count := 0
-	err := DB.Mysqldb.Model(&Park{}).Count(&count).Error
+	err := DB.Mysqldb.Model(&Park{}).Where("location LIKE ?", "%"+keyword+"%").Count(&count).Error
 	return count, err
 }
 func GetParkEmpty() (int, error) {

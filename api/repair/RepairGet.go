@@ -31,8 +31,9 @@ func RepairGetManager(c *gin.Context) {
 }
 
 func RepairGetTotal(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := repair.RepairGetService{}
-	res := service.RepairGetTotal()
+	res := service.RepairGetTotal(keyword)
 	c.JSON(200, res)
 }
 
@@ -45,7 +46,8 @@ func RepairGetPage(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+	keyword := c.Query("keyword")
 	service := repair.RepairGetService{}
-	res := service.RepairGetPage(pageindex, pagesize)
+	res := service.RepairGetPage(pageindex, pagesize, keyword)
 	c.JSON(200, res)
 }

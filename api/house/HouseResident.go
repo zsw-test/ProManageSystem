@@ -23,8 +23,9 @@ func ResidentGet(c *gin.Context) {
 
 // 获取小区所有的住户数量
 func ResidentGetTotal(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := house.ResidnetGetService{}
-	res := service.ResidentGetTotal()
+	res := service.ResidentGetTotal(keyword)
 	c.JSON(200, res)
 }
 
@@ -38,8 +39,9 @@ func ResidentGetPage(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+	keyword := c.Query("keyword")
 	service := house.ResidnetGetService{}
-	res := service.ResidentGetPage(pageindex, pagesize)
+	res := service.ResidentGetPage(pageindex, pagesize, keyword)
 	c.JSON(200, res)
 }
 

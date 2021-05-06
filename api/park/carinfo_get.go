@@ -16,8 +16,9 @@ func CarinfoGet(c *gin.Context) {
 }
 
 func CarinfoGetTotal(c *gin.Context) {
+	keyword := c.Query("keyword")
 	service := carinfo.CarinfoGetService{}
-	res := service.CarinfoGetTotal()
+	res := service.CarinfoGetTotal(keyword)
 	c.JSON(200, res)
 }
 
@@ -30,7 +31,8 @@ func CarinfoGetPage(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+	keyword := c.Query("keyword")
 	service := carinfo.CarinfoGetService{}
-	res := service.CarinfoGetPage(pageindex, pagesize)
+	res := service.CarinfoGetPage(pageindex, pagesize, keyword)
 	c.JSON(200, res)
 }
