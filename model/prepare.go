@@ -78,7 +78,7 @@ func PrepareUserDatas() {
 		}
 		accessrecord.Create()
 		parkinfo := parkmodel.ParkInfo{
-			CarNumber: "鄂A0000" + strconv.Itoa(i),
+			CarNumber: "鄂A123123" + strconv.Itoa(i),
 		}
 		parkinfo.Create()
 		carinfo := parkmodel.CarInfo{
